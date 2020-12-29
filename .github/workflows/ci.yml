@@ -5,10 +5,10 @@ name: ci
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   cache-version: v20200524
@@ -243,8 +243,8 @@ jobs:
           path: repo
       - name: Copy snapshots
         run: |
-          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
-            REF_DIR="master"
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            REF_DIR="main"
           else
             REF_DIR="${GITHUB_REF////-}"
           fi
@@ -309,11 +309,11 @@ jobs:
         working-directory: repo
       - name: Put snapshots
         run: |
-          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
-            EXPECTED_DIR="master-old"
-            ACTUAL_DIR="master"
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            EXPECTED_DIR="main-old"
+            ACTUAL_DIR="main"
           else
-            EXPECTED_DIR="master"
+            EXPECTED_DIR="main"
             ACTUAL_DIR="${GITHUB_REF////-}"
           fi
           mkdir -p repo/.reg
