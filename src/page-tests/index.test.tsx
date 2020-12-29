@@ -4,7 +4,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import App from './Index';
+import App from '../pages/index';
 
 describe('With React Testing Library', () => {
   it('Shows "Welcome to Next.js starter."', () => {

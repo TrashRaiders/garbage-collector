@@ -1,12 +1,10 @@
-import '../../styles/index.css';
-
 import { NextPage } from 'next';
 import Router from 'next/router';
 import React from 'react';
 
-import CommonHead from '../../components/tailwindcss/CommonHead';
-import CommonProviders from '../../components/tailwindcss/CommonProviders';
-import Page from '../../components/tailwindcss/pages/Index';
+import CommonHead from '../components/CommonHead';
+import CommonProviders from '../components/CommonProviders';
+import Page from '../pages/index';
 
 Router.router = {
   /* eslint-disable @typescript-eslint/no-empty-function */
@@ -15,7 +13,7 @@ Router.router = {
   /* eslint-enable @typescript-eslint/no-empty-function */
 } as never;
 
-export default { title: 'TailwindCSS Index' };
+export default { title: 'Mui Index' };
 
 // eslint-disable-next-line react/function-component-definition
 export const page: NextPage = () => (

@@ -1,13 +1,43 @@
-import { NextPage } from 'next';
+import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
+import React from 'react';
 
-import Mui from '../components/mui/pages/Index';
-import Tw from '../components/tailwindcss/pages/Index';
+import Layout from '../components/Layout';
 
-const ui = process.env.APP_UI ? process.env.APP_UI : '';
-const pages: { [key: string]: NextPage } = {
-  mui: Mui,
-  tailwindcss: Tw,
-};
-const MyPage = pages[ui];
+const useStyles = makeStyles((theme: Theme) => ({
+  page: {
+    flexGrow: 1,
+    display: 'flex',
+  },
+  paper: {
+    flexGrow: 1,
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
+}));
 
-export default MyPage;
+function IndexPage(): React.ReactElement {
+  const classes = useStyles();
+
+  return (
+    <Layout>
+      <div className={classes.page}>
+        <Paper className={classes.paper}>
+          <Typography component="p" variant="h3" align="center">
+            Welcome to Next.js starter.
+          </Typography>
+          <p className="csstest">Style example.</p>
+        </Paper>
+      </div>
+      <style jsx>
+        {`
+          .csstest {
+            font-size: 2em;
+            text-align: center;
+          }
+        `}
+      </style>
+    </Layout>
+  );
+}
+
+export default IndexPage;
