@@ -4,7 +4,7 @@ import React from 'react'
 import { AuthProvider } from '../lib/auth'
 import { DarkModeProvider } from '../lib/mui'
 
-import MyThemeProvider from './MyThemeProvider'
+import MyThemeProvider from './CommonProviders/MyThemeProvider'
 
 function CommonProviders({
   children,

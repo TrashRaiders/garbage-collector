@@ -14,7 +14,7 @@ import ViewColumnIcon from '@material-ui/icons/ViewColumn'
 import React from 'react'
 import { Column, Row } from 'react-table'
 
-import MuiTableSearch from './MuiTableSearch'
+import MuiTableSearch from './MuiTableToolbar/MuiTableSearch'
 
 /* eslint-disable @typescript-eslint/ban-types */
 const useToolbarStyles = makeStyles((theme) => ({

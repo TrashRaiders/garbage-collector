@@ -23,8 +23,8 @@ import {
   useTable,
 } from 'react-table'
 
-import TablePaginationActions from './MuiTablePaginationActions'
-import TableToolbar from './MuiTableToolbar'
+import TablePaginationActions from './MuiTable/MuiTablePaginationActions'
+import TableToolbar from './MuiTable/MuiTableToolbar'
 
 /* eslint-disable @typescript-eslint/ban-types */
 interface EditableCellProps<D extends {}> {
