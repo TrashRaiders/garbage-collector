@@ -20,10 +20,10 @@ import {
   Brightness4,
   Menu as MenuIcon,
 } from '@material-ui/icons'
+import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
-import useTranslation from 'next-translate/useTranslation'
 
 import { AuthContext } from '../lib/auth'
 import { DarkModeContext } from '../lib/mui'
