@@ -1,15 +1,15 @@
-import { CssBaseline } from '@material-ui/core';
-import React from 'react';
+import { CssBaseline } from '@material-ui/core'
+import React from 'react'
 
-import { AuthProvider } from '../lib/auth';
-import { DarkModeProvider } from '../lib/mui';
+import { AuthProvider } from '../lib/auth'
+import { DarkModeProvider } from '../lib/mui'
 
-import MyThemeProvider from './MyThemeProvider';
+import MyThemeProvider from './MyThemeProvider'
 
 function CommonProviders({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }): React.ReactElement {
   return (
     <DarkModeProvider>
@@ -20,7 +20,7 @@ function CommonProviders({
         </AuthProvider>
       </MyThemeProvider>
     </DarkModeProvider>
-  );
+  )
 }
 
-export default CommonProviders;
+export default CommonProviders

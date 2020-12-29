@@ -1,18 +1,18 @@
-import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Paper, Theme, Typography, makeStyles } from '@material-ui/core'
+import React from 'react'
 
-import { useGetAllUsersQuery } from '../graphql/generated/graphql';
-import { AuthContext } from '../lib/auth';
-import Layout from '../components/Layout';
-import MuiTable from '../components/MuiTable';
-import withApollo from '../lib/next-with-apollo';
+import Layout from '../components/Layout'
+import MuiTable from '../components/MuiTable'
+import { useGetAllUsersQuery } from '../graphql/generated/graphql'
+import { AuthContext } from '../lib/auth'
+import withApollo from '../lib/next-with-apollo'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flexGrow: 1,
     marginTop: theme.spacing(2),
   },
-}));
+}))
 
 const userTableColumns = [
   {
@@ -39,40 +39,40 @@ const userTableColumns = [
     Header: 'Version',
     accessor: 'version',
   },
-];
+]
 
 function UsersPage(): React.ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const result = useGetAllUsersQuery();
-  const { loading, error, data } = result;
+  const result = useGetAllUsersQuery()
+  const { loading, error, data } = result
   const errorMessages = error
     ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
-    : '';
+    : ''
 
-  const columns = React.useMemo(() => userTableColumns, []);
+  const columns = React.useMemo(() => userTableColumns, [])
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [tableData, setTableData] = React.useState<any[]>([]);
-  const [origTableDataStr, setOrigTableDataStr] = React.useState<string>('');
-  const [auth] = React.useContext(AuthContext);
+  const [tableData, setTableData] = React.useState<any[]>([])
+  const [origTableDataStr, setOrigTableDataStr] = React.useState<string>('')
+  const [auth] = React.useContext(AuthContext)
   React.useMemo(() => {
     if (!data || !auth.default.getToken()) {
-      return [];
+      return []
     }
 
-    const origStr = JSON.stringify(data.users);
-    setOrigTableDataStr(origStr);
+    const origStr = JSON.stringify(data.users)
+    setOrigTableDataStr(origStr)
 
-    const origData = JSON.parse(origStr) as typeof data.users;
-    const copiedData = JSON.parse(origStr) as typeof data.users;
-    setTableData(copiedData);
+    const origData = JSON.parse(origStr) as typeof data.users
+    const copiedData = JSON.parse(origStr) as typeof data.users
+    setTableData(copiedData)
 
-    return origData;
-  }, [auth.default, data]);
+    return origData
+  }, [auth.default, data])
   const isEdited = React.useMemo(
     () => origTableDataStr !== JSON.stringify(tableData),
     [origTableDataStr, tableData],
-  );
+  )
 
   return (
     <Layout>
@@ -90,12 +90,12 @@ function UsersPage(): React.ReactElement {
         </Paper>
       </div>
     </Layout>
-  );
+  )
 }
 
 const MyPage = withApollo(UsersPage, {
   setAuthToken: process.env.APP_ENV !== 'test',
   useMock: process.env.USE_GRAPHQL_MOCK === 'true',
-});
+})
 
-export default MyPage;
+export default MyPage

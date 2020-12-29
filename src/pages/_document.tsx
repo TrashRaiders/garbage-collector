@@ -1,13 +1,13 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import { NextComponentType } from 'next';
-import { AppInitialProps } from 'next/app';
+import { ServerStyleSheets } from '@material-ui/core/styles'
+import { NextComponentType } from 'next'
+import { AppInitialProps } from 'next/app'
 import {
   AppContextType,
   AppPropsType,
   RenderPageResult,
-} from 'next/dist/next-server/lib/utils';
+} from 'next/dist/next-server/lib/utils'
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -15,9 +15,9 @@ import Document, {
   Html,
   Main,
   NextScript,
-} from 'next/document';
-import { NextRouter } from 'next/router';
-import React from 'react';
+} from 'next/document'
+import { NextRouter } from 'next/router'
+import React from 'react'
 
 class MyDocument extends Document {
   render(): React.ReactElement {
@@ -29,7 +29,7 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
@@ -61,8 +61,8 @@ MyDocument.getInitialProps = async (
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
   ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> => {
     return originalRenderPage({
       enhanceApp: (
@@ -74,9 +74,9 @@ MyDocument.getInitialProps = async (
       ) => (
         props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
       ): React.ReactElement => sheets.collect(<App {...props} />),
-    });
-  };
-  const initialProps = await Document.getInitialProps(ctx);
+    })
+  }
+  const initialProps = await Document.getInitialProps(ctx)
 
   return {
     ...initialProps,
@@ -85,9 +85,9 @@ MyDocument.getInitialProps = async (
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
     ],
-  };
-};
+  }
+}
 /* eslint-enable @typescript-eslint/ban-types */
 /* eslint-enable react/jsx-props-no-spreading */
 
-export default MyDocument;
+export default MyDocument

@@ -7,17 +7,17 @@ import {
   Theme,
   Typography,
   makeStyles,
-} from '@material-ui/core';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { TextField } from 'formik-material-ui';
-import Link from 'next/link';
-import Router from 'next/router';
-import React from 'react';
-import * as yup from 'yup';
+} from '@material-ui/core'
+import { Field, Form, Formik, FormikHelpers } from 'formik'
+import { TextField } from 'formik-material-ui'
+import Link from 'next/link'
+import Router from 'next/router'
+import React from 'react'
+import * as yup from 'yup'
 
-import { useSignUpMutation } from '../graphql/generated/graphql';
-import Layout from '../components/Layout';
-import withApollo from '../lib/next-with-apollo';
+import Layout from '../components/Layout'
+import { useSignUpMutation } from '../graphql/generated/graphql'
+import withApollo from '../lib/next-with-apollo'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     padding: theme.spacing(4),
   },
-}));
+}))
 
 function SignUpPage(): React.ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
 
   const formSchema = yup
     .object({
@@ -49,32 +49,32 @@ function SignUpPage(): React.ReactElement {
         .min(8)
         .max(64),
     })
-    .required();
-  type FormValues = yup.InferType<typeof formSchema>;
+    .required()
+  type FormValues = yup.InferType<typeof formSchema>
   const initialFormValues: FormValues = {
     name: '',
     email: '',
     password: '',
-  };
+  }
 
-  const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' });
+  const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
   const handleSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>,
   ): Promise<void> => {
     await signUp({
       variables: { input: { ...values } },
-    });
-    setSubmitting(false);
-  };
+    })
+    setSubmitting(false)
+  }
 
-  const { loading, error, data } = result;
+  const { loading, error, data } = result
   if (data) {
-    Router.push('/login');
+    Router.push('/login')
   }
   const errorMessages = error
     ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
-    : '';
+    : ''
 
   return (
     <Layout>
@@ -160,12 +160,12 @@ function SignUpPage(): React.ReactElement {
         </Paper>
       </Container>
     </Layout>
-  );
+  )
 }
 
 const MyPage = withApollo(SignUpPage, {
   setAuthToken: process.env.APP_ENV !== 'test',
   useMock: process.env.USE_GRAPHQL_MOCK === 'true',
-});
+})
 
-export default MyPage;
+export default MyPage

@@ -49,7 +49,7 @@ import {
   UseSortByInstanceProps,
   UseSortByOptions,
   UseSortByState,
-} from 'react-table';
+} from 'react-table'
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
@@ -119,6 +119,7 @@ declare module 'react-table' {
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>,
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     V = any
   > extends UseGroupByCellProps<D>,
       UseRowStateCellProps<D> {}

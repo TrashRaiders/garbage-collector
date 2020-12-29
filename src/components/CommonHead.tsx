@@ -1,10 +1,10 @@
-import Head from 'next/head';
-import React from 'react';
+import Head from 'next/head'
+import React from 'react'
 
 function CommonHead({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }): React.ReactElement {
   return (
     <>
@@ -19,7 +19,7 @@ function CommonHead({
       </Head>
       {children}
     </>
-  );
+  )
 }
 
-export default CommonHead;
+export default CommonHead

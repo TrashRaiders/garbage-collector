@@ -1,7 +1,7 @@
-import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Paper, Theme, Typography, makeStyles } from '@material-ui/core'
+import React from 'react'
 
-import Layout from '../components/Layout';
+import Layout from '../components/Layout'
 
 const useStyles = makeStyles((theme: Theme) => ({
   page: {
@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(2),
     padding: theme.spacing(2),
   },
-}));
+}))
 
 function IndexPage(): React.ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Layout>
@@ -37,7 +37,7 @@ function IndexPage(): React.ReactElement {
         `}
       </style>
     </Layout>
-  );
+  )
 }
 
-export default IndexPage;
+export default IndexPage

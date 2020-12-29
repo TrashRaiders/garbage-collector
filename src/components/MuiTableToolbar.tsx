@@ -3,18 +3,18 @@ import {
   FormControlLabel,
   FormGroup,
   Popover,
-} from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ViewColumnIcon from '@material-ui/icons/ViewColumn';
-import React from 'react';
-import { Column, Row } from 'react-table';
+} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import { lighten, makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ViewColumnIcon from '@material-ui/icons/ViewColumn'
+import React from 'react'
+import { Column, Row } from 'react-table'
 
-import MuiTableSearch from './MuiTableSearch';
+import MuiTableSearch from './MuiTableSearch'
 
 /* eslint-disable @typescript-eslint/ban-types */
 const useToolbarStyles = makeStyles((theme) => ({
@@ -35,25 +35,25 @@ const useToolbarStyles = makeStyles((theme) => ({
   title: {
     flex: '1 1',
   },
-}));
+}))
 
 interface MuiTableToolbarProps<D extends {}> {
-  title: string;
-  allColumns: Column<D>[];
-  numSelected: number;
+  title: string
+  allColumns: Column<D>[]
+  numSelected: number
   deleteSelectedRowsHandler: (
     event: React.MouseEvent<HTMLButtonElement>,
-  ) => void;
-  globalFilter: string;
-  preGlobalFilteredRows: Row<D>[];
-  setGlobalFilter: (filterValue: unknown) => void;
+  ) => void
+  globalFilter: string
+  preGlobalFilteredRows: Row<D>[]
+  setGlobalFilter: (filterValue: unknown) => void
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
 function MuiTableToolbar<D extends {}>(
   props: MuiTableToolbarProps<D>,
 ): React.ReactElement {
-  const classes = useToolbarStyles();
+  const classes = useToolbarStyles()
   const {
     title,
     allColumns,
@@ -62,26 +62,26 @@ function MuiTableToolbar<D extends {}>(
     globalFilter,
     preGlobalFilteredRows,
     setGlobalFilter,
-  } = props;
+  } = props
 
   const [
     columnToggleAnchorEl,
     setColumnToggleAnchorEl,
-  ] = React.useState<HTMLButtonElement | null>(null);
+  ] = React.useState<HTMLButtonElement | null>(null)
 
   const handleColumnToggleClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ): void => {
-    setColumnToggleAnchorEl(event.currentTarget);
-  };
+    setColumnToggleAnchorEl(event.currentTarget)
+  }
   const handleColumnToggleClose = (): void => {
-    setColumnToggleAnchorEl(null);
-  };
+    setColumnToggleAnchorEl(null)
+  }
 
-  const columnTogglePopoverOpen = Boolean(columnToggleAnchorEl);
+  const columnTogglePopoverOpen = Boolean(columnToggleAnchorEl)
   const columnTogglePopoverId = columnTogglePopoverOpen
     ? 'column-toggle-popover'
-    : undefined;
+    : undefined
 
   return (
     <Toolbar className={classes.root}>
@@ -143,9 +143,9 @@ function MuiTableToolbar<D extends {}>(
         setGlobalFilter={setGlobalFilter}
       />
     </Toolbar>
-  );
+  )
 }
 /* eslint-enable react/jsx-props-no-spreading */
 /* eslint-enable @typescript-eslint/ban-types */
 
-export default MuiTableToolbar;
+export default MuiTableToolbar

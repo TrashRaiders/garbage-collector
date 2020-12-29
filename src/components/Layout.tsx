@@ -14,20 +14,20 @@ import {
   Toolbar,
   Typography,
   makeStyles,
-} from '@material-ui/core';
+} from '@material-ui/core'
 import {
   AccountCircle,
   Brightness4,
   Menu as MenuIcon,
-} from '@material-ui/icons';
-import Link from 'next/link';
-import Router from 'next/router';
-import React from 'react';
+} from '@material-ui/icons'
+import Link from 'next/link'
+import Router from 'next/router'
+import React from 'react'
 
-import { AuthContext } from '../lib/auth';
-import { DarkModeContext } from '../lib/mui';
+import { AuthContext } from '../lib/auth'
+import { DarkModeContext } from '../lib/mui'
 
-const drawerWidth = 160;
+const drawerWidth = 160
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -74,47 +74,47 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(2),
   },
   toolbar: theme.mixins.toolbar,
-}));
+}))
 
 function Layout({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }): React.ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const [darkMode, setDarkMode] = React.useContext(DarkModeContext);
+  const [darkMode, setDarkMode] = React.useContext(DarkModeContext)
   const handleDarkMode = (): void => {
     setDarkMode({
       isDarkMode: !darkMode.isDarkMode,
       auto: false,
-    });
-  };
+    })
+  }
 
-  const [auth] = React.useContext(AuthContext);
-  const isSignedIn = auth.default.getToken() !== '';
+  const [auth] = React.useContext(AuthContext)
+  const isSignedIn = auth.default.getToken() !== ''
   const handleSignOut = (): void => {
-    auth.default.setToken('');
-    Router.push('/');
-  };
+    auth.default.setToken('')
+    Router.push('/')
+  }
 
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
   const handleDrawerOpen = (): void => {
-    setDrawerOpen(!drawerOpen);
-  };
+    setDrawerOpen(!drawerOpen)
+  }
 
   const [
     accountIconAnchorEl,
     setAccountIconAnchorEl,
-  ] = React.useState<HTMLElement | null>(null);
+  ] = React.useState<HTMLElement | null>(null)
   const handleAccountMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
-    setAccountIconAnchorEl(event.currentTarget);
-  };
+    setAccountIconAnchorEl(event.currentTarget)
+  }
   const handleAccountMenuClose = (): void => {
-    setAccountIconAnchorEl(null);
-  };
+    setAccountIconAnchorEl(null)
+  }
 
   const drawer: React.ReactElement = (
     <>
@@ -132,7 +132,7 @@ function Layout({
         ))}
       </List>
     </>
-  );
+  )
 
   return (
     <div className={classes.root}>
@@ -226,7 +226,7 @@ function Layout({
         </Hidden>
       </nav>
     </div>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

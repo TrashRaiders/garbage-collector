@@ -7,18 +7,18 @@ import {
   Theme,
   Typography,
   makeStyles,
-} from '@material-ui/core';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { TextField } from 'formik-material-ui';
-import Link from 'next/link';
-import Router from 'next/router';
-import React from 'react';
-import * as yup from 'yup';
+} from '@material-ui/core'
+import { Field, Form, Formik, FormikHelpers } from 'formik'
+import { TextField } from 'formik-material-ui'
+import Link from 'next/link'
+import Router from 'next/router'
+import React from 'react'
+import * as yup from 'yup'
 
-import { useSignInMutation } from '../graphql/generated/graphql';
-import withApollo from '../lib/next-with-apollo';
-import { AuthContext } from '../lib/auth';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout'
+import { useSignInMutation } from '../graphql/generated/graphql'
+import { AuthContext } from '../lib/auth'
+import withApollo from '../lib/next-with-apollo'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -29,44 +29,44 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     padding: theme.spacing(4),
   },
-}));
+}))
 
 function LoginPage(): React.ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
 
   const formSchema = yup
     .object({
       name: yup.string().required(),
       password: yup.string().required(),
     })
-    .required();
-  type FormValues = yup.InferType<typeof formSchema>;
+    .required()
+  type FormValues = yup.InferType<typeof formSchema>
   const initialFormValues: FormValues = {
     name: '',
     password: '',
-  };
+  }
 
-  const [signIn, result] = useSignInMutation();
+  const [signIn, result] = useSignInMutation()
   const handleSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>,
   ): Promise<void> => {
     await signIn({
       variables: { input: { ...values } },
-    });
-    setSubmitting(false);
-  };
+    })
+    setSubmitting(false)
+  }
 
-  const { loading, error, data } = result;
-  const [auth] = React.useContext(AuthContext);
+  const { loading, error, data } = result
+  const [auth] = React.useContext(AuthContext)
   if (data) {
-    const { token } = data.signIn;
-    auth.default.setToken(token);
-    Router.push('/');
+    const { token } = data.signIn
+    auth.default.setToken(token)
+    Router.push('/')
   }
   const errorMessages = error
     ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
-    : '';
+    : ''
 
   return (
     <Layout>
@@ -140,12 +140,12 @@ function LoginPage(): React.ReactElement {
         </Paper>
       </Container>
     </Layout>
-  );
+  )
 }
 
 const MyPage = withApollo(LoginPage, {
   setAuthToken: process.env.APP_ENV !== 'test',
   useMock: process.env.USE_GRAPHQL_MOCK === 'true',
-});
+})
 
-export default MyPage;
+export default MyPage

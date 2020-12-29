@@ -9,4 +9,4 @@ module.exports = {
     'spaced-comment': 'off',
     'jest/expect-expect': 'off',
   },
-};
+}

@@ -1,8 +1,8 @@
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
-import { Row } from 'react-table';
+import InputBase from '@material-ui/core/InputBase'
+import { fade, makeStyles } from '@material-ui/core/styles'
+import SearchIcon from '@material-ui/icons/Search'
+import React from 'react'
+import { Row } from 'react-table'
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -40,13 +40,13 @@ const useStyles = makeStyles((theme) => ({
       width: 200,
     },
   },
-}));
+}))
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 interface MuiTableSearchProps<D extends {}> {
-  globalFilter: string;
-  preGlobalFilteredRows: Row<D>[];
-  setGlobalFilter: (filterValue: unknown) => void;
+  globalFilter: string
+  preGlobalFilteredRows: Row<D>[]
+  setGlobalFilter: (filterValue: unknown) => void
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -55,8 +55,8 @@ function MuiTableSearch<D extends {}>({
   preGlobalFilteredRows,
   setGlobalFilter,
 }: MuiTableSearchProps<D>): React.ReactElement {
-  const classes = useStyles();
-  const count = preGlobalFilteredRows.length;
+  const classes = useStyles()
+  const count = preGlobalFilteredRows.length
 
   // Global filter only works with pagination from the first page.
   // This may not be a problem for server side pagination when
@@ -72,7 +72,7 @@ function MuiTableSearch<D extends {}>({
         onChange={(
           e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
         ): void => {
-          setGlobalFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+          setGlobalFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
         placeholder={`${count} records...`}
         classes={{
@@ -82,7 +82,7 @@ function MuiTableSearch<D extends {}>({
         inputProps={{ 'aria-label': 'Search' }}
       />
     </div>
-  );
+  )
 }
 
-export default MuiTableSearch;
+export default MuiTableSearch

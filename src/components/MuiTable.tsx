@@ -1,15 +1,15 @@
-import { InputBase } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import React from 'react';
+import { InputBase } from '@material-ui/core'
+import Checkbox from '@material-ui/core/Checkbox'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableFooter from '@material-ui/core/TableFooter'
+import TableHead from '@material-ui/core/TableHead'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableRow from '@material-ui/core/TableRow'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
+import React from 'react'
 import {
   Column,
   ColumnInstance,
@@ -21,18 +21,18 @@ import {
   useRowSelect,
   useSortBy,
   useTable,
-} from 'react-table';
+} from 'react-table'
 
-import TablePaginationActions from './MuiTablePaginationActions';
-import TableToolbar from './MuiTableToolbar';
+import TablePaginationActions from './MuiTablePaginationActions'
+import TableToolbar from './MuiTableToolbar'
 
 /* eslint-disable @typescript-eslint/ban-types */
 interface EditableCellProps<D extends {}> {
-  column: { id: number };
-  row: { index: number };
-  value: string;
-  data: D[];
-  setData: React.Dispatch<React.SetStateAction<D[]>>;
+  column: { id: number }
+  row: { index: number }
+  value: string
+  data: D[]
+  setData: React.Dispatch<React.SetStateAction<D[]>>
 }
 
 function EditableCell<D extends {}>({
@@ -47,25 +47,25 @@ function EditableCell<D extends {}>({
     margin: 0,
     border: 0,
     background: 'transparent',
-  };
+  }
 
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState(initialValue)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value);
-  };
+    setValue(e.target.value)
+  }
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     setData(
       data.map((row, i) =>
         i === index ? { ...row, [id]: e.target.value } : row,
       ),
-    );
-  };
+    )
+  }
 
   React.useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
+    setValue(initialValue)
+  }, [initialValue])
 
   return (
     <InputBase
@@ -75,15 +75,15 @@ function EditableCell<D extends {}>({
       onBlur={onBlur}
       inputProps={{ size: value ? value.length : null }}
     />
-  );
+  )
 }
 
 interface MuiTableProps<D extends {}> {
-  title: string;
-  columns: Column<D>[];
-  data: D[];
-  setData: React.Dispatch<React.SetStateAction<D[]>>;
-  editableCell?: boolean;
+  title: string
+  columns: Column<D>[]
+  data: D[]
+  setData: React.Dispatch<React.SetStateAction<D[]>>
+  editableCell?: boolean
 }
 
 /* eslint-disable react/jsx-key */
@@ -99,12 +99,12 @@ function MuiTable<D extends {}>({
     columns,
     data,
     setData,
-  };
+  }
 
   if (editableCell) {
     tableOptions.defaultColumn = {
       Cell: EditableCell,
-    };
+    }
   }
 
   const tableInstance = useTable(
@@ -113,7 +113,7 @@ function MuiTable<D extends {}>({
     useSortBy,
     usePagination,
     useRowSelect,
-  );
+  )
 
   const {
     state: { pageIndex, pageSize, selectedRowIds, globalFilter },
@@ -126,15 +126,15 @@ function MuiTable<D extends {}>({
     gotoPage,
     setPageSize,
     getToggleAllRowsSelectedProps,
-  } = tableInstance;
+  } = tableInstance
 
   const deleteSelectedRowsHandler = (): void => {
     const indexes = new Set(
       Object.keys(selectedRowIds).map((n) => Number.parseInt(n, 10)),
-    );
-    const newData = data.filter((_, i) => !indexes.has(i));
-    setData(newData);
-  };
+    )
+    const newData = data.filter((_, i) => !indexes.has(i))
+    setData(newData)
+  }
 
   return (
     <TableContainer>
@@ -175,7 +175,7 @@ function MuiTable<D extends {}>({
 
         <TableBody>
           {page.map((row: Row<D>) => {
-            prepareRow(row);
+            prepareRow(row)
             return (
               <TableRow hover {...row.getRowProps()}>
                 <TableCell>
@@ -189,10 +189,10 @@ function MuiTable<D extends {}>({
                     <TableCell {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </TableCell>
-                  );
+                  )
                 })}
               </TableRow>
-            );
+            )
           })}
         </TableBody>
 
@@ -208,10 +208,10 @@ function MuiTable<D extends {}>({
                 native: true,
               }}
               onChangePage={(e, newPage): void => {
-                gotoPage(newPage);
+                gotoPage(newPage)
               }}
               onChangeRowsPerPage={(e): void => {
-                setPageSize(Number(e.target.value));
+                setPageSize(Number(e.target.value))
               }}
               ActionsComponent={TablePaginationActions}
             />
@@ -219,10 +219,10 @@ function MuiTable<D extends {}>({
         </TableFooter>
       </Table>
     </TableContainer>
-  );
+  )
 }
 /* eslint-enable react/jsx-key */
 /* eslint-enable react/jsx-props-no-spreading */
 /* eslint-enable @typescript-eslint/ban-types */
 
-export default MuiTable;
+export default MuiTable

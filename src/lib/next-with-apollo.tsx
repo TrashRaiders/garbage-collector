@@ -2,19 +2,19 @@ import {
   ApolloClient,
   ApolloProvider,
   NormalizedCacheObject,
-} from '@apollo/client';
-import { NextPage, NextPageContext } from 'next';
-import Head from 'next/head';
-import React from 'react';
+} from '@apollo/client'
+import { NextPage, NextPageContext } from 'next'
+import Head from 'next/head'
+import React from 'react'
 
-import { initApolloClient } from './apollo';
+import { initApolloClient } from './apollo'
 
 export interface WithApolloProps {
-  apolloState?: NormalizedCacheObject;
+  apolloState?: NormalizedCacheObject
 }
 
 export interface WithApolloPageContext extends NextPageContext {
-  apolloClient: ApolloClient<NormalizedCacheObject>;
+  apolloClient: ApolloClient<NormalizedCacheObject>
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
@@ -40,25 +40,25 @@ export default function withApollo(
       useMock,
       setAuthToken,
       authName,
-    });
+    })
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps} />
       </ApolloProvider>
-    );
-  };
+    )
+  }
 
   // Set the correct displayName in development
   if (process.env.NODE_ENV !== 'production') {
     const displayName =
-      PageComponent.displayName || PageComponent.name || 'Component';
+      PageComponent.displayName || PageComponent.name || 'Component'
 
     if (displayName === 'App') {
       // eslint-disable-next-line no-console
-      console.warn('This withApollo HOC only works with PageComponents.');
+      console.warn('This withApollo HOC only works with PageComponents.')
     }
 
-    WithApollo.displayName = `withApollo(${displayName})`;
+    WithApollo.displayName = `withApollo(${displayName})`
   }
 
   if (getDataFromTree || PageComponent.getInitialProps) {
@@ -67,13 +67,13 @@ export default function withApollo(
     ): Promise<WithApolloProps> => {
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
-      const apolloClient = initApolloClient();
-      ctx.apolloClient = apolloClient;
+      const apolloClient = initApolloClient()
+      ctx.apolloClient = apolloClient
 
       // Run wrapped getInitialProps methods
-      let pageProps = {};
+      let pageProps = {}
       if (PageComponent.getInitialProps) {
-        pageProps = await PageComponent.getInitialProps(ctx);
+        pageProps = await PageComponent.getInitialProps(ctx)
       }
 
       // Only on the server:
@@ -81,16 +81,16 @@ export default function withApollo(
         // When redirecting, the response is finished.
         // No point in continuing to render
         if (ctx.res?.finished) {
-          return pageProps;
+          return pageProps
         }
 
         // Only if getDataFromTree is enabled
         if (getDataFromTree) {
           try {
             // Run all GraphQL queries
-            const { getMarkupFromTree } = await import('@apollo/react-ssr');
-            const { renderToString } = await import('react-dom/server');
-            const { AppTree } = ctx;
+            const { getMarkupFromTree } = await import('@apollo/react-ssr')
+            const { renderToString } = await import('react-dom/server')
+            const { AppTree } = ctx
             await getMarkupFromTree({
               renderFunction: renderToString,
               tree: (
@@ -101,31 +101,31 @@ export default function withApollo(
                   }}
                 />
               ),
-            });
+            })
           } catch (error) {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
             // eslint-disable-next-line no-console
-            console.error('Error while running `getMarkupFromTree`', error);
+            console.error('Error while running `getMarkupFromTree`', error)
           }
 
           // getMarkupFromTree does not call componentWillUnmount
           // head side effect therefore need to be cleared manually
-          Head.rewind();
+          Head.rewind()
         }
       }
 
       // Extract query data from the Apollo store
-      const apolloState = apolloClient.cache.extract();
+      const apolloState = apolloClient.cache.extract()
 
       return {
         ...pageProps,
         apolloState,
-      };
-    };
+      }
+    }
   }
 
-  return WithApollo;
+  return WithApollo
 }
 /* eslint-enable react/jsx-props-no-spreading */
