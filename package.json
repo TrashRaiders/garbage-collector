@@ -44,6 +44,7 @@
     "@graphql-codegen/typescript": "1.19.0",
     "@graphql-codegen/typescript-operations": "1.17.13",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "@netlify/plugin-nextjs": "^1.0.3",
     "@next/bundle-analyzer": "10.0.4",
     "@storybook/addons": "6.1.11",
     "@storybook/react": "6.1.11",
