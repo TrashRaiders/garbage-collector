@@ -2817,17 +2817,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@netlify/plugin-nextjs@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@netlify/plugin-nextjs/-/plugin-nextjs-1.0.3.tgz#92aefdc1a36f14c9d5e8d22e116c8294ec7ceebd"
-  integrity sha512-zMRz/S5BOSnWzTAf6/aG/p6nGYAn3C1MSz5CMIlqHm02GDbbtGR83gGQebYxJZoD+7qsjw2WrxnMrvzUMTZ9Lw==
-  dependencies:
-    chalk "^4.1.0"
-    find-up "^4.1.0"
-    make-dir "^3.1.0"
-    next-on-netlify "^2.6.3"
-    semver "^7.3.2"
-
 "@next/bundle-analyzer@10.0.4":
   version "10.0.4"
   resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-10.0.4.tgz#7aaae96e69d2ce186d1d6bf2bc9e4377f418cc78"
@@ -11855,7 +11844,7 @@ next-compose-plugins@2.2.1:
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
 
-next-on-netlify@^2.6.3:
+next-on-netlify@2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/next-on-netlify/-/next-on-netlify-2.6.3.tgz#a6e24b5c0504ce2c85e7e59d909b9e4816936df8"
   integrity sha512-5ZEjlEH9ZeWDtbFIgxYLqNywCcssJMKV8WCCk1CC8so9Umlv1mZeUA5MoiMOENOE5mkZJNMLTG+nmL8+tQPQGQ==
