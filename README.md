@@ -34,11 +34,8 @@ Next.js framework starter repository.
 * UI Library
   * Docs
     * Material-UI: <https://material-ui.com/>
-    * TailwindCSS: <https://tailwindcss.com/>
   * Packages
     * @material-ui: <https://github.com/mui-org/material-ui>
-    * tailwindcss: <https://github.com/tailwindcss/tailwindcss>
-    * tailwindcss-theming: <https://github.com/hawezo/tailwindcss-theming>
 
 * Form Validation
   * Docs
@@ -160,11 +157,6 @@ yarn add formik formik-material-ui
 yarn add formik-material-ui-pickers @date-io/date-fns@1.x date-fns
 yarn add yup
 yarn add -D @types/yup
-
-# Tailwind CSS
-yarn add -D \
-  tailwindcss \
-  tailwindcss-theming
 
 # React Table
 yarn add react-table

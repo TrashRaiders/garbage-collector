@@ -1,14 +1,12 @@
-import '../../styles/index.css';
-
 import { NextPage } from 'next';
 import Router from 'next/router';
 import React from 'react';
 
-import CommonHead from '../../components/tailwindcss/CommonHead';
-import CommonProviders from '../../components/tailwindcss/CommonProviders';
-import Users from '../../components/tailwindcss/pages/Users';
-import { authInstances } from '../../lib/auth';
-import withApollo from '../../lib/next-with-apollo';
+import CommonHead from '../components/CommonHead';
+import CommonProviders from '../components/CommonProviders';
+import Users from '../pages/users';
+import { authInstances } from '../lib/auth';
+import withApollo from '../lib/next-with-apollo';
 
 Router.router = {
   /* eslint-disable @typescript-eslint/no-empty-function */
@@ -19,7 +17,7 @@ Router.router = {
 authInstances.default.setToken('dummy');
 const Page = withApollo(Users, { useMock: true, setAuthToken: true });
 
-export default { title: 'TailwindCSS Users' };
+export default { title: 'Mui Users' };
 
 // eslint-disable-next-line react/function-component-definition
 export const page: NextPage = () => (

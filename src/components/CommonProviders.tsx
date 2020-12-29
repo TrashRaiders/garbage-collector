@@ -1,8 +1,8 @@
 import { CssBaseline } from '@material-ui/core';
 import React from 'react';
 
-import { AuthProvider } from '../../lib/auth';
-import { DarkModeProvider } from '../../lib/mui';
+import { AuthProvider } from '../lib/auth';
+import { DarkModeProvider } from '../lib/mui';
 
 import MyThemeProvider from './MyThemeProvider';
 

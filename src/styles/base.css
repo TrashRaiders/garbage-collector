@@ -1,7 +1,0 @@
-hr {
-  @apply border-on-surface-border;
-}
-
-input {
-  @apply bg-transparent;
-}

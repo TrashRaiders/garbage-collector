@@ -7,7 +7,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
   env: {
     APP_UI: 'mui',
-    // APP_UI: 'tailwindcss',
     USE_GRAPHQL_MOCK: 'true',
     // USE_GRAPHQL_MOCK: process.env.NODE_ENV === 'test' ? 'true' : '',
   },

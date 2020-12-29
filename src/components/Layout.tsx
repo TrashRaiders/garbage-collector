@@ -24,8 +24,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 
-import { AuthContext } from '../../lib/auth';
-import { DarkModeContext } from '../../lib/mui';
+import { AuthContext } from '../lib/auth';
+import { DarkModeContext } from '../lib/mui';
 
 const drawerWidth = 160;
 
