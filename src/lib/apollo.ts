@@ -6,7 +6,6 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client'
 import { setContext } from '@apollo/link-context'
-import fetch from 'isomorphic-unfetch'
 
 import { authInstances } from './auth'
 

@@ -23,6 +23,7 @@ import {
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
+import useTranslation from 'next-translate/useTranslation'
 
 import { AuthContext } from '../lib/auth'
 import { DarkModeContext } from '../lib/mui'
@@ -116,6 +117,8 @@ function Layout({
     setAccountIconAnchorEl(null)
   }
 
+  const { t } = useTranslation('common')
+
   const drawer: React.ReactElement = (
     <>
       <div className={classes.toolbar} />
@@ -169,14 +172,14 @@ function Layout({
             keepMounted
           >
             {isSignedIn ? (
-              <MenuItem onClick={handleSignOut}>Log out</MenuItem>
+              <MenuItem onClick={handleSignOut}>{t('logout')}</MenuItem>
             ) : (
               <div>
                 <Link href="/login" passHref>
-                  <MenuItem component="a">Log in</MenuItem>
+                  <MenuItem component="a">{t('login')}</MenuItem>
                 </Link>
                 <Link href="/signup" passHref>
-                  <MenuItem component="a">Sign up</MenuItem>
+                  <MenuItem component="a">{t('signup')}</MenuItem>
                 </Link>
               </div>
             )}

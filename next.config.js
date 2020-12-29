@@ -2,14 +2,31 @@
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-});
+})
+const nextTranslate = require('next-translate')
+const withPlugins = require('next-compose-plugins')
 
-module.exports = withBundleAnalyzer({
-  env: {
-    APP_UI: 'mui',
-    USE_GRAPHQL_MOCK: 'true',
-    // USE_GRAPHQL_MOCK: process.env.NODE_ENV === 'test' ? 'true' : '',
+const nextConfig = {
+  i18n: {
+    locales: ['en', 'de'],
+    defaultLocale: 'en',
   },
-});
+}
+
+module.exports = withPlugins(
+  [
+    [
+      withBundleAnalyzer,
+      {
+        env: {
+          USE_GRAPHQL_MOCK: 'true',
+          // USE_GRAPHQL_MOCK: process.env.NODE_ENV === 'test' ? 'true' : '',
+        },
+      },
+    ],
+    [nextTranslate],
+  ],
+  nextConfig,
+)
 
 /* eslint-enable import/no-extraneous-dependencies */

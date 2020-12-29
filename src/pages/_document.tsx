@@ -20,9 +20,11 @@ import { NextRouter } from 'next/router'
 import React from 'react'
 
 class MyDocument extends Document {
+
+
   render(): React.ReactElement {
     return (
-      <Html lang="en">
+      <Html>
         <Head />
         <body>
           <Main />
