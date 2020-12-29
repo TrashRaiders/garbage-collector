@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "mike-co.import-sorter",
+    "christian-kohler.npm-intellisense"
+  ]
+}
