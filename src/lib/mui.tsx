@@ -9,6 +9,7 @@ const [DarkModeContext, DarkModeInnerProvider] = createStateContext({
 })
 export { DarkModeContext }
 
+/* eslint-disable react/jsx-props-no-spreading */
 function DarkModeConsumer(consumerProps: {
   children?: React.ReactNode
 }): React.ReactElement {
@@ -30,7 +31,6 @@ function DarkModeConsumer(consumerProps: {
   return <React.Fragment {...consumerProps} />
 }
 
-/* eslint-disable react/jsx-props-no-spreading */
 export function DarkModeProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {

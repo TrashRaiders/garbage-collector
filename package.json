@@ -20,7 +20,8 @@
     "graphql-typedefs": "node scripts/graphql-typedefs",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "storybook": "start-storybook --ci -p 9001",
-    "storycap": "storycap --serverTimeout 60000 --serverCmd 'start-storybook --ci -p 9002' http://localhost:9002"
+    "storycap": "storycap --serverTimeout 60000 --serverCmd 'start-storybook --ci -p 9002' http://localhost:9002",
+    "rearange-componnets": "yarn destiny"
   },
   "dependencies": {
     "@apollo/client": "3.3.6",
