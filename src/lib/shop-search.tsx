@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDebounce } from 'react-use'
 
 import { createStateContext } from './react-utils'
@@ -50,7 +50,7 @@ function ShopSearchConsumer(props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopSearch.filter])
 
-  useMemo(() => {
+  useEffect(() => {
     const searchResult = mockFetchResults(debouncedSearchOptions.searchTerm)
 
     setShopSearch((prevOptions) => ({

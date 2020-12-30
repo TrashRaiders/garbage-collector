@@ -1,35 +1,13 @@
-import {
-  Container,
-  Drawer,
-  Hidden,
-  List,
-  ListItem,
-  ListItemText,
-  Link as MuiLink,
-  Theme,
-  Typography,
-  makeStyles,
-} from '@material-ui/core'
-import Link from 'next/link'
+import { Container, Theme, makeStyles } from '@material-ui/core'
+import clsx from 'clsx'
 import React from 'react'
 
 import Topbar from './Layout/Topbar'
-
-const drawerWidth = 160
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     minHeight: '100vh',
-  },
-  nav: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-    },
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
   },
   container: {
     flexGrow: 1,
@@ -37,34 +15,41 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  filledContainer: {
+    padding: 0,
+  },
   main: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
   },
-  footer: {
-    padding: theme.spacing(2),
-  },
   toolbar: theme.mixins.toolbar,
 }))
 
-function Layout({
-  children,
-}: {
+interface LayoutProps {
+  fillContent?: boolean
   children?: React.ReactNode
-}): React.ReactElement {
+}
+
+function Layout(props: LayoutProps): React.ReactElement {
+  const { children, fillContent } = props
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <Topbar />
 
-      <Container className={classes.container} maxWidth="lg">
+      <Container
+        className={clsx(classes.container, {
+          [classes.filledContainer]: fillContent,
+        })}
+        maxWidth={fillContent ? false : 'lg'}
+      >
         <main className={classes.main}>
           <div className={classes.toolbar} />
+
           {children}
         </main>
-        <footer className={classes.footer} />
       </Container>
     </div>
   )

@@ -1,4 +1,10 @@
-import { Card, CardContent, Typography, makeStyles } from '@material-ui/core'
+import {
+  Card,
+  CardContent,
+  Theme,
+  Typography,
+  makeStyles,
+} from '@material-ui/core'
 import React from 'react'
 
 interface ShopCardProps {
@@ -7,14 +13,15 @@ interface ShopCardProps {
   tags: string[]
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    width: '100%',
-    height: '100%',
-  },
+const useStyles = makeStyles((theme: Theme) => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  card: {
+    flexGrow: 1,
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2),
   },
 }))
 
@@ -24,9 +31,10 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
   const classes = useStyles()
 
   return (
-    <Card className={[classes.root, className].join(' ')}>
+    <Card className={[classes.card, className].join(' ')}>
       <CardContent className={classes.content}>
         <Typography variant="body1">{name}</Typography>
+
         <Typography variant="body1">{tags.join(' ')}</Typography>
       </CardContent>
     </Card>

@@ -26,8 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     [theme.breakpoints.up('sm')]: {
       zIndex: theme.zIndex.drawer + 1,
-      // width: `calc(100% - ${drawerWidth}px)`,
-      // marginLeft: drawerWidth,
     },
     backgroundColor: theme.palette.background.paper,
   },
@@ -81,6 +79,8 @@ function Topbar(): React.ReactElement {
 
         <Search className={classes.grow} />
 
+        <div className={classes.grow} />
+
         <IconButton onClick={handleDarkMode} aria-label="Dark mode">
           <Brightness4 />
         </IconButton>
@@ -109,6 +109,7 @@ function Topbar(): React.ReactElement {
               <Link href="/login" passHref>
                 <MenuItem component="a">{t('login')}</MenuItem>
               </Link>
+
               <Link href="/signup" passHref>
                 <MenuItem component="a">{t('signup')}</MenuItem>
               </Link>

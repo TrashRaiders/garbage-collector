@@ -18,7 +18,7 @@ function IndexPage(): React.ReactElement {
 
   return (
     <ShopSearchProvider>
-      <Layout>
+      <Layout fillContent>
         <div className={classes.page}>
           <SearchResults />
         </div>
