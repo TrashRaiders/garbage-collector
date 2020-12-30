@@ -15,9 +15,14 @@ import Router from 'next/router'
 import React from 'react'
 
 import { AuthContext } from '../../lib/auth'
-import { DarkModeContext } from '../../lib/mui'
+import { DarkModeContext } from '../../lib/dark-mode'
+
+import Search from './Topbar/Search'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  grow: {
+    flexGrow: 1,
+  },
   appBar: {
     [theme.breakpoints.up('sm')]: {
       zIndex: theme.zIndex.drawer + 1,
@@ -25,9 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       // marginLeft: drawerWidth,
     },
     backgroundColor: theme.palette.background.paper,
-  },
-  menuTitle: {
-    flexGrow: 1,
   },
   menuButton: {
     [theme.breakpoints.up('sm')]: {
@@ -72,19 +74,17 @@ function Topbar(): React.ReactElement {
     <AppBar className={classes.appBar} color="default">
       <Toolbar>
         <Link href="/" passHref>
-          <MuiLink
-            className={classes.menuTitle}
-            variant="h5"
-            color="textPrimary"
-            underline="none"
-            noWrap
-          >
+          <MuiLink variant="h5" color="textPrimary" underline="none" noWrap>
             {t('appTitle')}
           </MuiLink>
         </Link>
+
+        <Search className={classes.grow} />
+
         <IconButton onClick={handleDarkMode} aria-label="Dark mode">
           <Brightness4 />
         </IconButton>
+
         <IconButton
           onClick={handleAccountMenuOpen}
           aria-label="Account menu"
@@ -92,6 +92,7 @@ function Topbar(): React.ReactElement {
         >
           <AccountCircle />
         </IconButton>
+
         <Menu
           anchorEl={accountIconAnchorEl}
           getContentAnchorEl={null}

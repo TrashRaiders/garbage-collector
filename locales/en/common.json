@@ -2,5 +2,6 @@
     "appTitle": "Garbage Collector",
     "login": "Login",
     "logout": "Logout",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "search": "Search"
 }

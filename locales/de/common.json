@@ -1,6 +1,7 @@
 {
-    "appTitle": "Müll Sammler",
-    "login": "Einloggen",
-    "logout": "Ausloggen",
-    "signup": "Registrieren"
+  "appTitle": "Müll Sammler",
+  "login": "Einloggen",
+  "logout": "Ausloggen",
+  "signup": "Registrieren",
+  "search": "Suche"
 }

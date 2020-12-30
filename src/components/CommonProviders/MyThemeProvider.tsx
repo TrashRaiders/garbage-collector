@@ -3,7 +3,7 @@ import { blue } from '@material-ui/core/colors'
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 import React from 'react'
 
-import { DarkModeContext } from '../../lib/mui'
+import { DarkModeContext } from '../../lib/dark-mode'
 
 function MyThemeProvider(props: {
   children: React.ReactNode
