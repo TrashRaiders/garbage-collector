@@ -8,11 +8,7 @@ import {
   Toolbar,
   makeStyles,
 } from '@material-ui/core'
-import {
-  AccountCircle,
-  Brightness4,
-  Menu as MenuIcon,
-} from '@material-ui/icons'
+import { AccountCircle, Brightness4 } from '@material-ui/icons'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'

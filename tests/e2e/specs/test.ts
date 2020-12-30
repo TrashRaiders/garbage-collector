@@ -25,15 +25,6 @@ describe('My First Test', (): void => {
       cy.get('button[type=submit]').click()
       cy.contains('p', 'Welcome to Next.js starter.')
       cy.matchImageSnapshot(`vp-${viewport}-5`)
-
-      // Users page
-      if (viewport === 'iphone-5') {
-        cy.get('[data-test-id="menu-icon"]').click({ force: true })
-        cy.matchImageSnapshot(`vp-${viewport}-6`)
-      }
-      cy.get('a[href="/users"]:visible').click()
-      cy.contains('h1', 'Users')
-      cy.matchImageSnapshot(`vp-${viewport}-7`)
     })
   })
 })
