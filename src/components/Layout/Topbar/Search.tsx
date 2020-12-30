@@ -3,6 +3,8 @@ import SearchIcon from '@material-ui/icons/Search'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
+import { ShopSearchContext } from '../../../lib/shop-search'
+
 const useStyles = makeStyles((theme: Theme) => ({
   search: {
     position: 'relative',
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   inputRoot: {
     color: 'inherit',
+    width: '100%',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -53,6 +56,17 @@ function Search(props: SearchProps): React.ReactElement {
   const classes = useStyles()
   const { t } = useTranslation('common')
 
+  const [, setShopSearch] = React.useContext(ShopSearchContext)
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    setShopSearch((prevOptions) => ({
+      ...prevOptions,
+      searchTerm: e.target.value,
+    }))
+  }
+
   return (
     <div className={[classes.search, className].join(' ')}>
       <div className={classes.searchIcon}>
@@ -64,7 +78,8 @@ function Search(props: SearchProps): React.ReactElement {
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search' }}
+        inputProps={{ 'aria-label': t('search') }}
+        onChange={handleChange}
       />
     </div>
   )

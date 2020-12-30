@@ -1,19 +1,15 @@
-import { Paper, Theme, makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import React from 'react'
 
 import Layout from '../components/Layout'
+import SearchResults from '../components/SearchResults'
+import { ShopSearchProvider } from '../lib/shop-search'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   page: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-  },
-  paper: {
-    flexGrow: 1,
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
-    height: 200,
   },
 }))
 
@@ -21,14 +17,13 @@ function IndexPage(): React.ReactElement {
   const classes = useStyles()
 
   return (
-    <Layout>
-      <div className={classes.page}>
-        <Paper className={classes.paper} />
-        <Paper className={classes.paper} />
-        <Paper className={classes.paper} />
-        <Paper className={classes.paper} />
-      </div>
-    </Layout>
+    <ShopSearchProvider>
+      <Layout>
+        <div className={classes.page}>
+          <SearchResults />
+        </div>
+      </Layout>
+    </ShopSearchProvider>
   )
 }
 

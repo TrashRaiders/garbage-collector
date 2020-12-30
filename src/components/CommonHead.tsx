@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import React from 'react'
 
@@ -6,16 +7,18 @@ function CommonHead({
 }: {
   children?: React.ReactNode
 }): React.ReactElement {
+  const { t } = useTranslation('common')
+
   return (
     <>
       <Head>
-        <title>Next.js starter</title>
+        <title>{t('appTitle')}</title>
         <meta charSet="utf-8" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <meta name="description" content="Next.js starter" />
+        <meta name="description" content={t('appTitle')} />
       </Head>
       {children}
     </>
