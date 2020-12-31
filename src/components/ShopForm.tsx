@@ -6,6 +6,7 @@ import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import FormInput from './ShopForm/FormInput'
+import FormSelect from './ShopForm/FormSelect'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -40,6 +41,34 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
       <ErrorMessage
         errors={errors}
         name="name"
+        render={({ message }) => (
+          <Typography variant="body2" color="error">
+            {message}
+          </Typography>
+        )}
+      />
+
+      <FormSelect
+        name="type"
+        label={t('shopType')}
+        control={control}
+        error={!!errors.name}
+        required={t('thisFieldIsRequired')}
+        options={[
+          {
+            id: 'shop',
+            label: t('shop'),
+          },
+          {
+            id: 'private',
+            label: t('private'),
+          },
+        ]}
+      />
+
+      <ErrorMessage
+        errors={errors}
+        name="type"
         render={({ message }) => (
           <Typography variant="body2" color="error">
             {message}

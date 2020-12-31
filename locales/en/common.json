@@ -8,5 +8,9 @@
   "send": "send",
   "addNewShop": "add new shop",
   "shopName": "shop name",
-  "thisFieldIsRequired": "This field is required"
+  "thisFieldIsRequired": "This field is required",
+  "shopType": "shop type",
+  "shop": "shop",
+  "private": "private",
+  "noSelection": "no selection"
 }

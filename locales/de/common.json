@@ -8,5 +8,9 @@
   "send": "senden",
   "addNewShop": "neues Geschäft hinzufügen",
   "shopName": "Name des Geschäfts",
-  "thisFieldIsRequired": "Dieses Feld ist erforderlich"
+  "thisFieldIsRequired": "Dieses Feld ist erforderlich",
+  "shopType": "Geschäftstyp",
+  "shop": "Geschäft",
+  "private": "Privat",
+  "noSelection": "keine Auswahl"
 }
