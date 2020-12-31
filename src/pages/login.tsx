@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { TextField } from 'formik-material-ui'
+import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
@@ -33,6 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function LoginPage(): React.ReactElement {
   const classes = useStyles()
+
+  const { t } = useTranslation('common')
 
   const formSchema = yup
     .object({
@@ -73,8 +76,9 @@ function LoginPage(): React.ReactElement {
       <Container className={classes.container} maxWidth="xs">
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Log in
+            {t('login')}
           </Typography>
+
           <Formik
             initialValues={initialFormValues}
             validationSchema={formSchema}
@@ -97,6 +101,7 @@ function LoginPage(): React.ReactElement {
                   variant="outlined"
                   margin="normal"
                 />
+
                 <Field
                   component={TextField}
                   id="password"
@@ -109,6 +114,7 @@ function LoginPage(): React.ReactElement {
                   variant="outlined"
                   margin="normal"
                 />
+
                 <Box mt={1} mb={1}>
                   <Button
                     type="submit"
@@ -120,6 +126,7 @@ function LoginPage(): React.ReactElement {
                     Log in
                   </Button>
                 </Box>
+
                 <Box mt={2} mb={1} fontSize="body2.fontSize">
                   Don&apos;t have an account?&nbsp;
                   <Link href="/signup" passHref>
@@ -128,9 +135,11 @@ function LoginPage(): React.ReactElement {
                     </MuiLink>
                   </Link>
                 </Box>
+
                 <Typography variant="body2">
                   {loading && 'Loading...'}
                 </Typography>
+
                 <Typography variant="body2" color="error">
                   {error && errorMessages}
                 </Typography>

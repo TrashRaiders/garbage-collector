@@ -3,5 +3,10 @@
   "login": "Einloggen",
   "logout": "Ausloggen",
   "signup": "Registrieren",
-  "search": "Suche"
+  "search": "Suche",
+  "newShop": "Neuer Shop",
+  "send": "senden",
+  "addNewShop": "neues Geschäft hinzufügen",
+  "shopName": "Name des Geschäfts",
+  "thisFieldIsRequired": "Dieses Feld ist erforderlich"
 }

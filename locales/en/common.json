@@ -1,7 +1,12 @@
 {
-    "appTitle": "Garbage Collector",
-    "login": "Login",
-    "logout": "Logout",
-    "signup": "Sign up",
-    "search": "Search"
+  "appTitle": "Müll Sammler",
+  "login": "Login",
+  "logout": "Logout",
+  "signup": "Sign up",
+  "search": "Search",
+  "newShop": "New Shop",
+  "send": "send",
+  "addNewShop": "add new shop",
+  "shopName": "shop name",
+  "thisFieldIsRequired": "This field is required"
 }

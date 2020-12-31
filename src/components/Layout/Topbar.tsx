@@ -8,7 +8,7 @@ import {
   Toolbar,
   makeStyles,
 } from '@material-ui/core'
-import { AccountCircle, Brightness4 } from '@material-ui/icons'
+import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -80,6 +80,12 @@ function Topbar(): React.ReactElement {
         <Search className={classes.grow} />
 
         <div className={classes.grow} />
+
+        <Link href="/shop/new" passHref>
+          <IconButton aria-label={t('addNewShop')}>
+            <AddLocation />
+          </IconButton>
+        </Link>
 
         <IconButton onClick={handleDarkMode} aria-label="Dark mode">
           <Brightness4 />
