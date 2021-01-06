@@ -8,7 +8,7 @@ const nextTranslate = require('next-translate')
 
 const nextConfig = {
   i18n: {
-    locales: ['de'],
+    locales: ['en', 'de'],
     defaultLocale: 'de',
   },
   target: 'serverless', // experimental-serverless-trace
