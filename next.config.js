@@ -11,6 +11,7 @@ const nextConfig = {
     locales: ['de'],
     defaultLocale: 'de',
   },
+  target: 'serverless', // experimental-serverless-trace
 }
 
 module.exports = withPlugins(
