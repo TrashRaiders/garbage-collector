@@ -8,8 +8,8 @@ const nextTranslate = require('next-translate')
 
 const nextConfig = {
   i18n: {
-    locales: ['en', 'de'],
-    defaultLocale: 'en',
+    locales: ['de'],
+    defaultLocale: 'de',
   },
 }
 
