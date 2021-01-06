@@ -67,6 +67,7 @@ function MuiTableSearch<D extends {}>({
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
+
       <InputBase
         value={globalFilter || ''}
         onChange={(

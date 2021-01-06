@@ -92,6 +92,7 @@ function MuiTableToolbar<D extends {}>(
       {numSelected > 0 && (
         <>
           <Typography>{`${numSelected} selected`}</Typography>
+
           <Tooltip title="Delete">
             <IconButton aria-label="Delete" onClick={deleteSelectedRowsHandler}>
               <DeleteIcon />
@@ -109,6 +110,7 @@ function MuiTableToolbar<D extends {}>(
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
+
       <Popover
         id={columnTogglePopoverId}
         open={columnTogglePopoverOpen}

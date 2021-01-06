@@ -27,6 +27,7 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
     <Card className={[classes.root, className].join(' ')}>
       <CardContent className={classes.content}>
         <Typography variant="body1">{name}</Typography>
+
         <Typography variant="body1">{tags.join(' ')}</Typography>
       </CardContent>
     </Card>

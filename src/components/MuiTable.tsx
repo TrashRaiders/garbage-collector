@@ -147,6 +147,7 @@ function MuiTable<D extends {}>({
         preGlobalFilteredRows={preGlobalFilteredRows}
         setGlobalFilter={setGlobalFilter}
       />
+
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup: HeaderGroup<D>) => (
@@ -157,6 +158,7 @@ function MuiTable<D extends {}>({
                   {...getToggleAllRowsSelectedProps()}
                 />
               </TableCell>
+
               {headerGroup.headers.map((column: ColumnInstance<D>) => (
                 <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -184,6 +186,7 @@ function MuiTable<D extends {}>({
                     {...row.getToggleRowSelectedProps()}
                   />
                 </TableCell>
+
                 {row.cells.map((cell) => {
                   return (
                     <TableCell {...cell.getCellProps()}>

@@ -57,6 +57,7 @@ function TablePaginationActions(
       >
         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
+
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
@@ -68,6 +69,7 @@ function TablePaginationActions(
           <KeyboardArrowLeft />
         )}
       </IconButton>
+
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
@@ -79,6 +81,7 @@ function TablePaginationActions(
           <KeyboardArrowRight />
         )}
       </IconButton>
+
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}

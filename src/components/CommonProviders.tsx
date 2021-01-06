@@ -16,6 +16,7 @@ function CommonProviders({
       <MyThemeProvider>
         <AuthProvider>
           <CssBaseline />
+
           {children}
         </AuthProvider>
       </MyThemeProvider>

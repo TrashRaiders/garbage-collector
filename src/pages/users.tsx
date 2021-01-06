@@ -84,8 +84,11 @@ function UsersPage(): React.ReactElement {
             data={tableData}
             setData={setTableData}
           />
+
           {loading && <Typography>Loading...</Typography>}
+
           {error && <Typography color="error">{errorMessages}</Typography>}
+
           {isEdited && <Typography>Edited</Typography>}
         </Paper>
       </div>

@@ -83,6 +83,7 @@ function SignUpPage(): React.ReactElement {
           <Typography component="h1" variant="h5">
             Create your account
           </Typography>
+
           <Formik
             initialValues={initialFormValues}
             validationSchema={formSchema}
@@ -105,6 +106,7 @@ function SignUpPage(): React.ReactElement {
                   variant="outlined"
                   margin="normal"
                 />
+
                 <Field
                   component={TextField}
                   type="text"
@@ -117,6 +119,7 @@ function SignUpPage(): React.ReactElement {
                   variant="outlined"
                   margin="normal"
                 />
+
                 <Field
                   component={TextField}
                   type="password"
@@ -129,6 +132,7 @@ function SignUpPage(): React.ReactElement {
                   variant="outlined"
                   margin="normal"
                 />
+
                 <Box mt={1} mb={1}>
                   <Button
                     type="submit"
@@ -140,6 +144,7 @@ function SignUpPage(): React.ReactElement {
                     Create account
                   </Button>
                 </Box>
+
                 <Box mt={2} mb={1} fontSize="body2.fontSize">
                   Already have an account?&nbsp;
                   <Link href="/login" passHref>
@@ -148,9 +153,11 @@ function SignUpPage(): React.ReactElement {
                     </MuiLink>
                   </Link>
                 </Box>
+
                 <Typography variant="body2">
                   {loading && 'Loading...'}
                 </Typography>
+
                 <Typography variant="body2" color="error">
                   {error && errorMessages}
                 </Typography>

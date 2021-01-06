@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction, useMemo, useRef } from 'react'
 
+// TODO replace with the `createStateContext` from 'react-use
 export function createStateContext<V>(
   defaultValue: V,
 ): [
@@ -15,8 +16,15 @@ export function createStateContext<V>(
 
   function Provider(props: { children?: React.ReactNode }): React.ReactElement {
     const [state, setState] = React.useState(defaultValue)
+
+    const value = useRef<[V, Dispatch<SetStateAction<V>>]>([state, setState])
+
+    useMemo(() => {
+      value.current = [state, setState]
+    }, [state, setState])
+
     // eslint-disable-next-line react/jsx-props-no-spreading
-    return <Context.Provider value={[state, setState]} {...props} />
+    return <Context.Provider value={value.current} {...props} />
   }
 
   return [Context, Provider] as [typeof Context, typeof Provider]
