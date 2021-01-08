@@ -154,7 +154,7 @@ jobs:
       - run: yarn cypress info
       - run: yarn start-test start 3001 "cypress run --browser ${{ matrix.browser }}"
       - name: Upload snapshots
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: snapshots-${{ matrix.os }}-${{ matrix.browser }}
           path: tests/e2e/snapshots
