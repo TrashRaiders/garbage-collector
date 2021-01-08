@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-offline-cache
         if: env.YARN_CACHE == 'true'
         with:
@@ -64,7 +64,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-offline-cache
         if: env.YARN_CACHE == 'true'
         with:
@@ -98,7 +98,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-offline-cache
         if: env.YARN_CACHE == 'true'
         with:
@@ -137,7 +137,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-offline-cache
         if: env.YARN_CACHE == 'true'
         with:
@@ -175,7 +175,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-offline-cache
         if: env.YARN_CACHE == 'true'
         with:
