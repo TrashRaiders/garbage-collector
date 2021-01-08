@@ -111,7 +111,7 @@ jobs:
           yarn config set yarn-offline-mirror ./yarn-offline-cache
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
-      - run: yarn test:unit
+      - run: yarn test:unit --passWithNoTests
 
   e2e-test:
     needs: yarn-install
@@ -151,7 +151,6 @@ jobs:
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
       - run: yarn build
-      - run: yarn export
       - run: yarn cypress info
       - run: yarn start-test start 3001 "cypress run --browser ${{ matrix.browser }}"
       - name: Upload snapshots
@@ -162,6 +161,7 @@ jobs:
 
   lighthouse-test:
     needs: yarn-install
+    if: 'false' # disable this action, because we should do it like here: https://github.com/treosh/lighthouse-ci-action at "Integrate Lighthouse CI with Netlify"
     strategy:
       matrix:
         os:
@@ -189,7 +189,6 @@ jobs:
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
       - run: yarn build
-      - run: yarn export
       - uses: treosh/lighthouse-ci-action@v2
         with:
           uploadArtifacts: true

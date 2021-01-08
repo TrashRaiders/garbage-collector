@@ -8,14 +8,14 @@ describe('My First Test', (): void => {
       // Top page
       cy.viewport(viewport)
       cy.visit('/')
-      cy.contains('p', 'Welcome to Next.js starter.')
+      cy.contains('Müll Sammler')
       cy.matchImageSnapshot(`vp-${viewport}-1`)
 
       // Login page
       cy.get('[data-test-id="account-icon"]').click()
       cy.matchImageSnapshot(`vp-${viewport}-2`)
       cy.get('a[href="/login"]:visible').click()
-      cy.contains('h1', 'Log in')
+      cy.contains('h1', 'Einloggen')
       cy.matchImageSnapshot(`vp-${viewport}-3`)
 
       // Log-in
@@ -23,7 +23,7 @@ describe('My First Test', (): void => {
       cy.get('input[name=password]').type('mypassword')
       cy.matchImageSnapshot(`vp-${viewport}-4`)
       cy.get('button[type=submit]').click()
-      cy.contains('p', 'Welcome to Next.js starter.')
+      cy.contains('Müll Sammler')
       cy.matchImageSnapshot(`vp-${viewport}-5`)
     })
   })
