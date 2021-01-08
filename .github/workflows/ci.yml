@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         if: env.YARN_CACHE == 'true'
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         if: env.YARN_CACHE == 'true'
         with:
           node-version: ${{ matrix.node-version }}
@@ -60,7 +60,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
@@ -94,7 +94,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
@@ -133,7 +133,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
@@ -171,7 +171,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn offline cache
