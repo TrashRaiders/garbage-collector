@@ -93,7 +93,7 @@ function LoginPage(): React.ReactElement {
                   type="text"
                   name="name"
                   autoComplete="name"
-                  label="Name"
+                  label={t('name')}
                   required
                   // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
@@ -108,7 +108,7 @@ function LoginPage(): React.ReactElement {
                   type="password"
                   name="password"
                   autoComplete="current-password"
-                  label="Password"
+                  label={t('password')}
                   required
                   fullWidth
                   variant="outlined"
@@ -123,21 +123,22 @@ function LoginPage(): React.ReactElement {
                     disabled={isSubmitting}
                     fullWidth
                   >
-                    Log in
+                    {t('logIn')}
                   </Button>
                 </Box>
 
                 <Box mt={2} mb={1} fontSize="body2.fontSize">
-                  Don&apos;t have an account?&nbsp;
+                  {`${t('dontHaveAnAccount?')} `}
+
                   <Link href="/signup" passHref>
                     <MuiLink component="a" color="primary">
-                      Create an account
+                      {t('createAnAccount')}
                     </MuiLink>
                   </Link>
                 </Box>
 
                 <Typography variant="body2">
-                  {loading && 'Loading...'}
+                  {loading && `${t('loading')}...`}
                 </Typography>
 
                 <Typography variant="body2" color="error">
