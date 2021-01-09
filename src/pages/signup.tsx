@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { TextField } from 'formik-material-ui'
+import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
@@ -32,6 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function SignUpPage(): React.ReactElement {
   const classes = useStyles()
+
+  const { t } = useTranslation('common')
 
   const formSchema = yup
     .object({
@@ -81,7 +84,7 @@ function SignUpPage(): React.ReactElement {
       <Container className={classes.container} maxWidth="xs">
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Create your account
+            {t('createYourAccount')}
           </Typography>
 
           <Formik
@@ -98,7 +101,7 @@ function SignUpPage(): React.ReactElement {
                   id="name"
                   name="name"
                   autoComplete="name"
-                  label="Name"
+                  label={t('name')}
                   required
                   // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
@@ -113,7 +116,7 @@ function SignUpPage(): React.ReactElement {
                   id="email"
                   name="email"
                   autoComplete="email"
-                  label="Email"
+                  label={t('email')}
                   required
                   fullWidth
                   variant="outlined"
@@ -126,7 +129,7 @@ function SignUpPage(): React.ReactElement {
                   id="password"
                   name="password"
                   autoComplete="current-password"
-                  label="Password"
+                  label={t('password')}
                   required
                   fullWidth
                   variant="outlined"
@@ -141,21 +144,22 @@ function SignUpPage(): React.ReactElement {
                     disabled={isSubmitting}
                     fullWidth
                   >
-                    Create account
+                    {t('createAccount')}
                   </Button>
                 </Box>
 
                 <Box mt={2} mb={1} fontSize="body2.fontSize">
-                  Already have an account?&nbsp;
+                  {`${t('alreadyHaveAnAccount?')} `}
+
                   <Link href="/login" passHref>
                     <MuiLink component="a" color="primary">
-                      Log in
+                      {t('logIn')}
                     </MuiLink>
                   </Link>
                 </Box>
 
                 <Typography variant="body2">
-                  {loading && 'Loading...'}
+                  {loading && `${t('loading')}...`}
                 </Typography>
 
                 <Typography variant="body2" color="error">

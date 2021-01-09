@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out/
+.env*.local
 
 # production
 /build
@@ -18,6 +19,9 @@
 # cypress
 screenshots
 videos
+**/snapshots/**/__diff_output__/**
+**/snapshots/**/*(failed)*.*
+**/snapshots/**/*-snap.*
 
 # reg
 /.reg
@@ -27,7 +31,6 @@ __screenshots__
 
 # misc
 .DS_Store
-.env*.local
 
 # debug
 npm-debug.log*

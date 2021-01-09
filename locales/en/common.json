@@ -12,5 +12,15 @@
   "shopType": "shop type",
   "shop": "shop",
   "private": "private",
-  "noSelection": "no selection"
+  "noSelection": "no selection",
+  "name": "Name",
+  "password": "Password",
+  "email": "Email",
+  "logIn": "Log in",
+  "createAnAccount": "Create an account",
+  "dontHaveAnAccount?": "Don't have an account?",
+  "loading": "loading",
+  "alreadyHaveAnAccount?": "Already have an account?",
+  "createAccount": "Create account",
+  "createYourAccount": "Create your account"
 }

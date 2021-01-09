@@ -12,5 +12,15 @@
   "shopType": "Geschäftstyp",
   "shop": "Geschäft",
   "private": "Privat",
-  "noSelection": "keine Auswahl"
+  "noSelection": "keine Auswahl",
+  "name": "Name",
+  "password": "Passwort",
+  "email": "E-Mail",
+  "logIn": "Einloggen",
+  "createAnAccount": "Erstelle einen Account",
+  "dontHaveAnAccount?": "Hast du noch keinen Account?",
+  "loading": "wird geladen",
+  "alreadyHaveAnAccount?": "Hast du schon einen Account?",
+  "createAccount": "Account erstellen",
+  "createYourAccount": "Deinen Account erstellen"
 }
