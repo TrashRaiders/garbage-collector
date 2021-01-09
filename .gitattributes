@@ -1,0 +1,17 @@
+# Set default behaviour to automatically normalize line endings.
+* text=auto
+
+# files that should never be merged, but rather be regenerated
+yarn.lock -diff
+src/graphql/generated/*.* -diff
+
+# images
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.ico filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+
+# Fonts
+*.woff2 filter=lfs diff=lfs merge=lfs -text

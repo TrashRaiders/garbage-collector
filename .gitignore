@@ -18,7 +18,6 @@
 # cypress
 screenshots
 videos
-snapshots
 
 # reg
 /.reg

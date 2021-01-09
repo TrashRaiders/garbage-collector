@@ -4,4 +4,4 @@ module.exports = {
     '<rootDir>/node_modules/',
     '<rootDir>/tests/e2e/',
   ],
-};
+}
