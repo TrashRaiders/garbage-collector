@@ -9,6 +9,13 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
   addMatchImageSnapshotPlugin(on, config)
 
+  // modify browser launch arguments
+  // https://on.cypress.io/browser-launch-api
+  on('before:browser:launch', (browser, launchOptions) => {
+    launchOptions.args.push('--force-dark-mode=true')
+    return launchOptions
+  })
+
   return {
     ...config,
     fixturesFolder: 'tests/e2e/fixtures',
