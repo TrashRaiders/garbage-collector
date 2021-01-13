@@ -190,6 +190,7 @@ jobs:
       - run: yarn build
       - run: yarn cypress info
       - run: yarn start-test start 3001 "cypress run"
+      
       - name: Upload snapshots
         uses: actions/upload-artifact@v2
         with:
