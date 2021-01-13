@@ -8,18 +8,19 @@
     "start": "next start -p 3001",
     "lint": "eslint --ext .js,.ts,.tsx --ignore-pattern generated src tests",
     "format": "eslint --fix --ext .js,.ts,.tsx --ignore-pattern generated src tests",
+    "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest",
-    "test:e2e": "start-server-and-test start http://localhost:3001 test:e2e:inner",
+    "test:e2e": "start-test start http://localhost:3001 test:e2e:inner",
     "test:e2e:inner": "cypress run",
-    "test:e2e:open": "start-server-and-test start http://localhost:3001 test:e2e:open:inner",
+    "test:e2e:open": "start-test start http://localhost:3001 test:e2e:open:inner",
     "test:e2e:open:inner": "cypress open",
-    "test:e2e:update-snapshot": "start-server-and-test start http://localhost:3001 test:e2e:update-snapshot:inner",
+    "test:e2e:update-snapshot": "start-test start http://localhost:3001 test:e2e:update-snapshot:inner",
     "test:e2e:update-snapshot:inner": "cypress run --env updateSnapshots=true",
     "graphql-typedefs": "node scripts/graphql-typedefs",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "storybook": "start-storybook --ci -p 9001",
     "storycap": "storycap --serverTimeout 60000 --serverCmd 'start-storybook --ci -p 9002' http://localhost:9002",
-    "rearange:componnets": "yarn destiny"
+    "rearange:components": "yarn destiny"
   },
   "dependencies": {
     "@apollo/client": "3.3.6",
