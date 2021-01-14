@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@material-ui/core'
+// import { useMediaQuery } from '@material-ui/core'
 import React from 'react'
 
 import { createStateContext } from './react-utils'
@@ -13,7 +13,8 @@ export { DarkModeContext }
 function DarkModeConsumer(consumerProps: {
   children?: React.ReactNode
 }): React.ReactElement {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  // Note: set dark theme as default, because forcing dark theme for cypress tests is not implemented
+  const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)')
   const [darkMode, setDarkMode] = React.useContext(DarkModeContext)
 
   React.useEffect(() => {
