@@ -57,7 +57,7 @@
     "@next/bundle-analyzer": "10.0.5",
     "@storybook/addons": "6.1.14",
     "@storybook/react": "6.1.14",
-    "@testing-library/jest-dom": "5.11.8",
+    "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",
     "@testing-library/user-event": "12.6.0",
     "@twihike/eslint-config": "0.1.12",
