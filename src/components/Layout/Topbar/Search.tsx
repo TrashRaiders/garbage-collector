@@ -1,4 +1,5 @@
-import { InputBase, Theme, fade, makeStyles } from '@material-ui/core'
+import { InputBase, Theme } from '@material-ui/core'
+import { fade, makeStyles } from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'

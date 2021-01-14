@@ -4,9 +4,8 @@ import {
   MenuItem,
   Select,
   Theme,
-  createStyles,
-  makeStyles,
 } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { Control, ValidationValueMessage, useController } from 'react-hook-form'

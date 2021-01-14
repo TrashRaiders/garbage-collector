@@ -1,4 +1,5 @@
-import { Container, Theme, makeStyles } from '@material-ui/core'
+import { Container, Theme } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import React from 'react'
 

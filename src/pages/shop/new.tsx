@@ -1,11 +1,5 @@
-import {
-  Button,
-  Container,
-  Paper,
-  Theme,
-  Typography,
-  makeStyles,
-} from '@material-ui/core'
+import { Button, Container, Paper, Theme, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import {

@@ -1,10 +1,5 @@
-import {
-  Card,
-  CardContent,
-  Theme,
-  Typography,
-  makeStyles,
-} from '@material-ui/core'
+import { Card, CardContent, Theme, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
 interface ShopCardProps {

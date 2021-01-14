@@ -6,8 +6,8 @@ import {
   Link as MuiLink,
   Theme,
   Toolbar,
-  makeStyles,
 } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
