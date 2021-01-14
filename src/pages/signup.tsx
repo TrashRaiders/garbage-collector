@@ -1,19 +1,21 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Box,
   Button,
   Container,
   Link as MuiLink,
   Paper,
+  TextField,
   Theme,
   Typography,
   makeStyles,
 } from '@material-ui/core'
-import { Field, Form, Formik, FormikHelpers } from 'formik'
-import { TextField } from 'formik-material-ui'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import Layout from '../components/Layout'
@@ -28,53 +30,64 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   paper: {
     padding: theme.spacing(4),
+    width: '100%',
+  },
+  errorMessage: {
+    paddingLeft: theme.spacing(2),
   },
 }))
+
+interface IFormInputs {
+  name: string
+  email: string
+  password: string
+}
 
 function SignUpPage(): React.ReactElement {
   const classes = useStyles()
 
   const { t } = useTranslation('common')
 
-  const formSchema = yup
-    .object({
-      name: yup
-        .string()
-        .required()
-        .matches(/^[\w-]+$/)
-        .min(6)
-        .max(64),
-      email: yup.string().required().email(),
-      password: yup
-        .string()
-        .required()
-        .matches(/^[\u0020-\u007E]+$/)
-        .min(8)
-        .max(64),
-    })
-    .required()
-  type FormValues = yup.InferType<typeof formSchema>
-  const initialFormValues: FormValues = {
-    name: '',
-    email: '',
-    password: '',
-  }
+  const formSchema = yup.object().shape({
+    name: yup
+      .string()
+      .required()
+      .matches(/^[\w-]+$/)
+      .min(6)
+      .max(64),
+    email: yup.string().required().email(),
+    password: yup
+      .string()
+      .required()
+      .matches(/^[\u0020-\u007E]+$/)
+      .min(8)
+      .max(64),
+  })
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState: { isSubmitting },
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(formSchema),
+    reValidateMode: 'onChange',
+  })
 
   const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
-  const handleSubmit = async (
-    values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>,
-  ): Promise<void> => {
+
+  const onSubmit = async (data: IFormInputs): Promise<void> => {
     await signUp({
-      variables: { input: { ...values } },
+      variables: { input: { ...data } },
     })
-    setSubmitting(false)
   }
 
   const { loading, error, data } = result
+
   if (data) {
     Router.push('/login')
   }
+
   const errorMessages = error
     ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
     : ''
@@ -87,87 +100,117 @@ function SignUpPage(): React.ReactElement {
             {t('createYourAccount')}
           </Typography>
 
-          <Formik
-            initialValues={initialFormValues}
-            validationSchema={formSchema}
-            validateOnChange={false}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }): React.ReactElement => (
-              <Form>
-                <Field
-                  component={TextField}
-                  type="text"
-                  id="name"
-                  name="name"
-                  autoComplete="name"
-                  label={t('name')}
-                  required
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              inputRef={register}
+              type="text"
+              name="name"
+              autoComplete="name"
+              label={t('name')}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              error={!!errors.name}
+            />
 
-                <Field
-                  component={TextField}
-                  type="text"
-                  id="email"
-                  name="email"
-                  autoComplete="email"
-                  label={t('email')}
-                  required
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                />
-
-                <Field
-                  component={TextField}
-                  type="password"
-                  id="password"
-                  name="password"
-                  autoComplete="current-password"
-                  label={t('password')}
-                  required
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                />
-
-                <Box mt={1} mb={1}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled={isSubmitting}
-                    fullWidth
-                  >
-                    {t('createAccount')}
-                  </Button>
-                </Box>
-
-                <Box mt={2} mb={1} fontSize="body2.fontSize">
-                  {`${t('alreadyHaveAnAccount?')} `}
-
-                  <Link href="/login" passHref>
-                    <MuiLink component="a" color="primary">
-                      {t('logIn')}
-                    </MuiLink>
-                  </Link>
-                </Box>
-
-                <Typography variant="body2">
-                  {loading && `${t('loading')}...`}
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => (
+                <Typography
+                  className={classes.errorMessage}
+                  variant="body2"
+                  color="error"
+                >
+                  {message}
                 </Typography>
+              )}
+            />
 
-                <Typography variant="body2" color="error">
-                  {error && errorMessages}
+            <TextField
+              inputRef={register}
+              type="text"
+              name="email"
+              autoComplete="email"
+              label={t('email')}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              error={!!errors.email}
+            />
+
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <Typography
+                  className={classes.errorMessage}
+                  variant="body2"
+                  color="error"
+                >
+                  {message}
                 </Typography>
-              </Form>
-            )}
-          </Formik>
+              )}
+            />
+
+            <TextField
+              inputRef={register}
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              label={t('password')}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              error={!!errors.password}
+            />
+
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ message }) => (
+                <Typography
+                  className={classes.errorMessage}
+                  variant="body2"
+                  color="error"
+                >
+                  {message}
+                </Typography>
+              )}
+            />
+
+            <Box mt={2} mb={1}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                fullWidth
+              >
+                {t('createAccount')}
+              </Button>
+            </Box>
+
+            <Box mt={2} mb={1} fontSize="body2.fontSize">
+              {`${t('alreadyHaveAnAccount?')} `}
+
+              <Link href="/login" passHref>
+                <MuiLink component="a" color="primary">
+                  {t('logIn')}
+                </MuiLink>
+              </Link>
+            </Box>
+
+            <Typography variant="body2">
+              {loading && `${t('loading')}...`}
+            </Typography>
+
+            <Typography variant="body2" color="error">
+              {error && errorMessages}
+            </Typography>
+          </form>
         </Paper>
       </Container>
     </Layout>

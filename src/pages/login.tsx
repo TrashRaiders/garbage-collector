@@ -6,7 +6,6 @@ import {
   Container,
   Link as MuiLink,
   Paper,
-  Switch,
   TextField,
   Theme,
   Typography,
@@ -53,6 +52,16 @@ function LoginPage(): React.ReactElement {
     password: yup.string().required(),
   })
 
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState: { isSubmitting },
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(formSchema),
+    reValidateMode: 'onChange',
+  })
+
   const [signIn, result] = useSignInMutation()
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
@@ -75,16 +84,6 @@ function LoginPage(): React.ReactElement {
     ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
     : ''
 
-  const {
-    register,
-    handleSubmit,
-    errors,
-    formState: { isSubmitting },
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(formSchema),
-    reValidateMode: 'onBlur',
-  })
-
   return (
     <Layout>
       <Container className={classes.container} maxWidth="xs">
@@ -96,15 +95,15 @@ function LoginPage(): React.ReactElement {
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               inputRef={register}
-              variant="outlined"
               type="text"
               name="name"
               autoComplete="name"
               label={t('name')}
-              margin="normal"
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               fullWidth
+              variant="outlined"
+              margin="normal"
               error={!!errors.name}
             />
 
