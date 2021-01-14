@@ -12,7 +12,32 @@ module.exports = (on, config) => {
   // modify browser launch arguments
   // https://on.cypress.io/browser-launch-api
   on('before:browser:launch', (browser, launchOptions) => {
-    launchOptions.args.push('--force-dark-mode=true')
+    const width = 1280
+    const height = 900
+
+    // Note: forcing dark mode/theme on windows doesn't work ;(
+
+    if (browser.name === 'chrome' && browser.isHeadless) {
+      launchOptions.args.push('--force-dark-mode=true')
+
+      // fullPage screenshot size on non-retina screens
+      launchOptions.args.push(`--window-size=${width},${height}`)
+
+      // force screen to be non-retina
+      launchOptions.args.push('--force-device-scale-factor=1')
+    }
+
+    if (browser.name === 'electron') {
+      /* eslint-disable no-param-reassign */
+      launchOptions.preferences.darkTheme = true
+
+      if (browser.isHeadless) {
+        launchOptions.preferences.width = width
+        launchOptions.preferences.height = height
+      }
+      /* eslint-enable no-param-reassign */
+    }
+
     return launchOptions
   })
 
