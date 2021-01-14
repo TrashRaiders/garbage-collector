@@ -1917,10 +1917,10 @@
   resolved "https://registry.yarnpkg.com/@hookform/error-message/-/error-message-0.0.5.tgz#606912b506513669980c440f383ff6c78a7aca3a"
   integrity sha512-es7eLLFA3SXNYAT8aUjvf7Gok1eMHK+9DMILtJA7ZEwYZlCCCPifhpoZmY+5SOopEtF7e+qxFOjX+MJnI3jOcg==
 
-"@hookform/resolvers@2.0.0-beta.3":
-  version "2.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.0.0-beta.3.tgz#6a13cecb8d261fee9fc53564e3e4ef6212148f16"
-  integrity sha512-sOP+IX7TglN34WbMVt8eRqWgnXAQcvFc4XUU6x3bIiIjTkjV5L3N7sBjff2Ln4QPTMYnmdXaZV2Yf5WxOiC5YQ==
+"@hookform/resolvers@2.0.0-rc.1":
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.0.0-rc.1.tgz#3234315d27bbd058083b17bd615d57d4d59d81f3"
+  integrity sha512-p6YLQbnPwG6VrMZGusdyAuvIPB3VCJLc/XG/cuaDQNm1xyijDAyU1Og86phOGOmMD4QbItJKcmoaxbO9JKYQCQ==
 
 "@iarna/toml@^2.2.5":
   version "2.2.5"
