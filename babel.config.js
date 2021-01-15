@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 // For Jest
 module.exports = function config(api) {
-  api.cache(true)
+  api.cache(false)
 
   const presets = [['next/babel']]
 
@@ -12,7 +12,7 @@ module.exports = function config(api) {
         'babel-plugin-import',
         {
           libraryName: '@material-ui/core',
-          libraryDirectory: 'esm',
+          libraryDirectory: '',
           camel2DashComponentName: false,
         },
         'core',
@@ -21,7 +21,7 @@ module.exports = function config(api) {
         'babel-plugin-import',
         {
           libraryName: '@material-ui/icons',
-          libraryDirectory: 'esm',
+          libraryDirectory: '',
           camel2DashComponentName: false,
         },
         'icons',
