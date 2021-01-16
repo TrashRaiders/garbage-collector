@@ -5,6 +5,7 @@ import React from 'react'
 
 import CommonHead from '../components/CommonHead'
 import CommonProviders from '../components/CommonProviders'
+import PageTransition from '../components/PageTransition'
 
 /* eslint-disable react/jsx-props-no-spreading */
 class MyApp extends App {
@@ -12,18 +13,19 @@ class MyApp extends App {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles?.parentElement) {
-      // eslint-disable-next-line unicorn/prefer-node-remove
-      jssStyles.parentElement.removeChild(jssStyles)
+      jssStyles.remove()
     }
   }
 
   render(): React.ReactElement {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, router } = this.props
 
     return (
       <CommonHead>
         <CommonProviders>
-          <Component {...pageProps} />
+          <PageTransition pageID={router.route}>
+            <Component {...pageProps} />
+          </PageTransition>
         </CommonProviders>
       </CommonHead>
     )
