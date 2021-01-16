@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m as motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
 
 import { VariantName, variants } from '../lib/animation-variants'
@@ -26,6 +26,7 @@ function Animate(props: AnimateProps): React.ReactElement {
       exit="exit"
       transition={{ duration }}
       variants={variants[variant]}
+      data-testId="animate"
     >
       {children}
     </motion.div>

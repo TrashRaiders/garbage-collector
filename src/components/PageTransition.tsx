@@ -1,4 +1,10 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import {
+  AnimatePresence,
+  AnimationFeature,
+  ExitFeature,
+  MotionConfig,
+  m as motion,
+} from 'framer-motion'
 import React from 'react'
 import { usePreviousDistinct } from 'react-use'
 
@@ -22,17 +28,19 @@ function PageTransition(props: PageTransitionProps): React.ReactElement {
   const prevPageID = usePreviousDistinct(pageID)
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <motion.div
-        key={pageID}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={variants[variant]}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <MotionConfig features={[AnimationFeature, ExitFeature]}>
+      <AnimatePresence exitBeforeEnter>
+        <motion.div
+          key={pageID}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={variants[variant]}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </MotionConfig>
   )
 }
 

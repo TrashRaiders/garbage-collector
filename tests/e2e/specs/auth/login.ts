@@ -11,6 +11,11 @@ describe('login', (): void => {
       cy.matchImageSnapshot(`vp-${viewport}-1-auth-options`)
       cy.get('a[href="/login"]:visible').click()
       cy.contains('h1', 'Einloggen')
+
+      // TODO find out how to listen to an animation end
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(300)
+
       cy.matchImageSnapshot(`vp-${viewport}-2-login`)
 
       // Login
