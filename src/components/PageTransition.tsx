@@ -2,24 +2,20 @@ import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 import { usePreviousDistinct } from 'react-use'
 
-const fadeInOut = {
-  pageInitial: {
-    opacity: 0,
-  },
-  pageAnimate: {
-    opacity: 1,
-  },
-  pageExit: {
-    opacity: 0,
-  },
-}
+import { VariantName, variants } from '../lib/animation-variants'
 
 interface PageTransitionProps {
   children: React.ReactNode
   pageID: string
+  variant?: VariantName
 }
+
+/**
+ * Enables exit animations for all child components.
+ * By passing the variant prop, it also applies a full page transition between pages.
+ */
 function PageTransition(props: PageTransitionProps): React.ReactElement {
-  const { children, pageID } = props
+  const { children, pageID, variant = 'none' } = props
 
   // enables to change the transition animation basen on the current/target page
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,10 +25,10 @@ function PageTransition(props: PageTransitionProps): React.ReactElement {
     <AnimatePresence exitBeforeEnter>
       <motion.div
         key={pageID}
-        initial="pageInitial"
-        animate="pageAnimate"
-        exit="pageExit"
-        variants={fadeInOut}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={variants[variant]}
       >
         {children}
       </motion.div>

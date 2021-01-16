@@ -18,6 +18,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import Animate from '../components/Animate'
 import Layout from '../components/Layout'
 import { useSignUpMutation } from '../graphql/generated/graphql'
 import withApollo from '../lib/next-with-apollo'
@@ -95,123 +96,125 @@ function SignUpPage(): React.ReactElement {
   return (
     <Layout>
       <Container className={classes.container} maxWidth="xs">
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            {t('createYourAccount')}
-          </Typography>
+        <Animate variant="zoomInOut">
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h5">
+              {t('createYourAccount')}
+            </Typography>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              inputRef={register}
-              type="text"
-              name="name"
-              autoComplete="name"
-              label={t('name')}
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              error={!!errors.name}
-            />
-
-            <ErrorMessage
-              errors={errors}
-              name="name"
-              render={({ message }) => (
-                <Typography
-                  className={classes.errorMessage}
-                  variant="body2"
-                  color="error"
-                >
-                  {message}
-                </Typography>
-              )}
-            />
-
-            <TextField
-              inputRef={register}
-              type="text"
-              name="email"
-              autoComplete="email"
-              label={t('email')}
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              error={!!errors.email}
-            />
-
-            <ErrorMessage
-              errors={errors}
-              name="email"
-              render={({ message }) => (
-                <Typography
-                  className={classes.errorMessage}
-                  variant="body2"
-                  color="error"
-                >
-                  {message}
-                </Typography>
-              )}
-            />
-
-            <TextField
-              inputRef={register}
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              label={t('password')}
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              error={!!errors.password}
-            />
-
-            <ErrorMessage
-              errors={errors}
-              name="password"
-              render={({ message }) => (
-                <Typography
-                  className={classes.errorMessage}
-                  variant="body2"
-                  color="error"
-                >
-                  {message}
-                </Typography>
-              )}
-            />
-
-            <Box mt={2} mb={1}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                inputRef={register}
+                type="text"
+                name="name"
+                autoComplete="name"
+                label={t('name')}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
                 fullWidth
-              >
-                {t('createAccount')}
-              </Button>
-            </Box>
+                variant="outlined"
+                margin="normal"
+                error={!!errors.name}
+              />
 
-            <Box mt={2} mb={1} fontSize="body2.fontSize">
-              {`${t('alreadyHaveAnAccount?')} `}
+              <ErrorMessage
+                errors={errors}
+                name="name"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
 
-              <Link href="/login" passHref>
-                <MuiLink component="a" color="primary">
-                  {t('logIn')}
-                </MuiLink>
-              </Link>
-            </Box>
+              <TextField
+                inputRef={register}
+                type="text"
+                name="email"
+                autoComplete="email"
+                label={t('email')}
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                error={!!errors.email}
+              />
 
-            <Typography variant="body2">
-              {loading && `${t('loading')}...`}
-            </Typography>
+              <ErrorMessage
+                errors={errors}
+                name="email"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
 
-            <Typography variant="body2" color="error">
-              {error && errorMessages}
-            </Typography>
-          </form>
-        </Paper>
+              <TextField
+                inputRef={register}
+                type="password"
+                name="password"
+                autoComplete="current-password"
+                label={t('password')}
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                error={!!errors.password}
+              />
+
+              <ErrorMessage
+                errors={errors}
+                name="password"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
+
+              <Box mt={2} mb={1}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  fullWidth
+                >
+                  {t('createAccount')}
+                </Button>
+              </Box>
+
+              <Box mt={2} mb={1} fontSize="body2.fontSize">
+                {`${t('alreadyHaveAnAccount?')} `}
+
+                <Link href="/login" passHref>
+                  <MuiLink component="a" color="primary">
+                    {t('logIn')}
+                  </MuiLink>
+                </Link>
+              </Box>
+
+              <Typography variant="body2">
+                {loading && `${t('loading')}...`}
+              </Typography>
+
+              <Typography variant="body2" color="error">
+                {error && errorMessages}
+              </Typography>
+            </form>
+          </Paper>
+        </Animate>
       </Container>
     </Layout>
   )
