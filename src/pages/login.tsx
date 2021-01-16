@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { motion } from 'framer-motion'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -87,97 +88,103 @@ function LoginPage(): React.ReactElement {
   return (
     <Layout>
       <Container className={classes.container} maxWidth="xs">
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            {t('login')}
-          </Typography>
+        <motion.div
+          initial={{ scale: 0.8, opacity: 1 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.5, opacity: 1 }}
+        >
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h5">
+              {t('login')}
+            </Typography>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              inputRef={register}
-              type="text"
-              name="name"
-              autoComplete="name"
-              label={t('name')}
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              error={!!errors.name}
-            />
-
-            <ErrorMessage
-              errors={errors}
-              name="name"
-              render={({ message }) => (
-                <Typography
-                  className={classes.errorMessage}
-                  variant="body2"
-                  color="error"
-                >
-                  {message}
-                </Typography>
-              )}
-            />
-
-            <TextField
-              inputRef={register}
-              variant="outlined"
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              label={t('password')}
-              margin="normal"
-              fullWidth
-              error={!!errors.password}
-            />
-
-            <ErrorMessage
-              errors={errors}
-              name="password"
-              render={({ message }) => (
-                <Typography
-                  className={classes.errorMessage}
-                  variant="body2"
-                  color="error"
-                >
-                  {message}
-                </Typography>
-              )}
-            />
-
-            <Box mt={2} mb={1}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                inputRef={register}
+                type="text"
+                name="name"
+                autoComplete="name"
+                label={t('name')}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
                 fullWidth
-              >
-                {t('logIn')}
-              </Button>
-            </Box>
+                variant="outlined"
+                margin="normal"
+                error={!!errors.name}
+              />
 
-            <Box mt={2} mb={1} fontSize="body2.fontSize">
-              {`${t('dontHaveAnAccount?')} `}
+              <ErrorMessage
+                errors={errors}
+                name="name"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
 
-              <Link href="/signup" passHref>
-                <MuiLink component="a" color="primary">
-                  {t('createAnAccount')}
-                </MuiLink>
-              </Link>
-            </Box>
+              <TextField
+                inputRef={register}
+                variant="outlined"
+                type="password"
+                name="password"
+                autoComplete="current-password"
+                label={t('password')}
+                margin="normal"
+                fullWidth
+                error={!!errors.password}
+              />
 
-            <Typography variant="body2">
-              {loading && `${t('loading')}...`}
-            </Typography>
+              <ErrorMessage
+                errors={errors}
+                name="password"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
 
-            <Typography variant="body2" color="error">
-              {error && errorMessages}
-            </Typography>
-          </form>
-        </Paper>
+              <Box mt={2} mb={1}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  fullWidth
+                >
+                  {t('logIn')}
+                </Button>
+              </Box>
+
+              <Box mt={2} mb={1} fontSize="body2.fontSize">
+                {`${t('dontHaveAnAccount?')} `}
+
+                <Link href="/signup" passHref>
+                  <MuiLink component="a" color="primary">
+                    {t('createAnAccount')}
+                  </MuiLink>
+                </Link>
+              </Box>
+
+              <Typography variant="body2">
+                {loading && `${t('loading')}...`}
+              </Typography>
+
+              <Typography variant="body2" color="error">
+                {error && errorMessages}
+              </Typography>
+            </form>
+          </Paper>
+        </motion.div>
       </Container>
     </Layout>
   )
