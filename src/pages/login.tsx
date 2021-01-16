@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { motion } from 'framer-motion'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -19,6 +18,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import Animate from '../components/Animate'
 import Layout from '../components/Layout'
 import { useSignInMutation } from '../graphql/generated/graphql'
 import { AuthContext } from '../lib/auth'
@@ -88,11 +88,7 @@ function LoginPage(): React.ReactElement {
   return (
     <Layout>
       <Container className={classes.container} maxWidth="xs">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 1 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.5, opacity: 1 }}
-        >
+        <Animate variant="zoomInOut">
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
               {t('login')}
@@ -184,7 +180,7 @@ function LoginPage(): React.ReactElement {
               </Typography>
             </form>
           </Paper>
-        </motion.div>
+        </Animate>
       </Container>
     </Layout>
   )
