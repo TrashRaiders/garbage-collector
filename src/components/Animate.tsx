@@ -1,5 +1,6 @@
 import { m as motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
+import { useLocalStorage } from 'react-use'
 
 import { VariantName, variants } from '../lib/animation-variants'
 
@@ -19,6 +20,13 @@ function Animate(props: AnimateProps): React.ReactElement {
     variant = 'zoomInOutReduced'
   }
 
+  /* The initial animation causes the element to stay transparent without a parent AnimationPresence Provider */
+  // TODO We should provide an example repo for this bug and open an issue for the framer-motion devs.
+  const [cypress] = useLocalStorage('cypress', false)
+  if (cypress) {
+    return <div>{children}</div>
+  }
+
   return (
     <motion.div
       initial="initial"
@@ -26,7 +34,7 @@ function Animate(props: AnimateProps): React.ReactElement {
       exit="exit"
       transition={{ duration }}
       variants={variants[variant]}
-      data-testId="animate"
+      data-test-id="animate"
     >
       {children}
     </motion.div>
