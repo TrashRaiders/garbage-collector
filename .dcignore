@@ -1,3 +1,5 @@
 node_modules/**
 .next/**
 src/graphql/generated/**
+dist/**
+netlify-automatic-functions/**

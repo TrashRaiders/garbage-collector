@@ -1,1 +1,9 @@
 src/graphql/generated/
+node_modules/
+dist/
+netlify-automatic-functions/
+.next/
+.netlify/
+.github/
+.vscode/
+
