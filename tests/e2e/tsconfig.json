@@ -4,6 +4,6 @@
     "module": "commonjs",
     "target": "es5",
     "lib": ["esnext", "dom"],
-    "types": ["cypress", "cypress-image-snapshot"]
+    "types": ["cypress", "@testing-library/cypress", "cypress-image-snapshot"]
   }
 }
