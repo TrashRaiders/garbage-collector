@@ -7,7 +7,7 @@ describe('login', (): void => {
       cy.visit('/')
 
       // Login page
-      cy.get('[data-test-id="account-icon"]').click()
+      cy.findByTestId('account-icon').click()
       cy.matchImageSnapshot(`vp-${viewport}-1-auth-options`)
       cy.get('a[href="/login"]:visible').click()
       cy.contains('h1', 'Einloggen')
