@@ -13533,10 +13533,10 @@ react-refresh@0.8.3, react-refresh@^0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
-react-select@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-4.0.0.tgz#3ce72e0df4526b1f8934b34ab7ebb6a3c0b6c53a"
-  integrity sha512-0SrCTwxQfnqq1zPsiWCqtJsDmVsaK2FSZaBlr0SzalwRW4mBriDZzOb20asym2Echaz+qFmx6xQaAR3bYgpZFA==
+react-select@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-4.0.1.tgz#ea1551d184d72e68c2375fd2a834ed6cc4ad713d"
+  integrity sha512-XwH1kJRN2D4OlwH2NJb1VCtmERJCfAimA/BIeXSYkVL1vC58FwjHltmVkIk5H0S2Z+qtJEvqO9DKNmzsTHJKZA==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@emotion/cache" "^11.0.0"
