@@ -3211,12 +3211,10 @@
   dependencies:
     chalk "*"
 
-"@types/cypress-image-snapshot@3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@types/cypress-image-snapshot/-/cypress-image-snapshot-3.1.3.tgz#697dbde64913fabe177146e44b06bbb7b4df4f8d"
-  integrity sha512-s6JU84bOrma++b662mvA3DLChi2pidIMQy70B/XhiQ7TUNLEVua6tPql4E5gNUZu0i2FLZAzLOM3RMbPuvCztQ==
-  dependencies:
-    cypress "*"
+"@types/cypress-image-snapshot@3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/cypress-image-snapshot/-/cypress-image-snapshot-3.1.4.tgz#eb6c0f8c48ab2a64d548456a727ecb3960c56660"
+  integrity sha512-9YlCQfjDR1KEsbIXMwDr+UMrzHvbsNSiWEjrQ32xyWZkVS+H2IMIdryuuSje/3jesxoCYDstWe374tunMo51iw==
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
@@ -6359,7 +6357,7 @@ cypress-image-snapshot@4.0.1:
     pkg-dir "^3.0.0"
     term-img "^4.0.0"
 
-cypress@*, cypress@6.3.0:
+cypress@6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.3.0.tgz#e27bba01d7e493265700e1e85333dca0b0127ede"
   integrity sha512-Ec6TAFOxdSB2HPINNJ1f7z75pENXcfCaQkz+A9j0eGSvusFJ2NNErq650DexCbNJAnCQkPqXB4XPH9kXnSQnUA==
