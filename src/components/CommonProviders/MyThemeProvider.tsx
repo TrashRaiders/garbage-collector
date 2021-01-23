@@ -1,24 +1,37 @@
-import { blue } from '@material-ui/core/colors'
+import { blueGrey, grey, lightGreen } from '@material-ui/core/colors'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 import React from 'react'
 
 import { DarkModeContext } from '../../lib/dark-mode'
 
+// Light Theme example: https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=455A64&primary.color=7CB342
+
 function MyThemeProvider(props: {
   children: React.ReactNode
 }): React.ReactElement {
+  const { children } = props
+
   const [darkMode] = React.useContext(DarkModeContext)
   const theme = React.useMemo(() => {
+    const { isDarkMode } = darkMode
     const themeProps: ThemeOptions = {
       palette: {
-        type: darkMode.isDarkMode ? 'dark' : 'light',
+        type: isDarkMode ? 'dark' : 'light',
         primary: {
-          main: darkMode.isDarkMode ? blue[200] : blue[800],
+          main: isDarkMode ? lightGreen[200] : lightGreen[900],
+          contrastText: isDarkMode ? '#030303' : '#FEFEFE',
+        },
+        secondary: {
+          main: isDarkMode ? blueGrey[400] : blueGrey[700],
+        },
+        text: {
+          primary: isDarkMode ? grey[100] : grey[900],
+          secondary: isDarkMode ? grey[200] : grey[800],
         },
       },
     }
-    if (darkMode.isDarkMode && themeProps.palette) {
+    if (isDarkMode && themeProps.palette) {
       themeProps.palette.background = {
         default: '#202020',
         paper: '#303030',
@@ -27,8 +40,7 @@ function MyThemeProvider(props: {
     return createMuiTheme(themeProps)
   }, [darkMode])
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <ThemeProvider theme={theme} {...props} />
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
 
 export default MyThemeProvider

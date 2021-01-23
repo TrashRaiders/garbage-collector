@@ -17,7 +17,7 @@ You need to have 2 tools installed before using any described scripts.
 - The latest [Node.js LTS](https://nodejs.org/de/download/) version
 - [Yarn v1.x](https://classic.yarnpkg.com/lang/en/)
 
-Download and install Node.js. Then you can simply call `npm i -g yarn expo-cli`. This will install and add both `yarn` and `expo-cli` to your PATH.
+Download and install Node.js. Then you can simply call `npm i -g yarn`. This will install and add `yarn` to your PATH.
 
 After these tools installed successfully, run `yarn` from the project root to install all required npm dependencies.
 
