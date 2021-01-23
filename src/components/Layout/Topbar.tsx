@@ -29,11 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     backgroundColor: theme.palette.background.paper,
   },
-  menuButton: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
 }))
 
 function Topbar(): React.ReactElement {
