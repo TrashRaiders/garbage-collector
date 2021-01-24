@@ -96,7 +96,7 @@ jobs:
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
       - run: yarn lint
-        continue-on-error: true
+        continue-on-error: false
 
   unit-test:
     needs: yarn-install

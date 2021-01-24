@@ -53,6 +53,7 @@ export function createApolloClient({
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {
+    // eslint-disable-next-line unicorn/prefer-spread
     link = createAuthLink({ authName }).concat(createIsomorphLink())
   } else {
     link = createIsomorphLink()

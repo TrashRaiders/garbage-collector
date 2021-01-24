@@ -18,13 +18,11 @@ module.exports = (on, config) => {
     // Note: forcing dark mode/theme on windows doesn't work ;(
 
     if (browser.name === 'chrome' && browser.isHeadless) {
-      launchOptions.args.push('--force-dark-mode=true')
-
-      // fullPage screenshot size on non-retina screens
-      launchOptions.args.push(`--window-size=${width},${height}`)
-
-      // force screen to be non-retina
-      launchOptions.args.push('--force-device-scale-factor=1')
+      launchOptions.args.push(
+        '--force-dark-mode=true',
+        `--window-size=${width},${height}`,
+        '--force-device-scale-factor=1',
+      )
     }
 
     if (browser.name === 'electron') {

@@ -17,9 +17,8 @@ Router.router = {
 authInstances.default.setToken('dummy')
 const Page = withApollo(Users, { useMock: true, setAuthToken: true })
 
-export default { title: 'Mui Users' }
+export default { title: 'Pages/Users' }
 
-// eslint-disable-next-line react/function-component-definition
 export const page: NextPage = () => (
   <CommonHead>
     <CommonProviders>

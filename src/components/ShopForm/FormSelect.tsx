@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-interface Item {
+export interface Item {
   id: string
   label: string
 }
+
 interface FormSelectProps {
   name: string
   label: string
