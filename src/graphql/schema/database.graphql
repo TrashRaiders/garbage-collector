@@ -1,0 +1,78 @@
+# not for suitable for code generation
+# used for schema creation on astra side
+mutation {
+  # keyspace: createKeyspace(name: "garbage", replicas: 3)
+
+  addressType: createType(
+    keyspaceName: "garbage"
+    typeName: "address_type"
+    fields: [
+      { name: "city", type: { basic: TEXT } }
+      { name: "country", type: { basic: TEXT } }
+      { name: "street", type: { basic: TEXT } }
+      { name: "houseNumber", type: { basic: TEXT } }
+      { name: "postalCode", type: { basic: TEXT } }
+    ]
+  )
+
+  contactType: createType(
+    keyspaceName: "garbage"
+    typeName: "contact_type"
+    fields: [
+      { name: "phone", type: { basic: TEXT } }
+      { name: "whatsapp", type: { basic: TEXT } }
+      { name: "facebook", type: { basic: TEXT } }
+    ]
+  )
+
+  coordinatesType: createType(
+    keyspaceName: "garbage"
+    typeName: "coordinates_type"
+    fields: [
+      { name: "latitude", type: { basic: FLOAT } }
+      { name: "longitude", type: { basic: FLOAT } }
+    ]
+  )
+
+  shops: createTable(
+    keyspaceName: "garbage"
+    tableName: "shops"
+    partitionKeys: [{ name: "shop_id", type: { basic: TEXT } }]
+    values: [
+      { name: "name", type: { basic: TEXT } }
+      { name: "type", type: { basic: TEXT } }
+      { name: "description", type: { basic: TEXT } }
+      { name: "website", type: { basic: TEXT } }
+      {
+        name: "tags"
+        type: { basic: LIST, info: { subTypes: [{ basic: TEXT }] } }
+      }
+      {
+        name: "pictures"
+        type: { basic: LIST, info: { subTypes: [{ basic: TEXT }] } }
+      }
+      {
+        name: "coordinates"
+        type: { basic: UDT, info: { name: "coordinates_type", frozen: true } }
+      }
+      {
+        name: "address"
+        type: { basic: UDT, info: { name: "address_type", frozen: true } }
+      }
+      {
+        name: "contact"
+        type: { basic: UDT, info: { name: "contact_type", frozen: true } }
+      }
+    ]
+  )
+
+  shopsByLocation: createTable(
+    keyspaceName: "garbage"
+    tableName: "shops_by_location"
+    partitionKeys: [
+      { name: "longitude", type: { basic: FLOAT } }
+      { name: "latitude", type: { basic: FLOAT } }
+    ]
+    clusteringKeys: [{ name: "title", type: { basic: TEXT }, order: "ASC" }]
+  )
+}
