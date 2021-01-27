@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import FormChipSelect from './FormChipSelect'
 import FormInput from './ShopForm/FormInput'
 import FormSelect from './ShopForm/FormSelect'
 
@@ -70,6 +71,29 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
       <ErrorMessage
         errors={errors}
         name="type"
+        render={({ message }) => (
+          <Typography variant="body2" color="error">
+            {message}
+          </Typography>
+        )}
+      />
+
+      <FormChipSelect
+        name="tags"
+        label={t('shopTags')}
+        control={control}
+        error={!!errors.name}
+        required={t('thisFieldIsRequired')}
+        options={[
+          { id: 'bikes', label: 'Bikes' },
+          { id: 'cars', label: 'Cars' },
+          { id: 'hifi', label: 'Hifi' },
+        ]}
+      />
+
+      <ErrorMessage
+        errors={errors}
+        name="tags"
         render={({ message }) => (
           <Typography variant="body2" color="error">
             {message}
