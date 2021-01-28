@@ -1,12 +1,12 @@
 overwrite: true
 schema: src/graphql/schema/stargate.graphql
-documents: "src/graphql/documents/**/*.graphql"
+documents: 'src/graphql/documents/**/*.graphql'
 generates:
   src/generated/graphql.tsx:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
     config:
       withComponent: false
       withHOC: false
@@ -14,8 +14,21 @@ generates:
       reactApolloVersion: 3
   src/generated/schema.json:
     plugins:
-      - "introspection"
+      - 'introspection'
+  src/generated/page.tsx:
+    plugins:
+      - 'graphql-codegen-apollo-next-ssr'
+    config:
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./graphql
+      apolloClientVersion: 3
+      reactApolloVersion: 3
+      withHooks: true
+      withHOC: false
+      apolloClientInstanceImport: '../lib/next-with-apollo'
+    preset: import-types
+    presetConfig:
+      typesPath: ./graphql
 hooks:
   afterAllFileWrite:
     - prettier --write
-    

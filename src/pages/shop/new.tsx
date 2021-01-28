@@ -1,5 +1,13 @@
-import { Button, Container, Paper, Theme, Typography } from '@material-ui/core'
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Paper,
+  Theme,
+  Typography,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import {
@@ -11,6 +19,8 @@ import {
 
 import Layout from '../../components/Layout'
 import ShopForm from '../../components/ShopForm'
+import { useCreateShopMutation } from '../../generated/graphql'
+import { ssrGetShops } from '../../generated/page'
 
 type FormValues = {
   name: string
@@ -40,12 +50,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const onSubmit: SubmitHandler<FormValues> = () => {
-  // TODO send the mutation request
-}
-
-const onError: SubmitErrorHandler<FormValues> = () => {
+const onError: SubmitErrorHandler<FormValues> = (errors) => {
   // additional actions when the form has errors
+  // eslint-disable-next-line no-console
+  console.log({ errors })
 }
 
 function NewShopPage(): React.ReactNode {
@@ -53,6 +61,21 @@ function NewShopPage(): React.ReactNode {
   const { t } = useTranslation('common')
   const methods = useForm<FormValues>()
   const { handleSubmit } = methods
+
+  const [createShop, { loading, error }] = useCreateShopMutation()
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const variables = { value: data }
+
+    // eslint-disable-next-line no-console
+    console.log({ createShop: variables })
+    createShop({ variables })
+  }
+
+  const { data } = ssrGetShops.usePage()
+
+  // eslint-disable-next-line no-console
+  console.log({ shopData: data })
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
@@ -67,9 +90,15 @@ function NewShopPage(): React.ReactNode {
             <div className={classes.formContainer}>
               <ShopForm className={classes.form} />
 
+              {error && <Typography color="error">{error}</Typography>}
+
               <Button
                 onClick={handleSubmit(onSubmit, onError)}
                 variant="contained"
+                startIcon={
+                  loading && <CircularProgress size={18} color="inherit" />
+                }
+                disabled={loading}
               >
                 {t('send')}
               </Button>
@@ -80,6 +109,10 @@ function NewShopPage(): React.ReactNode {
     </Layout>
   )
   /* eslint-enable react/jsx-props-no-spreading */
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return ssrGetShops.getServerPage({}, context)
 }
 
 export default NewShopPage
