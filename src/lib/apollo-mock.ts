@@ -15,8 +15,8 @@ import {
   makeExecutableSchema,
 } from 'graphql-tools'
 
-import introspectionResult from '../graphql/generated/schema.json'
-import typeDefs from '../graphql/generated/typedefs'
+import introspectionResult from '../generated/schema.json'
+import typeDefs from '../generated/typedefs'
 /* eslint-enable import/no-extraneous-dependencies */
 
 export const defaultMocks = {
@@ -27,7 +27,7 @@ export const defaultMocks = {
 }
 
 export const defaultResolvers = {
-  DateTime: GraphQLDateTime,
+  // DateTime: GraphQLDateTime,
   // Date: GraphQLDate,
   // Time: GraphQLTime,
 }

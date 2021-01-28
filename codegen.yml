@@ -2,7 +2,7 @@ overwrite: true
 schema: src/graphql/schema/stargate.graphql
 documents: "src/graphql/documents/**/*.graphql"
 generates:
-  src/graphql/generated/graphql.tsx:
+  src/generated/graphql.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
@@ -12,6 +12,10 @@ generates:
       withHOC: false
       withHooks: true
       reactApolloVersion: 3
-  src/graphql/generated/schema.json:
+  src/generated/schema.json:
     plugins:
       - "introspection"
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+    

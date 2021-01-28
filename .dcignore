@@ -1,5 +1,5 @@
 node_modules/**
 .next/**
-src/graphql/generated/**
+src/generated
 dist/**
 netlify-automatic-functions/**

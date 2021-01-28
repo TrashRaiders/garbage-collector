@@ -33,7 +33,7 @@ If you want a more control over your developed output, take a look at our Storyb
 - `scripts/` - Utility scripts that are used for some commands triggert by developers
 - `src/components/` - Here are the reusable React components ordered using [`destiny`](https://github.com/benawad/destiny/wiki), the Fractal Project Structure prettier
 - `src/graphql/` - GraphQL queries and mutations that are used to generate JS code into `generated` for easy usage.
-- `src/graphql/generated/` - Code that is automatically generated through scripts. Do not modify manually.
+- `src/generated/` - Code that is automatically generated through scripts. Do not modify manually.
 - `src/lib/` - Utility functions that are used in one or more React components
 - `src/pages/` - The routes of the app (`pages/api/index.ts` -> `localhost:3001/api`)
 - `src/stories/` - Stories for pages that will show up in the Storybook
@@ -51,7 +51,7 @@ After you edit imports, exports or create new files in `src/components/` you can
 
 After the GraphQL API was changed in the backend, the frontend code needs to be updated as well. This needs to be automated in this project.
 
-As soon as we have a running graphql API and the configs are setup, you should be able to run `yarn graphql-codegen` and all your requests in `src/graphql/` are transformed into usable React hooks in the `src/graphql/generated/` folder.
+As soon as we have a running graphql API and the configs are setup, you should be able to run `yarn graphql-codegen` and all your requests in `src/graphql/` are transformed into usable React hooks in the `src/generated/` folder.
 
 ### ⚙ Testing
 
