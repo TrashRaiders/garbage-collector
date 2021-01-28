@@ -44,3 +44,6 @@ yarn-error.log*
 .netlify
 dist
 netlify-*
+
+# vscode
+.vscode/launch.json

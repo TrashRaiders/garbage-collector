@@ -85,9 +85,9 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
         error={!!errors.name}
         required={t('thisFieldIsRequired')}
         options={[
-          { id: 'bikes', label: 'Bikes' },
-          { id: 'cars', label: 'Cars' },
-          { id: 'hifi', label: 'Hifi' },
+          { id: 'bicycles', label: t('bicycles') },
+          { id: 'cars', label: t('cars') },
+          { id: 'hifi', label: t('hifi') },
         ]}
       />
 
