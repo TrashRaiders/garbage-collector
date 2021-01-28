@@ -49,6 +49,7 @@ export default function FormChipSelect(
         id="tags-outlined"
         options={options}
         getOptionLabel={(option) => option.label}
+        getOptionSelected={(option, value) => option.id === value.id}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
