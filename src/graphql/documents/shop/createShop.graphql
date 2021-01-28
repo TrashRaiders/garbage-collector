@@ -1,0 +1,7 @@
+mutation CreateShop($value: shopsInput!) {
+  insertshops(value: $value) {
+    value {
+      shop_id
+    }
+  }
+}
