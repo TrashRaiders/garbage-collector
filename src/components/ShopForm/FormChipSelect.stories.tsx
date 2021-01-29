@@ -1,8 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import CommonHead from './CommonHead'
-import CommonProviders from './CommonProviders'
+import CommonHead from '../CommonHead'
+import CommonProviders from '../CommonProviders'
+
 import FormChipSelect, { IChipItem } from './FormChipSelect'
 
 export default { title: 'Components/FormChipSelect' }
@@ -23,7 +24,12 @@ export function Initial(): React.ReactElement {
   return (
     <CommonHead>
       <CommonProviders>
-        <FormChipSelect options={options} />
+        <FormChipSelect
+          options={options}
+          control={control}
+          name="initial"
+          label="Label"
+        />
       </CommonProviders>
     </CommonHead>
   )
@@ -35,7 +41,13 @@ export function Error(): React.ReactElement {
   return (
     <CommonHead>
       <CommonProviders>
-        <FormChipSelect options={options} error />
+        <FormChipSelect
+          options={options}
+          error
+          control={control}
+          name="error"
+          label="Label"
+        />
       </CommonProviders>
     </CommonHead>
   )

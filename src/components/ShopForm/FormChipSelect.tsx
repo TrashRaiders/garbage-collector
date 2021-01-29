@@ -1,4 +1,4 @@
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import React from 'react'
@@ -15,11 +15,11 @@ interface IFormChipSelectProps {
   options: IChipItem[]
 
   required?: boolean | string | ValidationValueMessage<boolean>
-  error: boolean
+  error?: boolean
   control: Control
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     autoComplete: {
       minWidth: 120,
@@ -46,16 +46,14 @@ export default function FormChipSelect(
       <Autocomplete
         fullWidth
         multiple
-        id="tags-outlined"
         options={options}
         getOptionLabel={(option) => option.label}
         getOptionSelected={(option, value) => option.id === value.id}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...inputProps}
             {...params}
+            {...inputProps}
             inputRef={ref}
             error={error}
             variant="outlined"
