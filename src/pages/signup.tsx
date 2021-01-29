@@ -20,7 +20,6 @@ import * as yup from 'yup'
 
 import Animate from '../components/Animate'
 import Layout from '../components/Layout'
-import withApollo from '../lib/next-with-apollo'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -216,9 +215,4 @@ function SignUpPage(): React.ReactElement {
   )
 }
 
-const MyPage = withApollo(SignUpPage, {
-  setAuthToken: process.env.APP_ENV !== 'test',
-  useMock: process.env.USE_GRAPHQL_MOCK === 'true',
-})
-
-export default MyPage
+export default SignUpPage

@@ -1,26 +1,36 @@
-// https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-
-import App from 'next/app'
-import React from 'react'
+import { ApolloProvider } from '@apollo/client'
+import type { AppProps } from 'next/app'
+import Error from 'next/error'
+import React, { useEffect } from 'react'
 
 import CommonHead from '../components/CommonHead'
 import CommonProviders from '../components/CommonProviders'
 import PageTransition from '../components/PageTransition'
+import { useApollo } from '../lib/next-with-apollo'
 
 /* eslint-disable react/jsx-props-no-spreading */
-class MyApp extends App {
-  componentDidMount(): void {
+function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
+  const apolloClient = useApollo(pageProps.initialApolloState)
+
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles?.parentElement) {
       jssStyles.remove()
     }
+  }, [])
+
+  if (pageProps.error) {
+    return (
+      <Error
+        statusCode={pageProps.error.statusCode}
+        title={pageProps.error.message}
+      />
+    )
   }
 
-  render(): React.ReactElement {
-    const { Component, pageProps, router } = this.props
-
-    return (
+  return (
+    <ApolloProvider client={apolloClient}>
       <CommonHead>
         <CommonProviders>
           <PageTransition pageID={router.route}>
@@ -28,21 +38,9 @@ class MyApp extends App {
           </PageTransition>
         </CommonProviders>
       </CommonHead>
-    )
-  }
+    </ApolloProvider>
+  )
 }
 /* eslint-enable react/jsx-props-no-spreading */
-
-// const didMountRef = React.useRef(false);
-// React.useLayoutEffect(() => {
-//   if (!didMountRef.current) {
-//     // Remove the server-side injected CSS.
-//     const jssStyles = document.querySelector('#jss-server-side');
-//     if (jssStyles?.parentElement) {
-//       jssStyles.parentElement.removeChild(jssStyles);
-//     }
-//     didMountRef.current = true;
-//   }
-// });
 
 export default MyApp
