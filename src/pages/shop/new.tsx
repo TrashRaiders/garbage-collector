@@ -14,6 +14,7 @@ import ShopForm from '../../components/ShopForm'
 
 type FormValues = {
   name: string
+  type: string
   tags: string[]
 }
 
