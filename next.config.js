@@ -12,6 +12,12 @@ const nextConfig = {
     defaultLocale: 'de',
   },
   target: 'serverless', // experimental-serverless-trace
+  rewrites: async () => [
+    {
+      source: '/api',
+      destination: process.env.GRAPHQL_API_ENDPOINT,
+    },
+  ],
 }
 
 module.exports = withPlugins(

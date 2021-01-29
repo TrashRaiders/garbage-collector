@@ -20,7 +20,6 @@ import * as yup from 'yup'
 
 import Animate from '../components/Animate'
 import Layout from '../components/Layout'
-import withApollo from '../lib/next-with-apollo'
 
 interface IFormInputs {
   name: string
@@ -175,9 +174,4 @@ function LoginPage(): React.ReactElement {
   )
 }
 
-const MyPage = withApollo(LoginPage, {
-  setAuthToken: process.env.APP_ENV !== 'test',
-  useMock: process.env.USE_GRAPHQL_MOCK === 'true',
-})
-
-export default MyPage
+export default LoginPage
