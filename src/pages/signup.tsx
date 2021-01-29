@@ -20,7 +20,6 @@ import * as yup from 'yup'
 
 import Animate from '../components/Animate'
 import Layout from '../components/Layout'
-import { useSignUpMutation } from '../graphql/generated/graphql'
 import withApollo from '../lib/next-with-apollo'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -75,23 +74,20 @@ function SignUpPage(): React.ReactElement {
     reValidateMode: 'onChange',
   })
 
-  const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
+  // const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
-    await signUp({
-      variables: { input: { ...data } },
-    })
+    // eslint-disable-next-line no-console
+    console.info('Here the user should be signed up', { data })
+    Router.push('/')
   }
 
-  const { loading, error, data } = result
-
-  if (data) {
-    Router.push('/login')
+  const result = {
+    loading: false,
+    error: null,
   }
 
-  const errorMessages = error
-    ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
-    : ''
+  const { loading, error } = result
 
   return (
     <Layout>
@@ -210,7 +206,7 @@ function SignUpPage(): React.ReactElement {
               </Typography>
 
               <Typography variant="body2" color="error">
-                {error && errorMessages}
+                {error}
               </Typography>
             </form>
           </Paper>

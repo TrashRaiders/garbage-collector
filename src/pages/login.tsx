@@ -20,8 +20,6 @@ import * as yup from 'yup'
 
 import Animate from '../components/Animate'
 import Layout from '../components/Layout'
-import { useSignInMutation } from '../graphql/generated/graphql'
-import { AuthContext } from '../lib/auth'
 import withApollo from '../lib/next-with-apollo'
 
 interface IFormInputs {
@@ -63,27 +61,18 @@ function LoginPage(): React.ReactElement {
     reValidateMode: 'onChange',
   })
 
-  const [signIn, result] = useSignInMutation()
-
   const onSubmit = async (data: IFormInputs): Promise<void> => {
-    await signIn({
-      variables: { input: { ...data } },
-    })
-  }
-
-  const { loading, error, data } = result
-
-  const [auth] = React.useContext(AuthContext)
-
-  if (data) {
-    const { token } = data.signIn
-    auth.default.setToken(token)
+    // eslint-disable-next-line no-console
+    console.info('Here the user should be logged in', { data })
     Router.push('/')
   }
 
-  const errorMessages = error
-    ? error.graphQLErrors.map((v) => JSON.stringify(v.message))
-    : ''
+  const result = {
+    loading: false,
+    error: null,
+  }
+
+  const { loading, error } = result
 
   return (
     <Layout>
@@ -176,7 +165,7 @@ function LoginPage(): React.ReactElement {
               </Typography>
 
               <Typography variant="body2" color="error">
-                {error && errorMessages}
+                {error}
               </Typography>
             </form>
           </Paper>

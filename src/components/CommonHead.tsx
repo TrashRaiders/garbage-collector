@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core/styles'
 import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import React from 'react'
@@ -8,6 +9,7 @@ function CommonHead({
   children?: React.ReactNode
 }): React.ReactElement {
   const { t } = useTranslation('common')
+  const { palette } = useTheme()
 
   return (
     <>
@@ -22,6 +24,11 @@ function CommonHead({
         />
 
         <meta name="description" content={t('appTitle')} />
+
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
 
         {/* Icons */}
 
@@ -113,7 +120,7 @@ function CommonHead({
 
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content={palette.primary.main} />
       </Head>
 
       {children}

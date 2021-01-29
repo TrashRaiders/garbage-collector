@@ -1,26 +1,20 @@
-// https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-
 import { ServerStyleSheets } from '@material-ui/core/styles'
-import { NextComponentType } from 'next'
-import { AppInitialProps } from 'next/app'
 import {
   AppContextType,
+  AppInitialProps,
   AppPropsType,
-  RenderPageResult,
-} from 'next/dist/next-server/lib/utils'
-import Document, {
   DocumentContext,
   DocumentInitialProps,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document'
+  NextComponentType,
+  RenderPageResult,
+} from 'next/dist/next-server/lib/utils'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { NextRouter } from 'next/router'
 import React from 'react'
 
-class MyDocument extends Document {
-  render(): React.ReactElement {
+export default class MyDocument extends Document {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  render() {
     return (
       <Html>
         <Head />
@@ -35,8 +29,8 @@ class MyDocument extends Document {
   }
 }
 
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable react/jsx-props-no-spreading */
+// `getInitialProps` belongs to `_document` (instead of `_app`),
+// it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (
   ctx: DocumentContext,
 ): Promise<DocumentInitialProps> => {
@@ -65,19 +59,22 @@ MyDocument.getInitialProps = async (
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets()
   const originalRenderPage = ctx.renderPage
-  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> => {
-    return originalRenderPage({
+
+  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
+    originalRenderPage({
       enhanceApp: (
         App: NextComponentType<
           AppContextType<NextRouter>,
           AppInitialProps,
-          AppPropsType<NextRouter, {}>
+          AppPropsType<NextRouter, Record<string, unknown>>
         >,
       ) => (
-        props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
+        props: React.PropsWithChildren<
+          AppPropsType<NextRouter, Record<string, unknown>>
+        >,
       ): React.ReactElement => sheets.collect(<App {...props} />),
     })
-  }
+
   const initialProps = await Document.getInitialProps(ctx)
 
   return {
@@ -89,7 +86,3 @@ MyDocument.getInitialProps = async (
     ],
   }
 }
-/* eslint-enable @typescript-eslint/ban-types */
-/* eslint-enable react/jsx-props-no-spreading */
-
-export default MyDocument
