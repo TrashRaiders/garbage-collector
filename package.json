@@ -20,6 +20,7 @@
     "graphql-typedefs": "node scripts/graphql-typedefs",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "storybook": "start-storybook --ci -p 9001",
+    "check:storybook": "yarn storybook --smoke-test",
     "rearange:components": "yarn destiny"
   },
   "dependencies": {

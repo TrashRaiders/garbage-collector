@@ -1,6 +1,6 @@
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
-  addons: ['storycap/register'],
+  addons: [],
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
