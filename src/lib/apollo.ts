@@ -1,3 +1,8 @@
+/**
+ * Here is an explanation of the basic approach we are using to setup the Apollo Client:
+ * https://youtu.be/y34ym0-KZ8A
+ */
+
 import {
   ApolloClient,
   ApolloLink,
@@ -5,13 +10,10 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
-import { onError } from '@apollo/client/link/error'
+import { RetryLink } from '@apollo/client/link/retry'
 import { setContext } from '@apollo/link-context'
 
-import { authInstances } from './auth'
-
-const URL_SSR = `${process.env.BASE_URL}/api`
-const URL_CSR = `${process.env.BASE_URL}/api`
+import { createErrorLink, token } from './apollo/error-link'
 
 export const clientInstances: {
   [key: string]: ApolloClient<NormalizedCacheObject>
@@ -25,7 +27,7 @@ export function initApolloClient({
   authName = 'default',
 } = {}): ApolloClient<NormalizedCacheObject> {
   if (typeof window === 'undefined') {
-    const client = createApolloClient({ initialState, useMock })
+    const client = createApolloClient({ initialState, useMock, setAuthToken })
     return client
   }
 
@@ -41,7 +43,7 @@ export function initApolloClient({
   return clientInstances[clientName]
 }
 
-export function createApolloClient({
+function createApolloClient({
   initialState = {},
   useMock = false,
   setAuthToken = false,
@@ -57,6 +59,7 @@ export function createApolloClient({
   } else if (setAuthToken) {
     link = ApolloLink.from([
       createErrorLink(),
+      createRetryLink(),
       createAuthLink({ authName }),
       createIsomorphLink(),
     ])
@@ -72,56 +75,45 @@ export function createApolloClient({
   })
 }
 
-export function createIsomorphLink(): ApolloLink {
-  const uri = typeof window === 'undefined' ? URL_SSR : URL_CSR
+function createIsomorphLink(): ApolloLink {
+  const uri =
+    typeof window === 'undefined' ? process.env.GRAPHQL_API_ENDPOINT : '/api'
 
   return new HttpLink({
     uri,
-    credentials: 'same-origin',
+    fetch,
   })
 }
 
-export function createAuthLink({ authName = 'default' } = {}): ApolloLink {
-  const authLink = setContext((_, { headers }) => {
-    const token = authInstances[authName].getToken()
+function createAuthLink({ authName = 'default' } = {}): ApolloLink {
+  const authLink = setContext((_, previousContext) => {
+    const { headers } = previousContext
 
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : '',
+        'x-cassandra-token': token.auth,
       },
     }
   })
   return authLink
 }
 
-/**
- * Catches Apollo client errors to we don't have these ugly next.js error windows,
- * if there is an error with the connection to the Backend API.
- *
- * TODO doesn't work as intendet yet. Should show the error page, if there is no connection.
- */
-export function createErrorLink(): ApolloLink {
-  return onError(({ graphQLErrors, networkError, response }) => {
-    if (graphQLErrors) {
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.info(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
-      )
-    }
-
-    if (networkError) {
-      // Check if error response is JSON
-      if (networkError.message === 'Internal Server Error' && response) {
-        response.errors = undefined
-      }
-
-      if (networkError.name === 'FetchError' && response) {
-        response.errors = undefined
-      }
-
-      console.info('[Network error]:', networkError)
-    }
+function createRetryLink(): ApolloLink {
+  return new RetryLink({
+    delay: {
+      initial: 300,
+      max: Number.POSITIVE_INFINITY,
+      jitter: true,
+    },
+    attempts: {
+      max: 5,
+      retryIf: (error) => {
+        // TODO maybe there are some error cases which should be just retried
+        // eslint-disable-next-line no-console
+        console.log('Error got in RetryLink:', error)
+        return false
+      },
+    },
   })
 }
