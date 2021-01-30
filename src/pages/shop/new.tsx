@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const onError: SubmitErrorHandler<FormValues> = (errors) => {
   // additional actions when the form has errors
   // eslint-disable-next-line no-console
-  // console.log({ errors })
+  console.log({ errors })
 }
 
 function NewShopPage(): React.ReactNode {
