@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     'react/jsx-props-no-spreading': 'off',
     'unicorn/no-array-for-each': 'off',
+    'no-restricted-syntax': 'off',
   },
 }

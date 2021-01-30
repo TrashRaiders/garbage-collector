@@ -1,7 +1,7 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { useMemo } from 'react'
 
-import { createApolloClient, initApolloClient } from './apollo'
+import { initApolloClient } from './apollo'
 
 /**
  * Hook that returns the apollo client instance
@@ -13,8 +13,8 @@ export function useApollo(
     () =>
       initApolloClient({
         initialState,
-        setAuthToken: process.env.APP_ENV !== 'test',
-        useMock: process.env.USE_GRAPHQL_MOCK === 'true',
+        setAuthToken: process.env.NODE_ENV !== 'test',
+        useMock: process.env.MOCK_GRAPHQL_API === 'true',
       }),
     [initialState],
   )
@@ -31,7 +31,7 @@ export const getApolloClient = (
 ): ApolloClient<NormalizedCacheObject> => {
   return initApolloClient({
     initialState,
-    setAuthToken: process.env.APP_ENV !== 'test',
-    useMock: process.env.USE_GRAPHQL_MOCK === 'true',
+    setAuthToken: process.env.NODE_ENV !== 'test',
+    useMock: process.env.MOCK_GRAPHQL_API === 'true',
   })
 }

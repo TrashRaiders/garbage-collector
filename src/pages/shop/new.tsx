@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const onError: SubmitErrorHandler<FormValues> = (errors) => {
   // additional actions when the form has errors
   // eslint-disable-next-line no-console
-  console.log({ errors })
+  // console.log({ errors })
 }
 
 function NewShopPage(): React.ReactNode {
@@ -72,10 +72,10 @@ function NewShopPage(): React.ReactNode {
     createShop({ variables })
   }
 
-  const { data } = ssrGetShops.usePage()
+  const { data, loading: shopsAreLoading } = ssrGetShops.usePage()
 
   // eslint-disable-next-line no-console
-  console.log({ shopData: data })
+  console.log({ shopData: data, shopsAreLoading })
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
@@ -112,7 +112,7 @@ function NewShopPage(): React.ReactNode {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  return ssrGetShops.getServerPage({}, context)
+  return ssrGetShops.getServerPage({}, context) ?? { props: {} }
 }
 
 export default NewShopPage
