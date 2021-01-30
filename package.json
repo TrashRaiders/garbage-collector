@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3001",
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 3001",
-    "lint": "eslint --fix",
+    "lint": "eslint . --fix",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest --passWithNoTests",
     "test:e2e": "start-test start http://localhost:3001 test:e2e:inner",

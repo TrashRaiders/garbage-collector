@@ -82,6 +82,7 @@ export function createErrorLink(): ApolloLink {
           response.errors = undefined
         }
 
+        // eslint-disable-next-line no-console
         console.info('[Network error]:', networkError)
       }
     },

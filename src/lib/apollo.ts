@@ -24,7 +24,6 @@ export function initApolloClient({
   initialState = {},
   useMock = false,
   setAuthToken = false,
-  authName = 'default',
 } = {}): ApolloClient<NormalizedCacheObject> {
   if (typeof window === 'undefined') {
     const client = createApolloClient({ initialState, useMock, setAuthToken })
@@ -36,7 +35,6 @@ export function initApolloClient({
       initialState,
       useMock,
       setAuthToken,
-      authName,
     })
   }
 
@@ -47,7 +45,6 @@ function createApolloClient({
   initialState = {},
   useMock = false,
   setAuthToken = false,
-  authName = 'default',
 } = {}): ApolloClient<NormalizedCacheObject> {
   const cache = new InMemoryCache().restore(initialState)
 
@@ -60,7 +57,7 @@ function createApolloClient({
     link = ApolloLink.from([
       createErrorLink(),
       createRetryLink(),
-      createAuthLink({ authName }),
+      createAuthLink(),
       createIsomorphLink(),
     ])
   } else {
@@ -85,7 +82,7 @@ function createIsomorphLink(): ApolloLink {
   })
 }
 
-function createAuthLink({ authName = 'default' } = {}): ApolloLink {
+function createAuthLink(): ApolloLink {
   const authLink = setContext((_, previousContext) => {
     const { headers } = previousContext
 
