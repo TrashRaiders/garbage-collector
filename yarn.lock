@@ -11270,10 +11270,10 @@ next-compose-plugins@2.2.1:
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
 
-next-translate@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-1.0.1.tgz#fd8f5976efb542030563d81d5f605bc019729028"
-  integrity sha512-yCzYSi906IhSzJetVD7pJOKBfceQxYvSA+NUK1YPWhi/VJWFqbp90WAz85uX77eW4nreTeDijQfcAcFG16fjqg==
+next-translate@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-1.0.2.tgz#af93208221d08a09b96545b2e3d853b69a6ddeb5"
+  integrity sha512-dRJdRkcBeO2cxxvyM+G9rNZ7gSng8fAGQk03C1PsIMRFpZK9WnVfKjK5buaFYG78XfBrBIEEz2d/wnJQIBy8Ow==
 
 next@10.0.6:
   version "10.0.6"
