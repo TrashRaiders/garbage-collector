@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import FormChipSelect from './FormChipSelect'
+import FormChipSelect from './ShopForm/FormChipSelect'
 import FormInput from './ShopForm/FormInput'
 import FormSelect from './ShopForm/FormSelect'
 
