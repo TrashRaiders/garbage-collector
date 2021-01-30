@@ -90,7 +90,11 @@ function NewShopPage(): React.ReactNode {
             <div className={classes.formContainer}>
               <ShopForm className={classes.form} />
 
-              {error && <Typography color="error">{error}</Typography>}
+              {error && (
+                <pre style={{ whiteSpace: 'pre-wrap', color: 'red' }}>
+                  {JSON.stringify(error, null, 2)}
+                </pre>
+              )}
 
               <Button
                 onClick={handleSubmit(onSubmit, onError)}
