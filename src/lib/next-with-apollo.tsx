@@ -1,4 +1,7 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { GetServerSidePropsContext } from 'next'
 import { useMemo } from 'react'
 
 import { initApolloClient } from './apollo'
@@ -22,11 +25,9 @@ export function useApollo(
 
 /**
  * Client used by 'graphql-codegen-apollo-next-ssr' through 'codegen.yml'.
- *
- * TODO: context is unused... maybe it should be used for more performance
  */
 export const getApolloClient = (
-  context?: unknown,
+  context?: GetServerSidePropsContext<ParsedUrlQuery>,
   initialState?: NormalizedCacheObject,
 ): ApolloClient<NormalizedCacheObject> => {
   return initApolloClient({

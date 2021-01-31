@@ -13,7 +13,6 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import { RetryLink } from '@apollo/client/link/retry'
 import merge from 'deepmerge'
-import Cookie from 'js-cookie'
 
 import { createErrorLink, token } from './apollo/error-link'
 

@@ -27,10 +27,6 @@ export function createErrorLink(): ApolloLink {
       if (graphQLErrors) {
         for (const graphQLError of graphQLErrors) {
           const { message, locations, path } = graphQLError
-          // eslint-disable-next-line no-console
-          console.info(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          )
 
           // based on this approach to refresh a token:
           // https://able.bio/AnasT/apollo-graphql-async-access-token-refresh--470t1c8#concurrent-requests
@@ -71,6 +67,10 @@ export function createErrorLink(): ApolloLink {
 
             return forward$.flatMap(() => forward(operation))
           }
+          // eslint-disable-next-line no-console
+          console.info(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          )
         }
       }
 
