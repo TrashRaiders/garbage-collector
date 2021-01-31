@@ -16,10 +16,14 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 
 import Layout from '../../components/Layout'
 import ShopForm from '../../components/ShopForm'
-import { useCreateShopMutation } from '../../generated/graphql'
+import {
+  CreateShopMutationVariables,
+  useCreateShopMutation,
+} from '../../generated/graphql'
 import { ssrGetShops } from '../../generated/page'
 
 type FormValues = {
@@ -65,7 +69,12 @@ function NewShopPage(): React.ReactNode {
   const [createShop, { loading, error }] = useCreateShopMutation()
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const variables = { value: data }
+    const variables: CreateShopMutationVariables = {
+      value: {
+        shop_id: `shop:${uuidv4()}`,
+        ...data,
+      },
+    }
 
     // eslint-disable-next-line no-console
     console.log({ createShop: variables })
