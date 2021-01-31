@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ApolloLink } from '@apollo/client'
-import { SchemaLink } from '@apollo/link-schema'
+import { SchemaLink } from '@apollo/client/link/schema'
 // import { addMocksToSchema } from '@graphql-tools/mock';
 // import {
 //   addResolversToSchema,

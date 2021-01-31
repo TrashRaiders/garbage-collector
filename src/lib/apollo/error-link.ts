@@ -91,10 +91,11 @@ export function createErrorLink(): ApolloLink {
 /* eslint-enable no-loop-func */
 
 async function getNewToken() {
+  const tokenPath = '/api/get-token'
   const url =
     typeof window === 'undefined'
-      ? `${process.env.BASE_URL}/api/get-token`
-      : '/api/get-token'
+      ? `${process.env.BASE_URL}${tokenPath}`
+      : tokenPath
 
   const res = await fetch(url)
   const data = await res.json()

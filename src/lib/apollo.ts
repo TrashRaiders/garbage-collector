@@ -10,8 +10,8 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { RetryLink } from '@apollo/client/link/retry'
-import { setContext } from '@apollo/link-context'
 
 import { createErrorLink, token } from './apollo/error-link'
 
