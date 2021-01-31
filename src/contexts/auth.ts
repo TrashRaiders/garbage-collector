@@ -1,4 +1,4 @@
-import { createStateContext } from './react-utils'
+import { createStateContext } from '../lib/react-utils'
 
 export type OnSetTokenHandler = (auth: Auth) => void
 

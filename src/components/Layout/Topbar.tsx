@@ -14,8 +14,8 @@ import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
 
-import { AuthContext } from '../../lib/auth'
-import { DarkModeContext } from '../../lib/dark-mode'
+import { AuthContext } from '../../contexts/auth'
+import { DarkModeContext } from '../../contexts/dark-mode'
 
 import Search from './Topbar/Search'
 

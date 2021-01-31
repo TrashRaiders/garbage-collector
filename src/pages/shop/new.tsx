@@ -25,6 +25,7 @@ import {
   useCreateShopMutation,
 } from '../../generated/graphql'
 import { ssrGetShops } from '../../generated/page'
+import { getToken } from '../../lib/auth-cookies'
 
 type FormValues = {
   name: string
@@ -79,6 +80,15 @@ function NewShopPage(): React.ReactNode {
     // eslint-disable-next-line no-console
     console.log({ createShop: variables })
     createShop({ variables })
+      .then((createShopResult) => {
+        // eslint-disable-next-line no-console
+        console.log({ createShopResult })
+        return null
+      })
+      .catch((createShopError) => {
+        // eslint-disable-next-line no-console
+        console.error(createShopError)
+      })
   }
 
   const { data, loading: shopsAreLoading } = ssrGetShops.usePage()
@@ -125,7 +135,14 @@ function NewShopPage(): React.ReactNode {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  return ssrGetShops.getServerPage({}, context) ?? { props: {} }
+  const token = await getToken(context.req)
+  return ssrGetShops.getServerPage({
+    context: {
+      headers: {
+        'x-cassandra-token': token,
+      },
+    },
+  })
 }
 
 export default NewShopPage

@@ -3,7 +3,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 import React from 'react'
 
-import { DarkModeContext } from '../../lib/dark-mode'
+import { DarkModeContext } from '../../contexts/dark-mode'
 
 // Light Theme example: https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=455A64&primary.color=7CB342
 

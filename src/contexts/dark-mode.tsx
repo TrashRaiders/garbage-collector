@@ -1,7 +1,7 @@
 // import { useMediaQuery } from '@material-ui/core'
 import React from 'react'
 
-import { createStateContext } from './react-utils'
+import { createStateContext } from '../lib/react-utils'
 
 const [DarkModeContext, DarkModeInnerProvider] = createStateContext({
   isDarkMode: false,
