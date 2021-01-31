@@ -11,11 +11,12 @@ import {
 
 import Layout from '../../components/Layout'
 import ShopForm from '../../components/ShopForm'
+import { IChipItem } from '../../components/ShopForm/FormChipSelect'
 
 type FormValues = {
   name: string
   type: string
-  tags: string[]
+  tags: IChipItem[]
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,11 +41,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const onSubmit: SubmitHandler<FormValues> = () => {
+const onSubmit: SubmitHandler<FormValues> = (args) => {
+  console.log(args)
   // TODO send the mutation request
 }
 
-const onError: SubmitErrorHandler<FormValues> = () => {
+const onError: SubmitErrorHandler<FormValues> = (error) => {
+  console.log('!!!!error!!!', error)
   // additional actions when the form has errors
 }
 
