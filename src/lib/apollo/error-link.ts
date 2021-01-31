@@ -35,6 +35,8 @@ export function createErrorLink(): ApolloLink {
           // based on this approach to refresh a token:
           // https://able.bio/AnasT/apollo-graphql-async-access-token-refresh--470t1c8#concurrent-requests
           if (/.*authorization failed/g.test(message)) {
+            // eslint-disable-next-line no-console
+            console.info(`Authorization failed... retrying with fresh token`)
             // error code is set to UNAUTHENTICATED
             // when AuthenticationError thrown in resolver
             let forward$

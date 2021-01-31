@@ -12,45 +12,51 @@ import {
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { RetryLink } from '@apollo/client/link/retry'
+import merge from 'deepmerge'
+import Cookie from 'js-cookie'
 
 import { createErrorLink, token } from './apollo/error-link'
 
-export const clientInstances: {
-  [key: string]: ApolloClient<NormalizedCacheObject>
-} = {}
+let apolloClient: ApolloClient<NormalizedCacheObject>
 
 export function initApolloClient({
-  clientName = 'default',
   initialState = {},
   useMock = false,
   setAuthToken = false,
 } = {}): ApolloClient<NormalizedCacheObject> {
-  if (typeof window === 'undefined') {
-    const client = createApolloClient({ initialState, useMock, setAuthToken })
-    return client
+  // eslint-disable-next-line no-underscore-dangle
+  const _apolloClient =
+    apolloClient ?? createApolloClient({ useMock, setAuthToken })
+
+  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
+  // get hydrated here
+  if (initialState) {
+    // Get existing cache, loaded during client side data fetching
+    const existingCache = _apolloClient.extract()
+
+    // Merge the existing cache into data passed from getStaticProps/getServerSideProps
+    const data = merge(initialState, existingCache)
+
+    // Restore the cache with the merged data
+    _apolloClient.cache.restore(data)
   }
 
-  if (!(clientName in clientInstances)) {
-    clientInstances[clientName] = createApolloClient({
-      initialState,
-      useMock,
-      setAuthToken,
-    })
-  }
+  // For SSG and SSR always create a new Apollo Client
+  if (typeof window === 'undefined') return _apolloClient
 
-  return clientInstances[clientName]
+  // Create the Apollo Client once in the client
+  if (!apolloClient) apolloClient = _apolloClient
+
+  return _apolloClient
 }
 
 function createApolloClient({
-  initialState = {},
   useMock = false,
   setAuthToken = false,
 } = {}): ApolloClient<NormalizedCacheObject> {
-  const cache = new InMemoryCache().restore(initialState)
-
   let link: ApolloLink
 
-  if (useMock || !process.env.GRAPHQL_API_ENDPOINT) {
+  if (useMock) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {
@@ -65,7 +71,7 @@ function createApolloClient({
   }
 
   return new ApolloClient({
-    cache,
+    cache: new InMemoryCache(),
     link,
     ssrMode: typeof window === 'undefined',
     connectToDevTools: process.env.NODE_ENV === 'development',
@@ -78,7 +84,7 @@ function createIsomorphLink(): ApolloLink {
 
   return new HttpLink({
     uri,
-    fetch,
+    credentials: 'same-origin',
   })
 }
 
