@@ -50,7 +50,7 @@ function createApolloClient({
 
   let link: ApolloLink
 
-  if (useMock) {
+  if (useMock || !process.env.GRAPHQL_API_ENDPOINT) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {

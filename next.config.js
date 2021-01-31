@@ -12,12 +12,18 @@ const nextConfig = {
     defaultLocale: 'de',
   },
   target: 'serverless', // experimental-serverless-trace
-  rewrites: async () => [
-    {
-      source: '/api',
-      destination: process.env.GRAPHQL_API_ENDPOINT,
-    },
-  ],
+  rewrites: async () => {
+    const resultingRewrites = []
+
+    if (process.env.GRAPHQL_API_ENDPOINT) {
+      resultingRewrites.push({
+        source: '/api',
+        destination: process.env.GRAPHQL_API_ENDPOINT,
+      })
+    }
+
+    return resultingRewrites
+  },
 }
 
 module.exports = withPlugins(
@@ -26,8 +32,7 @@ module.exports = withPlugins(
       withBundleAnalyzer,
       {
         env: {
-          USE_GRAPHQL_MOCK: 'true',
-          // USE_GRAPHQL_MOCK: process.env.NODE_ENV === 'test' ? 'true' : '',
+          MOCK_GRAPHQL_API: process.env.NODE_ENV === 'test' ? 'true' : '',
         },
       },
     ],
