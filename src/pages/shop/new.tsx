@@ -20,6 +20,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import Layout from '../../components/Layout'
 import ShopForm from '../../components/ShopForm'
+import { IChipItem } from '../../components/ShopForm/FormChipSelect'
 import {
   CreateShopMutationVariables,
   useCreateShopMutation,
@@ -29,7 +30,7 @@ import { ssrGetShops } from '../../generated/page'
 type FormValues = {
   name: string
   type: string
-  tags: string[]
+  tags: IChipItem[]
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -54,7 +55,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const onError: SubmitErrorHandler<FormValues> = (errors) => {
+const onSubmit: SubmitHandler<FormValues> = (args) => {
+  console.log(args)
+  // TODO send the mutation request
+}
+
+const onError: SubmitErrorHandler<FormValues> = (error) => {
+  console.log('!!!!error!!!', error)
   // additional actions when the form has errors
   // eslint-disable-next-line no-console
   console.log({ errors })
