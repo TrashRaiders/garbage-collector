@@ -59,7 +59,7 @@
     "@testing-library/cypress": "7.0.3",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",
-    "@testing-library/user-event": "12.6.2",
+    "@testing-library/user-event": "12.6.3",
     "@twihike/eslint-config": "0.1.12",
     "@twihike/prettier-config": "0.1.12",
     "@types/cypress-image-snapshot": "3.1.4",
