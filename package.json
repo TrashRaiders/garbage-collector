@@ -58,7 +58,7 @@
     "@storybook/react": "6.1.16",
     "@testing-library/cypress": "7.0.3",
     "@testing-library/jest-dom": "5.11.9",
-    "@testing-library/react": "11.2.4",
+    "@testing-library/react": "11.2.5",
     "@testing-library/user-event": "12.6.3",
     "@twihike/eslint-config": "0.1.12",
     "@twihike/prettier-config": "0.1.12",
