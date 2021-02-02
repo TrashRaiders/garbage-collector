@@ -8569,10 +8569,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
-graphql-codegen-apollo-next-ssr@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/graphql-codegen-apollo-next-ssr/-/graphql-codegen-apollo-next-ssr-1.3.0.tgz#782248c1a63b745be41d0103c256d32853200574"
-  integrity sha512-97VdqI/W0AhIT8r2Iz3d9k0VjeFcoGLKbxdbJ1qDrvDwiOgHUBblHxlkl4OLrmjwUI39NQ4wW6F77Mr0RAU2cA==
+graphql-codegen-apollo-next-ssr@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/graphql-codegen-apollo-next-ssr/-/graphql-codegen-apollo-next-ssr-1.3.1.tgz#dd449fa8d1d26458eea2f7a9b64dd6eeb59a32b3"
+  integrity sha512-7WUAHRB9/zu6okzSQoDRKDF953H1frFXSw6gO0rS4+xoqKYnDEnn3BBWls0KFExdCGpwZL7bm+cDs+dp32XNeQ==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^1.18.2"
     "@graphql-codegen/visitor-plugin-common" "^1.18.0"
