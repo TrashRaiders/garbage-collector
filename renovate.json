@@ -1,6 +1,12 @@
 {
   "extends": ["config:base"],
   "labels": ["dependencies", "code-quality"],
+  "dependencyDashboard": true,
+  "dependencyDashboardApproval": true,
+  "dependencyDashboardAutoclose": true,
+  "lockFileMaintenance": {
+    "enabled": false
+  },
   "packageRules": [
     {
       "updateTypes": ["minor", "patch", "pin", "digest"],
