@@ -9,6 +9,7 @@ on:
   pull_request:
     branches:
       - main
+      - bump
 
 env:
   cache-version: v20200524
