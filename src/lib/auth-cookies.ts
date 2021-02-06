@@ -62,7 +62,7 @@ export async function getToken(req: Request): Promise<string> {
     return tokenFromCookie
   }
 
-  const response = await fetch('/api/get-token')
+  const response = await fetch(`${process.env.BASE_URL}/api/get-token`)
   const { authToken: newToken } = await response.json()
 
   return newToken
