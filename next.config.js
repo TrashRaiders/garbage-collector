@@ -7,6 +7,7 @@ const withPlugins = require('next-compose-plugins')
 const nextTranslate = require('next-translate')
 
 const nextConfig = {
+  basePath: '',
   i18n: {
     locales: ['en', 'de'],
     defaultLocale: 'de',
