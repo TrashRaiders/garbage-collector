@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { setTokenCookie } from '../../lib/auth-cookies'
-
 type Data = {
   authToken: string
 }
@@ -33,7 +31,6 @@ export default async (
   })
   const data: Data = await response.json()
 
-  setTokenCookie(res, data.authToken)
   res.status(200).json(data)
 }
 
