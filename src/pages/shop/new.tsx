@@ -134,15 +134,8 @@ function NewShopPage(): React.ReactNode {
   /* eslint-enable react/jsx-props-no-spreading */
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const token = await getToken(context.req)
-  return ssrGetShops.getServerPage({
-    context: {
-      headers: {
-        'x-cassandra-token': token,
-      },
-    },
-  })
+export const getServerSideProps: GetServerSideProps = async () => {
+  return ssrGetShops.getServerPage({})
 }
 
 export default NewShopPage

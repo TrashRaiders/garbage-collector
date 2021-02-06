@@ -33,15 +33,15 @@ export function createErrorLink(): ApolloLink {
           if (/.*authorization failed/g.test(message)) {
             // eslint-disable-next-line no-console
             console.info(`Authorization failed... retrying with fresh token`)
-            // error code is set to UNAUTHENTICATED
-            // when AuthenticationError thrown in resolver
+
+            /*
             let forward$
 
             if (!isRefreshing) {
               isRefreshing = true
               forward$ = fromPromise(
                 getNewToken()
-                  .then(({ authToken }) => {
+                  .then((authToken) => {
                     // Store the new tokens for your auth link
                     token.auth = authToken
 
@@ -66,6 +66,7 @@ export function createErrorLink(): ApolloLink {
             }
 
             return forward$.flatMap(() => forward(operation))
+            */
           }
           // eslint-disable-next-line no-console
           console.info(
@@ -91,16 +92,3 @@ export function createErrorLink(): ApolloLink {
   )
 }
 /* eslint-enable no-loop-func */
-
-async function getNewToken() {
-  const tokenPath = '/api/get-token'
-  const url =
-    typeof window === 'undefined'
-      ? `${process.env.BASE_URL}${tokenPath}`
-      : tokenPath
-
-  const res = await fetch(url)
-  const data = await res.json()
-
-  return data
-}

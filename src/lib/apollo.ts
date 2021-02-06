@@ -14,9 +14,11 @@ import { setContext } from '@apollo/client/link/context'
 import { RetryLink } from '@apollo/client/link/retry'
 import merge from 'deepmerge'
 
-import { createErrorLink, token } from './apollo/error-link'
+import { createErrorLink } from './apollo/error-link'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
+
+let token: string
 
 export function initApolloClient({
   initialState = {},
@@ -60,8 +62,8 @@ function createApolloClient({
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {
     link = ApolloLink.from([
-      createErrorLink(),
-      createRetryLink(),
+      // createErrorLink(),
+      // createRetryLink(),
       createAuthLink(),
       createIsomorphLink(),
     ])
@@ -88,13 +90,14 @@ function createIsomorphLink(): ApolloLink {
 }
 
 function createAuthLink(): ApolloLink {
-  const authLink = setContext((_, previousContext) => {
+  const authLink = setContext(async (req, previousContext) => {
     const { headers } = previousContext
+    token = token || (await getNewToken())
 
     return {
       headers: {
         ...headers,
-        'x-cassandra-token': token.auth,
+        'x-cassandra-token': token,
       },
     }
   })
@@ -118,4 +121,17 @@ function createRetryLink(): ApolloLink {
       },
     },
   })
+}
+
+export async function getNewToken(): Promise<string> {
+  const tokenPath = '/api/get-token'
+  const url =
+    typeof window === 'undefined'
+      ? `${process.env.BASE_URL}${tokenPath}`
+      : tokenPath
+
+  const res = await fetch(url)
+  const data = await res.json()
+
+  return data.authToken
 }
