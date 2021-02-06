@@ -6,6 +6,17 @@
 
 We deploy our site on Netlify. Every commit to `main` is deployed automatically.
 
+Additionally you can build and deploy the site from your local machine.
+First you need to setup the Netlify credentials.
+To do that, execute the following steps:
+
+1. run `yarn netlify login` and use your Netlify credentials in the opened browser
+2. run `yarn netlify init` to start the setup wizard
+3. select `Connect this directory to an existing Netlify site`
+4. select `Use current git remote origin`
+
+Now you can use `yarn ny:build` and `yarn ny:deploy` to build the site and deploy it the the Netlify servers.
+
 ## Development
 
 Our site is build with [Next.js](https://nextjs.org/). To develop locally you need to have some

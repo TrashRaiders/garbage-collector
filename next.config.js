@@ -11,7 +11,7 @@ const nextConfig = {
     locales: ['en', 'de'],
     defaultLocale: 'de',
   },
-  target: 'serverless', // experimental-serverless-trace
+  target: 'serverless', // use 'experimental-serverless-trace' as an alternative
   rewrites: async () => {
     const resultingRewrites = []
 
