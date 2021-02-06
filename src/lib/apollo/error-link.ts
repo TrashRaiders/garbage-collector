@@ -1,18 +1,6 @@
 /* eslint-disable no-loop-func */
-import { ApolloLink, fromPromise } from '@apollo/client'
+import { ApolloLink } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
-
-let isRefreshing = false
-let pendingRequests: (() => void)[] = []
-
-const resolvePendingRequests = () => {
-  pendingRequests.map((callback) => callback())
-  pendingRequests = []
-}
-
-export const token: { auth: string } = {
-  auth: '',
-}
 
 /**
  * Catches Apollo client errors to we don't have these ugly next.js error windows,
@@ -23,7 +11,7 @@ export const token: { auth: string } = {
 export function createErrorLink(): ApolloLink {
   return onError(
     // eslint-disable-next-line consistent-return
-    ({ graphQLErrors, networkError, response, forward, operation }) => {
+    ({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
         for (const graphQLError of graphQLErrors) {
           const { message, locations, path } = graphQLError
@@ -32,41 +20,7 @@ export function createErrorLink(): ApolloLink {
           // https://able.bio/AnasT/apollo-graphql-async-access-token-refresh--470t1c8#concurrent-requests
           if (/.*authorization failed/g.test(message)) {
             // eslint-disable-next-line no-console
-            console.info(`Authorization failed... retrying with fresh token`)
-
-            /*
-            let forward$
-
-            if (!isRefreshing) {
-              isRefreshing = true
-              forward$ = fromPromise(
-                getNewToken()
-                  .then((authToken) => {
-                    // Store the new tokens for your auth link
-                    token.auth = authToken
-
-                    resolvePendingRequests()
-                    return authToken
-                  })
-                  .catch(() => {
-                    pendingRequests = []
-                    // Should never error
-                  })
-                  .finally(() => {
-                    isRefreshing = false
-                  }),
-              ).filter((value) => Boolean(value))
-            } else {
-              // Will only emit once the Promise is resolved
-              forward$ = fromPromise(
-                new Promise<void>((resolve) => {
-                  pendingRequests.push(() => resolve())
-                }),
-              )
-            }
-
-            return forward$.flatMap(() => forward(operation))
-            */
+            console.info(`Authorization failed!`)
           }
           // eslint-disable-next-line no-console
           console.info(

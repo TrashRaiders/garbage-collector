@@ -25,7 +25,6 @@ import {
   useCreateShopMutation,
 } from '../../generated/graphql'
 import { ssrGetShops } from '../../generated/page'
-import { getToken } from '../../lib/auth-cookies'
 
 type FormValues = {
   name: string

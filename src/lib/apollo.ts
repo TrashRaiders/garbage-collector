@@ -62,8 +62,8 @@ function createApolloClient({
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {
     link = ApolloLink.from([
-      // createErrorLink(),
-      // createRetryLink(),
+      createErrorLink(),
+      createRetryLink(),
       createAuthLink(),
       createIsomorphLink(),
     ])
@@ -112,11 +112,17 @@ function createRetryLink(): ApolloLink {
       jitter: true,
     },
     attempts: {
-      max: 5,
-      retryIf: (error) => {
+      max: 2,
+      retryIf: async (error) => {
         // TODO maybe there are some error cases which should be just retried
         // eslint-disable-next-line no-console
         console.log('Error got in RetryLink:', error)
+        if (/.*authorization failed/g.test(error.message)) {
+          // fetch a new token here, if authentication fails
+          token = token || (await getNewToken())
+          return true
+        }
+
         return false
       },
     },
