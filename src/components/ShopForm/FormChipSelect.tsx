@@ -21,7 +21,7 @@ interface IFormChipSelectProps {
 type ReturnValue = string[]
 
 function setValueAs(value: IChipItem[]): ReturnValue {
-  return value.map((item) => item.label) || []
+  return value.map((item) => item.id) || []
 }
 
 export default function FormChipSelect(
