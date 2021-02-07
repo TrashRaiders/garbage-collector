@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import * as yup from 'yup'
 
 import FormChipSelect from './ShopForm/FormChipSelect'
 import FormInput from './ShopForm/FormInput'
@@ -18,6 +19,20 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
+// data structure of the resulting form values
+export type FormValues = {
+  name: string
+  type: string
+  tags: string[]
+}
+
+// validation rules
+export const FORM_SCHEMA = yup.object().shape({
+  name: yup.string().required(),
+  type: yup.string().required(),
+  tags: yup.array().of(yup.string()),
+})
+
 interface ShopFormProps {
   className?: string
 }
@@ -26,9 +41,16 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
   const { className } = props
 
   const classes = useStyles()
-  const { control, errors } = useFormContext()
+  const { control, errors } = useFormContext<FormValues>()
 
   const { t } = useTranslation('common')
+
+  // TODO should be fetched from API
+  const tagOptions = [
+    { id: 'bicycles', label: t('bicycles') },
+    { id: 'cars', label: t('cars') },
+    { id: 'hifi', label: t('hifi') },
+  ]
 
   return (
     <div className={clsx(className, classes.root)}>
@@ -83,11 +105,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
         label={t('shopTags')}
         control={control}
         error={!!errors.tags}
-        options={[
-          { id: 'bicycles', label: t('bicycles') },
-          { id: 'cars', label: t('cars') },
-          { id: 'hifi', label: t('hifi') },
-        ]}
+        options={tagOptions}
       />
 
       <ErrorMessage

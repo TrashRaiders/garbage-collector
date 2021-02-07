@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Button,
   CircularProgress,
@@ -10,28 +11,16 @@ import { makeStyles } from '@material-ui/core/styles'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import {
-  FormProvider,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
 
 import Layout from '../../components/Layout'
-import ShopForm from '../../components/ShopForm'
-import { IChipItem } from '../../components/ShopForm/FormChipSelect'
+import ShopForm, { FORM_SCHEMA, FormValues } from '../../components/ShopForm'
 import {
   CreateShopMutationVariables,
   useCreateShopMutation,
 } from '../../generated/graphql'
 import { ssrGetShops } from '../../generated/page'
-
-type FormValues = {
-  name: string
-  type: string
-  tags: IChipItem[]
-}
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -55,22 +44,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const onSubmit: SubmitHandler<FormValues> = (args) => {
-  console.log(args)
-  // TODO send the mutation request
-}
-
-const onError: SubmitErrorHandler<FormValues> = (error) => {
-  console.log('!!!!error!!!', error)
-  // additional actions when the form has errors
-  // eslint-disable-next-line no-console
-  console.log({ errors })
-}
-
 function NewShopPage(): React.ReactNode {
   const classes = useStyles()
   const { t } = useTranslation('common')
-  const methods = useForm<FormValues>()
+
+  const methods = useForm<FormValues>({
+    resolver: yupResolver(FORM_SCHEMA),
+  })
   const { handleSubmit } = methods
 
   const [createShop, { loading, error }] = useCreateShopMutation()
@@ -122,7 +102,7 @@ function NewShopPage(): React.ReactNode {
               )}
 
               <Button
-                onClick={handleSubmit(onSubmit, onError)}
+                onClick={handleSubmit(onSubmit)}
                 variant="contained"
                 startIcon={
                   loading && <CircularProgress size={18} color="inherit" />
