@@ -54,7 +54,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
         name="type"
         label={t('shopType')}
         control={control}
-        error={!!errors.name}
+        error={!!errors.type}
         required={t('thisFieldIsRequired')}
         options={[
           {
@@ -82,8 +82,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
         name="tags"
         label={t('shopTags')}
         control={control}
-        error={!!errors.name}
-        required={t('thisFieldIsRequired')}
+        error={!!errors.tags}
         options={[
           { id: 'bicycles', label: t('bicycles') },
           { id: 'cars', label: t('cars') },

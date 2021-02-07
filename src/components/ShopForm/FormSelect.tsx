@@ -13,7 +13,6 @@ import { Control, ValidationValueMessage, useController } from 'react-hook-form'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      // margin: theme.spacing(1),
       minWidth: 120,
     },
     selectEmpty: {
@@ -55,7 +54,12 @@ function FormSelect(props: FormSelectProps): React.ReactElement {
 
   return (
     <FormControl fullWidth className={classes.formControl}>
-      <InputLabel id={`${name}-label`} variant="outlined" required={!!required}>
+      <InputLabel
+        id={`${name}-label`}
+        variant="outlined"
+        error={error}
+        required={!!required}
+      >
         {label}
       </InputLabel>
 
