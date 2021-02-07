@@ -1,9 +1,12 @@
 # range slice query to get all names
 # shop_id is primary key and only searchable
 query GetShops {
-  shops(value: { shop_id: "*" }) {
+  shops(value: {}) {
     values {
+      shop_id
       name
+      type
+      tags
     }
   }
 }

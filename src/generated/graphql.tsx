@@ -370,7 +370,14 @@ export type GetShopsQueryVariables = Exact<{ [key: string]: never }>
 export type GetShopsQuery = { __typename?: 'Query' } & {
   shops?: Maybe<
     { __typename?: 'shopsResult' } & {
-      values?: Maybe<Array<{ __typename?: 'shops' } & Pick<Shops, 'name'>>>
+      values?: Maybe<
+        Array<
+          { __typename?: 'shops' } & Pick<
+            Shops,
+            'shop_id' | 'name' | 'type' | 'tags'
+          >
+        >
+      >
     }
   >
 }
@@ -427,9 +434,12 @@ export type CreateShopMutationOptions = Apollo.BaseMutationOptions<
 >
 export const GetShopsDocument = gql`
   query GetShops {
-    shops(value: { shop_id: "*" }) {
+    shops(value: {}) {
       values {
+        shop_id
         name
+        type
+        tags
       }
     }
   }
