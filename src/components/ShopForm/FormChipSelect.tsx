@@ -1,5 +1,5 @@
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
+import { TextField } from '@material-ui/core'
+import { Autocomplete } from '@material-ui/lab'
 import React, { useState } from 'react'
 import { Control, ValidationValueMessage, useController } from 'react-hook-form'
 
