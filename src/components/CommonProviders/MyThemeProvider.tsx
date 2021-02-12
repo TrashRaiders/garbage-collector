@@ -1,7 +1,7 @@
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import React from 'react'
 
-import { DarkModeContext } from '../../contexts/dark-mode'
+import { useDarkMode } from 'contexts/dark-mode'
 import { theme as darkTheme } from 'themes/dark'
 import { theme as lightTheme } from 'themes/light'
 
@@ -12,7 +12,7 @@ function MyThemeProvider(props: {
 }): React.ReactElement {
   const { children } = props
 
-  const [darkMode] = React.useContext(DarkModeContext)
+  const [darkMode] = useDarkMode()
   const theme = React.useMemo(() => {
     const { isDarkMode } = darkMode
     return createMuiTheme(isDarkMode ? darkTheme : lightTheme)

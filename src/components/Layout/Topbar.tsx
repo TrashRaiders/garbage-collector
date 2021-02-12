@@ -14,10 +14,9 @@ import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
 
-import { AuthContext } from '../../contexts/auth'
-import { DarkModeContext } from '../../contexts/dark-mode'
-
 import Search from './Topbar/Search'
+
+import { useDarkMode } from 'contexts/dark-mode'
 
 const useStyles = makeStyles((theme: Theme) => ({
   grow: {
@@ -35,7 +34,7 @@ function Topbar(): React.ReactElement {
   const classes = useStyles()
   const { t } = useTranslation('common')
 
-  const [darkMode, setDarkMode] = React.useContext(DarkModeContext)
+  const [darkMode, setDarkMode] = useDarkMode()
   const handleDarkMode = (): void => {
     setDarkMode({
       isDarkMode: !darkMode.isDarkMode,
