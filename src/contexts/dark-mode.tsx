@@ -1,6 +1,6 @@
-// import { useMediaQuery } from '@material-ui/core'
+import { useMediaQuery } from '@material-ui/core'
 import React from 'react'
-import { createStateContext } from 'react-use'
+import { createStateContext, useCookie } from 'react-use'
 
 const [useDarkMode, DarkModeInnerProvider] = createStateContext({
   isDarkMode: false,
@@ -10,9 +10,8 @@ const [useDarkMode, DarkModeInnerProvider] = createStateContext({
 function DarkModeConsumer(consumerProps: {
   children?: React.ReactNode
 }): React.ReactElement {
-  // Note: set dark theme as default, because forcing dark theme for cypress tests is not implemented
-  const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)')
   const [darkMode, setDarkMode] = useDarkMode()
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   React.useEffect(() => {
     if (
@@ -32,8 +31,15 @@ function DarkModeConsumer(consumerProps: {
 function DarkModeProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {
+  const [theme] = useCookie('theme')
+
   return (
-    <DarkModeInnerProvider>
+    <DarkModeInnerProvider
+      initialValue={{
+        isDarkMode: theme === 'dark',
+        auto: !theme,
+      }}
+    >
       <DarkModeConsumer {...props} />
     </DarkModeInnerProvider>
   )
