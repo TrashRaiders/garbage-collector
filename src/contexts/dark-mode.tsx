@@ -2,6 +2,8 @@ import { useMediaQuery } from '@material-ui/core'
 import React from 'react'
 import { createStateContext, useCookie } from 'react-use'
 
+export const THEME_COOKIE = 'theme'
+
 const [useDarkMode, DarkModeInnerProvider] = createStateContext({
   isDarkMode: false,
   auto: true,
@@ -31,7 +33,7 @@ function DarkModeConsumer(consumerProps: {
 function DarkModeProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {
-  const [theme] = useCookie('theme')
+  const [theme] = useCookie(THEME_COOKIE)
 
   return (
     <DarkModeInnerProvider
