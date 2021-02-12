@@ -30,7 +30,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function Topbar(): React.ReactElement {
+interface TopbarProps {
+  withSearch?: boolean
+}
+
+function Topbar(props: TopbarProps): React.ReactElement {
+  const { withSearch = false } = props
+
   const classes = useStyles()
   const { t } = useTranslation('common')
 
@@ -70,7 +76,7 @@ function Topbar(): React.ReactElement {
           </MuiLink>
         </Link>
 
-        <Search className={classes.grow} />
+        {withSearch && <Search className={classes.grow} />}
 
         <div className={classes.grow} />
 
