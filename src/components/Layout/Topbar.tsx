@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
+import { useCookie } from 'react-use'
 
 import Search from './Topbar/Search'
 
@@ -40,8 +41,10 @@ function Topbar(props: TopbarProps): React.ReactElement {
   const classes = useStyles()
   const { t } = useTranslation('common')
 
+  const [, updateThemeCookie] = useCookie('theme')
   const [darkMode, setDarkMode] = useDarkMode()
   const handleDarkMode = (): void => {
+    updateThemeCookie(!darkMode.isDarkMode ? 'dark' : 'light')
     setDarkMode({
       isDarkMode: !darkMode.isDarkMode,
       auto: false,
