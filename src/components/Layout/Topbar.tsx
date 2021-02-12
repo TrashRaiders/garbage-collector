@@ -17,7 +17,7 @@ import { useCookie } from 'react-use'
 
 import Search from './Topbar/Search'
 
-import { useDarkMode } from 'contexts/dark-mode'
+import { THEME_COOKIE, useDarkMode } from 'contexts/dark-mode'
 
 const useStyles = makeStyles((theme: Theme) => ({
   grow: {
@@ -41,7 +41,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
   const classes = useStyles()
   const { t } = useTranslation('common')
 
-  const [, updateThemeCookie] = useCookie('theme')
+  const [, updateThemeCookie] = useCookie(THEME_COOKIE)
   const [darkMode, setDarkMode] = useDarkMode()
   const handleDarkMode = (): void => {
     updateThemeCookie(!darkMode.isDarkMode ? 'dark' : 'light')
