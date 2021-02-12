@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
-import { ShopSearchContext } from '../../../lib/shop-search'
+import { useShopSearch } from 'lib/shop-search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   search: {
@@ -58,7 +58,7 @@ function Search(props: SearchProps): React.ReactElement {
   const classes = useStyles()
   const { t } = useTranslation('common')
 
-  const [, setShopSearch] = React.useContext(ShopSearchContext)
+  const [, setShopSearch] = useShopSearch()
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

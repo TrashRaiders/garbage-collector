@@ -1,12 +1,12 @@
 import { ListItem } from '@material-ui/core'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useMeasure } from 'react-use'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 
-import { ShopSearchContext } from '../lib/shop-search'
-
 import ShopCard from './SearchResults/ShopCard'
+
+import { useShopSearch } from 'lib/shop-search'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,7 +28,7 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function SearchResults(): React.ReactElement {
-  const [shopSearch] = useContext(ShopSearchContext)
+  const [shopSearch] = useShopSearch()
   const { result: shops } = shopSearch
 
   const classes = useStyles()

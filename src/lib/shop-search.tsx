@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { useDebounce } from 'react-use'
-
-import { createStateContext } from './react-utils'
+import { createStateContext, useDebounce } from 'react-use'
 
 type ShopTag = string
 
@@ -11,19 +9,16 @@ interface ShopResult {
   tags: ShopTag[]
 }
 
-const [ShopSearchContext, ShopSearchInnerProvider] = createStateContext({
+const [useShopSearch, ShopSearchInnerProvider] = createStateContext({
   searchTerm: '',
   filter: {},
   result: [] as ShopResult[],
 })
 
-export { ShopSearchContext }
-
-/* eslint-disable react/jsx-props-no-spreading */
 function ShopSearchConsumer(props: {
   children?: React.ReactNode
 }): React.ReactElement {
-  const [shopSearch, setShopSearch] = React.useContext(ShopSearchContext)
+  const [shopSearch, setShopSearch] = useShopSearch()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...initialDebouncedSearchOptions } = shopSearch
@@ -63,7 +58,7 @@ function ShopSearchConsumer(props: {
   return <React.Fragment {...props} />
 }
 
-export function ShopSearchProvider(props: {
+function ShopSearchProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {
   return (
@@ -72,7 +67,6 @@ export function ShopSearchProvider(props: {
     </ShopSearchInnerProvider>
   )
 }
-/* eslint-enable react/jsx-props-no-spreading */
 
 function mockFetchResults(searchTerm: string): ShopResult[] {
   const chars = searchTerm.split('')
@@ -85,3 +79,5 @@ function mockFetchResults(searchTerm: string): ShopResult[] {
     }
   })
 }
+
+export { useShopSearch, ShopSearchProvider }
