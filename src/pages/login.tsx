@@ -18,8 +18,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import Animate from '../components/Animate'
-import Layout from '../components/Layout'
+import Animate from 'components/Animate'
+import Layout from 'components/Layout'
 
 interface IFormInputs {
   name: string

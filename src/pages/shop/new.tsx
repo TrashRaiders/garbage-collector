@@ -14,13 +14,13 @@ import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
 
-import Layout from '../../components/Layout'
-import ShopForm, { FORM_SCHEMA, FormValues } from '../../components/ShopForm'
+import Layout from 'components/Layout'
+import ShopForm, { FORM_SCHEMA, FormValues } from 'components/ShopForm'
 import {
   CreateShopMutationVariables,
   useCreateShopMutation,
-} from '../../generated/graphql'
-import { ssrGetShops } from '../../generated/page'
+} from 'generated/graphql'
+import { ssrGetShops } from 'generated/page'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
