@@ -3,7 +3,7 @@ import React from 'react'
 
 import Layout from 'components/Layout'
 import SearchResults from 'components/SearchResults'
-import { ShopSearchProvider } from 'lib/shop-search'
+import { ShopSearchProvider } from 'contexts/shop-search'
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -18,7 +18,7 @@ function IndexPage(): React.ReactElement {
 
   return (
     <ShopSearchProvider>
-      <Layout fillContent>
+      <Layout withSearch fillContent>
         <div className={classes.page}>
           <SearchResults />
         </div>

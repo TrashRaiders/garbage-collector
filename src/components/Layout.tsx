@@ -28,17 +28,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface LayoutProps {
+  withSearch?: boolean
   fillContent?: boolean
   children?: React.ReactNode
 }
 
 function Layout(props: LayoutProps): React.ReactElement {
-  const { children, fillContent } = props
+  const { children, withSearch, fillContent } = props
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
-      <Topbar />
+      <Topbar withSearch={withSearch} />
 
       <Container
         className={clsx(classes.container, {

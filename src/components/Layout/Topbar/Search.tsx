@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
-import { useShopSearch } from 'lib/shop-search'
+import { useShopSearch } from 'contexts/shop-search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   search: {

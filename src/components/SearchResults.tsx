@@ -6,7 +6,7 @@ import { FixedSizeList, ListChildComponentProps } from 'react-window'
 
 import ShopCard from './SearchResults/ShopCard'
 
-import { useShopSearch } from 'lib/shop-search'
+import { useShopSearch } from 'contexts/shop-search'
 
 const useStyles = makeStyles(() =>
   createStyles({
