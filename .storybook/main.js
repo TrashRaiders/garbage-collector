@@ -1,7 +1,10 @@
+const path = require('path')
+
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: [],
   webpackFinal: async (config) => {
+    config.resolve.modules.push(path.resolve(__dirname, '../src'))
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: require.resolve('babel-loader'),
