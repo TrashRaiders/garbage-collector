@@ -3,10 +3,10 @@ import type { AppProps } from 'next/app'
 import Error from 'next/error'
 import React, { useEffect } from 'react'
 
-import CommonHead from '../components/CommonHead'
-import CommonProviders from '../components/CommonProviders'
-import PageTransition from '../components/PageTransition'
-import { useApollo } from '../lib/next-with-apollo'
+import CommonHead from 'components/CommonHead'
+import CommonProviders from 'components/CommonProviders'
+import PageTransition from 'components/PageTransition'
+import { useApollo } from 'lib/next-with-apollo'
 
 /* eslint-disable react/jsx-props-no-spreading */
 function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
