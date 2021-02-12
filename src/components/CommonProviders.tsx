@@ -1,10 +1,9 @@
 import { CssBaseline } from '@material-ui/core'
 import React from 'react'
 
-import { AuthProvider } from '../contexts/auth'
-import { DarkModeProvider } from '../contexts/dark-mode'
-
 import MyThemeProvider from './CommonProviders/MyThemeProvider'
+
+import { DarkModeProvider } from 'contexts/dark-mode'
 
 function CommonProviders({
   children,
@@ -14,11 +13,9 @@ function CommonProviders({
   return (
     <DarkModeProvider>
       <MyThemeProvider>
-        <AuthProvider>
-          <CssBaseline />
+        <CssBaseline />
 
-          {children}
-        </AuthProvider>
+        {children}
       </MyThemeProvider>
     </DarkModeProvider>
   )

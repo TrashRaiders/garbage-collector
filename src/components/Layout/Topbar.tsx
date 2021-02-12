@@ -43,10 +43,9 @@ function Topbar(): React.ReactElement {
     })
   }
 
-  const [auth] = React.useContext(AuthContext)
-  const isSignedIn = auth.default.getToken() !== ''
+  const isSignedIn = false
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const handleSignOut = (): void => {
-    auth.default.setToken('')
     Router.push('/')
   }
 
