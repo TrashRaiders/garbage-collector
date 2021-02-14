@@ -1,23 +1,37 @@
+import { ApolloProvider } from '@apollo/client'
 import { CssBaseline } from '@material-ui/core'
+import { Provider as AuthProvider, useSession } from 'next-auth/client'
 import React from 'react'
 
 import MyThemeProvider from './CommonProviders/MyThemeProvider'
 
 import { DarkModeProvider } from 'contexts/dark-mode'
+import { useApollo } from 'lib/next-with-apollo'
 
-function CommonProviders({
-  children,
-}: {
+interface CommonProviderProps {
   children?: React.ReactNode
-}): React.ReactElement {
-  return (
-    <DarkModeProvider>
-      <MyThemeProvider>
-        <CssBaseline />
 
-        {children}
-      </MyThemeProvider>
-    </DarkModeProvider>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pageProps?: any
+}
+
+function CommonProviders(props: CommonProviderProps): React.ReactElement {
+  const { children, pageProps } = props
+  const apolloClient = useApollo(pageProps.initialApolloState)
+  const [session] = useSession()
+
+  return (
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider session={session}>
+        <DarkModeProvider>
+          <MyThemeProvider>
+            <CssBaseline />
+
+            {children}
+          </MyThemeProvider>
+        </DarkModeProvider>
+      </AuthProvider>
+    </ApolloProvider>
   )
 }
 
