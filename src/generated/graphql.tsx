@@ -451,10 +451,28 @@ export type GetShopsQuery = { __typename?: 'Query' } & {
     { __typename?: 'shopsResult' } & {
       values?: Maybe<
         Array<
+          { __typename?: 'shops' } & Pick<Shops, 'name' | 'type' | 'tags'> & {
+              id: Shops['shop_id']
+            }
+        >
+      >
+    }
+  >
+}
+
+export type GetShopQueryVariables = Exact<{
+  id: Scalars['String']
+}>
+
+export type GetShopQuery = { __typename?: 'Query' } & {
+  shops?: Maybe<
+    { __typename?: 'shopsResult' } & {
+      values?: Maybe<
+        Array<
           { __typename?: 'shops' } & Pick<
             Shops,
-            'shop_id' | 'name' | 'type' | 'tags'
-          >
+            'name' | 'description' | 'pictures'
+          > & { id: Shops['shop_id'] }
         >
       >
     }
@@ -543,7 +561,7 @@ export const GetShopsDocument = gql`
   query GetShops {
     shops(value: {}) {
       values {
-        shop_id
+        id: shop_id
         name
         type
         tags
@@ -594,6 +612,7 @@ export type GetShopsQueryResult = Apollo.QueryResult<
   GetShopsQuery,
   GetShopsQueryVariables
 >
+<<<<<<< HEAD
 export const CreateUserDocument = gql`
   mutation CreateUser($value: userInput!) {
     insertuser(value: $value) {
@@ -652,21 +671,39 @@ export const GetUserDocument = gql`
       values {
         name
         email
+=======
+export const GetShopDocument = gql`
+  query GetShop($id: String!) {
+    shops(value: { shop_id: $id }) {
+      values {
+        id: shop_id
+        name
+        description
+        pictures
+>>>>>>> 20262e4 (add shop detail view)
       }
     }
   }
 `
 
 /**
+<<<<<<< HEAD
  * __useGetUserQuery__
  *
  * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
  * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+=======
+ * __useGetShopQuery__
+ *
+ * To run a query within a React component, call `useGetShopQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetShopQuery` returns an object from Apollo Client that contains loading, error, and data properties
+>>>>>>> 20262e4 (add shop detail view)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
+<<<<<<< HEAD
  * const { data, loading, error } = useGetUserQuery({
  *   variables: {
  *      value: // value for 'value'
@@ -697,4 +734,36 @@ export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>
 export type GetUserQueryResult = Apollo.QueryResult<
   GetUserQuery,
   GetUserQueryVariables
+=======
+ * const { data, loading, error } = useGetShopQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetShopQuery(
+  baseOptions: Apollo.QueryHookOptions<GetShopQuery, GetShopQueryVariables>,
+) {
+  return Apollo.useQuery<GetShopQuery, GetShopQueryVariables>(
+    GetShopDocument,
+    baseOptions,
+  )
+}
+export function useGetShopLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetShopQuery,
+    GetShopQueryVariables
+  >,
+) {
+  return Apollo.useLazyQuery<GetShopQuery, GetShopQueryVariables>(
+    GetShopDocument,
+    baseOptions,
+  )
+}
+export type GetShopQueryHookResult = ReturnType<typeof useGetShopQuery>
+export type GetShopLazyQueryHookResult = ReturnType<typeof useGetShopLazyQuery>
+export type GetShopQueryResult = Apollo.QueryResult<
+  GetShopQuery,
+  GetShopQueryVariables
+>>>>>>> 20262e4 (add shop detail view)
 >

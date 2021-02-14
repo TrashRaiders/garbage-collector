@@ -1,18 +1,24 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createStateContext, useDebounce } from 'react-use'
 
+import shopsMock from './__fixtures__/shops'
+
 type ShopTag = string
 
 interface ShopResult {
-  id: string
-  name: string
-  tags: ShopTag[]
+  id?: string | null
+  name?: string | null
+  description?: string | null
+  pictures?: (string | null)[] | null
+  tags?: ShopTag[] | null
+
+  [key: string]: unknown
 }
 
 const [useShopSearch, ShopSearchInnerProvider] = createStateContext({
   searchTerm: '',
   filter: {},
-  result: [] as ShopResult[],
+  result: shopsMock.shops?.values as ShopResult[],
 })
 
 function ShopSearchConsumer(props: {
@@ -69,15 +75,13 @@ function ShopSearchProvider(props: {
 }
 
 function mockFetchResults(searchTerm: string): ShopResult[] {
-  const chars = searchTerm.split('')
+  const shops = shopsMock.shops?.values || []
 
-  return chars.map((char, index) => {
-    return {
-      id: `${index}`,
-      name: char,
-      tags: [],
-    }
-  })
+  return searchTerm.length > 0
+    ? shops.filter((shop) =>
+        shop?.name?.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    : shops
 }
 
 export { useShopSearch, ShopSearchProvider }
