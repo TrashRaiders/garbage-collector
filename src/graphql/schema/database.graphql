@@ -66,6 +66,16 @@ mutation {
     ]
   )
 
+  user: createTable(
+    keyspaceName: "garbage"
+    tableName: "user"
+    partitionKeys: [{ name: "user_id", type: { basic: TEXT } }]
+    values: [
+      { name: "name", type: { basic: TEXT } }
+      { name: "email", type: { basic: TEXT } }
+    ]
+  )
+
   shopsByLocation: createTable(
     keyspaceName: "garbage"
     tableName: "shops_by_location"

@@ -80,6 +80,32 @@ type Mutation {
     ifCondition: shops_by_locationFilterInput
     options: MutationOptions
   ): shops_by_locationMutationResult
+
+  # Delete mutation for the table 'user'.
+  # Note that 'user_id' is the field that corresponds to the table primary key.
+  deleteuser(
+    value: userInput!
+    ifExists: Boolean
+    ifCondition: userFilterInput
+    options: MutationOptions
+  ): userMutationResult
+
+  # Insert mutation for the table 'user'.
+  # Note that 'user_id' is the field that corresponds to the table primary key.
+  insertuser(
+    value: userInput!
+    ifNotExists: Boolean
+    options: MutationOptions
+  ): userMutationResult
+
+  # Update mutation for the table 'user'.
+  # Note that 'user_id' is the field that corresponds to the table primary key.
+  updateuser(
+    value: userInput!
+    ifExists: Boolean
+    ifCondition: userFilterInput
+    options: MutationOptions
+  ): userMutationResult
 }
 
 enum MutationConsistency {
@@ -124,6 +150,21 @@ type Query {
     orderBy: [shops_by_locationOrder]
     options: QueryOptions
   ): shops_by_locationResult
+    @deprecated(reason: "No longer supported. Use root type instead.")
+
+  # Query for the table 'user'.
+  # Note that 'user_id' is the field that corresponds to the table primary key.
+  user(
+    value: userInput
+    filter: userFilterInput
+    orderBy: [userOrder]
+    options: QueryOptions
+  ): userResult
+  userFilter(
+    filter: userFilterInput
+    orderBy: [userOrder]
+    options: QueryOptions
+  ): userResult
     @deprecated(reason: "No longer supported. Use root type instead.")
 }
 
@@ -347,4 +388,48 @@ enum shops_by_locationOrder {
 type shops_by_locationResult {
   pageState: String
   values: [shops_by_location!]
+}
+
+# The type used to represent results of a query for the table 'user'.
+type user {
+  user_id: String
+  email: String
+  name: String
+}
+
+# The input type used for filtering with non-equality operators for the table 'user'.
+# Note that 'user_id' is the field that corresponds to the table primary key.
+input userFilterInput {
+  user_id: StringFilterInput
+  email: StringFilterInput
+  name: StringFilterInput
+}
+
+# The input type for the table 'user'.
+# Note that 'user_id' is the field that corresponds to the table primary key.
+input userInput {
+  user_id: String
+  email: String
+  name: String
+}
+
+# The type used to represent results of a mutation for the table 'user'.
+type userMutationResult {
+  applied: Boolean
+  value: user
+}
+
+# The enum used to order a query result based on one or more fields for the table 'user'.
+enum userOrder {
+  user_id_DESC
+  user_id_ASC
+  email_DESC
+  email_ASC
+  name_DESC
+  name_ASC
+}
+
+type userResult {
+  pageState: String
+  values: [user!]
 }
