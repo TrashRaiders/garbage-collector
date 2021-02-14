@@ -7,3 +7,6 @@ netlify-automatic-functions/
 .github/
 .vscode/
 
+# coverage reports
+*coverage/
+

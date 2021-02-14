@@ -6,7 +6,11 @@
 .pnp.js
 
 # testing
+/jest-coverage
+/cypress-coverage
 /coverage
+/reports
+.nyc_output
 
 # next.js
 /.next/
@@ -22,12 +26,6 @@ videos
 **/snapshots/**/__diff_output__/**
 **/snapshots/**/*(failed)*.*
 **/snapshots/**/*-snap.*
-
-# reg
-/.reg
-
-# storycap
-__screenshots__
 
 # misc
 .DS_Store

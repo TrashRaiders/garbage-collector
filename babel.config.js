@@ -8,6 +8,7 @@ module.exports = function config(api) {
   return {
     presets,
     plugins: [
+      'istanbul',
       [
         'babel-plugin-import',
         {

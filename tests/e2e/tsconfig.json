@@ -1,9 +1,17 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "jsx": "react",
+    "module": "es6",
+    "noImplicitAny": false,
     "strict": true,
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["esnext", "dom"],
-    "types": ["cypress", "@testing-library/cypress", "cypress-image-snapshot"]
-  }
+    "target": "es6",
+    "types": [
+      "node",
+      "cypress",
+      "@testing-library/cypress",
+      "cypress-image-snapshot"
+    ]
+  },
+  "include": ["**/*.ts"]
 }

@@ -1,5 +1,12 @@
 {
   "baseUrl": "http://localhost:3001",
-  "pluginsFile": "tests/e2e/plugins/index.js",
+  "nodeVersion": "bundled",
+  "env": {
+    "codeCoverage": {
+      "url": "/api/__coverage__"
+    }
+  },
+  "pluginsFile": "tests/e2e/plugins/index.ts",
+  "supportFile": "tests/e2e/support/index.ts",
   "defaultCommandTimeout": 12000
 }
