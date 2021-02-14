@@ -1,9 +1,13 @@
 {
-  "extension": [".js", ".jsx", ".ts", ".tsx"],
+  "extension": [".ts", ".tsx"],
   "extends": "@istanbuljs/nyc-config-typescript",
-  "include": ["pages/**/*"],
-  "exclude": ["pages/api/__coverage__.js"],
-  "all": true,
-  "sourceMap": true,
-  "instrument": true
+  "include": ["src/**/*"],
+  "exclude": [
+    "src/pages/api/__coverage__.ts",
+    "src/pages/_document.tsx",
+    "src/stories/**/*",
+    "src/generated/**/*",
+    "src/graphql/**/*"
+  ],
+  "all": true
 }

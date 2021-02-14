@@ -53,6 +53,7 @@ jobs:
           yarn config set yarn-offline-mirror ./yarn-offline-cache
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
+
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
@@ -62,6 +63,8 @@ jobs:
         with:
           path: .git/lfs
           key: ${{ matrix.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}-v1
+          restore-keys: |
+            ${{ matrix.os }}-lfs-
 
       - name: Git LFS Pull
         run: git lfs pull
@@ -143,6 +146,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Yarn offline cache
         uses: actions/cache@v2
         id: yarn-offline-cache
@@ -152,12 +156,24 @@ jobs:
           key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+
       - name: Install packages
         run: |
           yarn config set yarn-offline-mirror ./yarn-offline-cache
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
-      - run: yarn test:unit
+
+      - name: Run unit tests
+        run: yarn test:unit
+
+      - name: Cache jest coverage
+        uses: actions/cache@v2
+        id: jest-coverage
+        with:
+          path: jest-coverage
+          key: ${{ matrix.os }}-jest-coverage-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.os }}-jest-coverage-
 
   e2e-test:
     needs: yarn-install
@@ -170,9 +186,6 @@ jobs:
           - 14.x
         browser:
           - chrome
-        exclude:
-          - os: ubuntu-latest
-            browser: edge
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -203,6 +216,8 @@ jobs:
         with:
           path: .git/lfs
           key: ${{ matrix.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}-v1
+          restore-keys: |
+            ${{ matrix.os }}-lfs-
 
       - name: Git LFS Pull
         run: git lfs pull
@@ -216,11 +231,69 @@ jobs:
       - run: yarn cypress info
       - run: yarn start-test start 3001 "cypress run"
 
+      - name: Cache cypress coverage
+        uses: actions/cache@v2
+        id: cypress-coverage
+        with:
+          path: cypress-coverage
+          key: ${{ matrix.os }}-cypress-coverage-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.os }}-cypress-coverage-
+
       - name: Upload snapshots
         uses: actions/upload-artifact@v2
         with:
           name: snapshots-${{ matrix.os }}-${{ matrix.browser }}
           path: tests/e2e/snapshots
+
+  code-coverage:
+    needs:
+      - unit-test
+      - e2e-test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        node-version:
+          - 14.x
+    env:
+      OS: ${{ matrix.os }}
+      NODE: ${{ matrix.node_version }}
+    steps:
+      - name: Create combined coverage report
+        run: yarn report:combined
+
+      - name: Restore jest coverage cache
+        uses: actions/cache@v2
+        id: jest-coverage
+        with:
+          path: jest-coverage
+          key: ${{ matrix.os }}-jest-coverage-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.os }}-jest-coverage-
+
+      - name: Restore cypress coverage cache
+        uses: actions/cache@v2
+        id: cypress-coverage
+        with:
+          path: cypress-coverage
+          key: ${{ matrix.os }}-cypress-coverage-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.os }}-cypress-coverage-
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          flags: tests
+          env_vars: OS,NODE
+          name: codecov-garbage
+          fail_ci_if_error: true
+          path_to_write_report: ./coverage/codecov_report.txt
+          verbose: true
 
   lighthouse-test:
     needs: yarn-install
