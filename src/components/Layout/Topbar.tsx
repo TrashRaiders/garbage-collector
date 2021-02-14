@@ -35,6 +35,10 @@ interface TopbarProps {
   withSearch?: boolean
 }
 
+function handleSignOut(): void {
+  signOut()
+}
+
 function Topbar(props: TopbarProps): React.ReactElement {
   const { withSearch = false } = props
 
@@ -50,11 +54,6 @@ function Topbar(props: TopbarProps): React.ReactElement {
       isDarkMode: !darkMode.isDarkMode,
       auto: false,
     })
-  }
-
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  const handleSignOut = (): void => {
-    signOut()
   }
 
   const [
@@ -114,12 +113,8 @@ function Topbar(props: TopbarProps): React.ReactElement {
             <MenuItem onClick={handleSignOut}>{t('logout')}</MenuItem>
           ) : (
             <div>
-              <Link href="/auth/signin">
+              <Link href="/api/auth/signin">
                 <MenuItem component="a">{t('login')}</MenuItem>
-              </Link>
-
-              <Link href="/signup" passHref>
-                <MenuItem component="a">{t('signup')}</MenuItem>
               </Link>
             </div>
           )}

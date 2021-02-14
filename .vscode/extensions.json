@@ -5,6 +5,7 @@
     "redhat.vscode-yaml",
     "christian-kohler.npm-intellisense",
     "graphql.vscode-graphql",
+    "wix.vscode-import-cost",
     "brainfit.vscode-coverage-highlighter"
   ]
 }

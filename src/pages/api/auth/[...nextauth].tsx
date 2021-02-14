@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import NextAuth from 'next-auth'
+import NextAuth, { InitOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
 
 const env: { [key: string]: string } = (function local() {
@@ -20,7 +20,7 @@ const env: { [key: string]: string } = (function local() {
   return variables
 })()
 
-const options = {
+const options: InitOptions = {
   // Configure one or more authentication providers
   providers: [
     Providers.Google({
@@ -33,7 +33,7 @@ const options = {
     }),
   ],
   pages: {
-    signIn: '/auth/signin',  // Displays signin buttons
+    // signIn: '/api/auth/signin',  // Displays signin buttons
     // signOut: '/api/auth/signout', // Displays form with sign out button
     // error: '/api/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/api/auth/verify-request', // Used for check email page

@@ -24,7 +24,8 @@ interface ISignInProps {
   providers: GetProvidersResponse | null
 }
 
-export default function SignIn(props: ISignInProps): React.ReactNode {
+// TODO currently not reachable... need to override api/auth/[...nextauth].tsx
+function SigninPage(props: ISignInProps): React.ReactNode {
   const { providers } = props
 
   if (!providers) {
@@ -52,3 +53,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   }
 }
+
+export default SigninPage
