@@ -7,8 +7,8 @@ import {
   makeExecutableSchema,
 } from '@graphql-tools/schema'
 import { buildClientSchema } from 'graphql'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
+
+// import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 
 import introspectionResult from '../generated/schema.json'
 import typeDefs from '../generated/typedefs'

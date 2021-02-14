@@ -1,24 +1,24 @@
 import { ApolloProvider } from '@apollo/client'
 import type { AppProps } from 'next/app'
 import Error from 'next/error'
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useMount } from 'react-use'
 
 import CommonHead from 'components/CommonHead'
 import CommonProviders from 'components/CommonProviders'
 import PageTransition from 'components/PageTransition'
 import { useApollo } from 'lib/next-with-apollo'
 
-/* eslint-disable react/jsx-props-no-spreading */
 function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
-  useEffect(() => {
+  useMount(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles?.parentElement) {
       jssStyles.remove()
     }
-  }, [])
+  })
 
   if (pageProps.error) {
     return (
@@ -41,6 +41,5 @@ function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
     </ApolloProvider>
   )
 }
-/* eslint-enable react/jsx-props-no-spreading */
 
 export default MyApp

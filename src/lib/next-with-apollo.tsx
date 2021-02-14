@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ParsedUrlQuery } from 'querystring'
 
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
