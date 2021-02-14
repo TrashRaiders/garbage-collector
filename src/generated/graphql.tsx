@@ -47,6 +47,9 @@ export type Mutation = {
   deleteshops_by_location?: Maybe<Shops_By_LocationMutationResult>
   insertshops_by_location?: Maybe<Shops_By_LocationMutationResult>
   updateshops_by_location?: Maybe<Shops_By_LocationMutationResult>
+  deleteuser?: Maybe<UserMutationResult>
+  insertuser?: Maybe<UserMutationResult>
+  updateuser?: Maybe<UserMutationResult>
 }
 
 export type MutationDeleteshopsArgs = {
@@ -89,6 +92,26 @@ export type MutationUpdateshops_By_LocationArgs = {
   options?: Maybe<MutationOptions>
 }
 
+export type MutationDeleteuserArgs = {
+  value: UserInput
+  ifExists?: Maybe<Scalars['Boolean']>
+  ifCondition?: Maybe<UserFilterInput>
+  options?: Maybe<MutationOptions>
+}
+
+export type MutationInsertuserArgs = {
+  value: UserInput
+  ifNotExists?: Maybe<Scalars['Boolean']>
+  options?: Maybe<MutationOptions>
+}
+
+export type MutationUpdateuserArgs = {
+  value: UserInput
+  ifExists?: Maybe<Scalars['Boolean']>
+  ifCondition?: Maybe<UserFilterInput>
+  options?: Maybe<MutationOptions>
+}
+
 export enum MutationConsistency {
   LocalOne = 'LOCAL_ONE',
   LocalQuorum = 'LOCAL_QUORUM',
@@ -109,6 +132,9 @@ export type Query = {
   shops_by_location?: Maybe<Shops_By_LocationResult>
   /** @deprecated No longer supported. Use root type instead. */
   shops_by_locationFilter?: Maybe<Shops_By_LocationResult>
+  user?: Maybe<UserResult>
+  /** @deprecated No longer supported. Use root type instead. */
+  userFilter?: Maybe<UserResult>
 }
 
 export type QueryShopsArgs = {
@@ -134,6 +160,19 @@ export type QueryShops_By_LocationArgs = {
 export type QueryShops_By_LocationFilterArgs = {
   filter?: Maybe<Shops_By_LocationFilterInput>
   orderBy?: Maybe<Array<Maybe<Shops_By_LocationOrder>>>
+  options?: Maybe<QueryOptions>
+}
+
+export type QueryUserArgs = {
+  value?: Maybe<UserInput>
+  filter?: Maybe<UserFilterInput>
+  orderBy?: Maybe<Array<Maybe<UserOrder>>>
+  options?: Maybe<QueryOptions>
+}
+
+export type QueryUserFilterArgs = {
+  filter?: Maybe<UserFilterInput>
+  orderBy?: Maybe<Array<Maybe<UserOrder>>>
   options?: Maybe<QueryOptions>
 }
 
@@ -353,6 +392,46 @@ export type Shops_By_LocationResult = {
   values?: Maybe<Array<Shops_By_Location>>
 }
 
+export type User = {
+  __typename?: 'user'
+  user_id?: Maybe<Scalars['String']>
+  email?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+}
+
+export type UserFilterInput = {
+  user_id?: Maybe<StringFilterInput>
+  email?: Maybe<StringFilterInput>
+  name?: Maybe<StringFilterInput>
+}
+
+export type UserInput = {
+  user_id?: Maybe<Scalars['String']>
+  email?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+}
+
+export type UserMutationResult = {
+  __typename?: 'userMutationResult'
+  applied?: Maybe<Scalars['Boolean']>
+  value?: Maybe<User>
+}
+
+export enum UserOrder {
+  UserIdDesc = 'user_id_DESC',
+  UserIdAsc = 'user_id_ASC',
+  EmailDesc = 'email_DESC',
+  EmailAsc = 'email_ASC',
+  NameDesc = 'name_DESC',
+  NameAsc = 'name_ASC',
+}
+
+export type UserResult = {
+  __typename?: 'userResult'
+  pageState?: Maybe<Scalars['String']>
+  values?: Maybe<Array<User>>
+}
+
 export type CreateShopMutationVariables = Exact<{
   value: ShopsInput
 }>
@@ -377,6 +456,34 @@ export type GetShopsQuery = { __typename?: 'Query' } & {
             'shop_id' | 'name' | 'type' | 'tags'
           >
         >
+      >
+    }
+  >
+}
+
+export type CreateUserMutationVariables = Exact<{
+  value: UserInput
+}>
+
+export type CreateUserMutation = { __typename?: 'Mutation' } & {
+  insertuser?: Maybe<
+    { __typename?: 'userMutationResult' } & {
+      value?: Maybe<
+        { __typename?: 'user' } & Pick<User, 'user_id' | 'name' | 'email'>
+      >
+    }
+  >
+}
+
+export type GetUserQueryVariables = Exact<{
+  value: UserInput
+}>
+
+export type GetUserQuery = { __typename?: 'Query' } & {
+  user?: Maybe<
+    { __typename?: 'userResult' } & {
+      values?: Maybe<
+        Array<{ __typename?: 'user' } & Pick<User, 'name' | 'email'>>
       >
     }
   >
@@ -486,4 +593,108 @@ export type GetShopsLazyQueryHookResult = ReturnType<
 export type GetShopsQueryResult = Apollo.QueryResult<
   GetShopsQuery,
   GetShopsQueryVariables
+>
+export const CreateUserDocument = gql`
+  mutation CreateUser($value: userInput!) {
+    insertuser(value: $value) {
+      value {
+        user_id
+        name
+        email
+      }
+    }
+  }
+`
+export type CreateUserMutationFn = Apollo.MutationFunction<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      value: // value for 'value'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >,
+) {
+  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
+    CreateUserDocument,
+    baseOptions,
+  )
+}
+export type CreateUserMutationHookResult = ReturnType<
+  typeof useCreateUserMutation
+>
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>
+export const GetUserDocument = gql`
+  query GetUser($value: userInput!) {
+    user(value: $value) {
+      values {
+        name
+        email
+      }
+    }
+  }
+`
+
+/**
+ * __useGetUserQuery__
+ *
+ * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserQuery({
+ *   variables: {
+ *      value: // value for 'value'
+ *   },
+ * });
+ */
+export function useGetUserQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>,
+) {
+  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(
+    GetUserDocument,
+    baseOptions,
+  )
+}
+export function useGetUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserQuery,
+    GetUserQueryVariables
+  >,
+) {
+  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(
+    GetUserDocument,
+    baseOptions,
+  )
+}
+export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>
+export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>
+export type GetUserQueryResult = Apollo.QueryResult<
+  GetUserQuery,
+  GetUserQueryVariables
 >

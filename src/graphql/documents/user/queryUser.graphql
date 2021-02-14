@@ -1,0 +1,10 @@
+# range slice query to get all names
+# shop_id is primary key and only searchable
+query GetUser($value: userInput!) {
+  user(value: $value) {
+    values {
+      name
+      email
+    }
+  }
+}

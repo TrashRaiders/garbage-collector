@@ -48,3 +48,43 @@ export const ssrGetShops = {
 
   usePage: useGetShops,
 }
+
+export async function getServerPageGetUser(
+  options: Omit<Apollo.QueryOptions<Types.GetUserQueryVariables>, 'query'>,
+  ctx?: any,
+) {
+  const apolloClient = getApolloClient(ctx)
+
+  const data = await apolloClient.query<Types.GetUserQuery>({
+    ...options,
+    query: Operations.GetUserDocument,
+  })
+
+  const apolloState = apolloClient.cache.extract()
+
+  return {
+    props: {
+      apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  }
+}
+export const useGetUser = (
+  optionsFunc?: (
+    router: NextRouter,
+  ) => QueryHookOptions<Types.GetUserQuery, Types.GetUserQueryVariables>,
+) => {
+  const router = useRouter()
+  const options = optionsFunc ? optionsFunc(router) : {}
+  return useQuery(Operations.GetUserDocument, options)
+}
+export type PageGetUserComp = React.FC<{
+  data?: Types.GetUserQuery
+  error?: Apollo.ApolloError
+}>
+export const ssrGetUser = {
+  getServerPage: getServerPageGetUser,
+
+  usePage: useGetUser,
+}
