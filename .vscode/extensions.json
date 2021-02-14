@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode",
     "redhat.vscode-yaml",
     "christian-kohler.npm-intellisense",
-    "graphql.vscode-graphql"
+    "graphql.vscode-graphql",
+    "brainfit.vscode-coverage-highlighter"
   ]
 }

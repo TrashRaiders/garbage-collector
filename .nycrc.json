@@ -6,8 +6,11 @@
     "src/pages/api/__coverage__.ts",
     "src/pages/_document.tsx",
     "src/stories/**/*",
+    "src/**/*.stories.tsx",
     "src/generated/**/*",
-    "src/graphql/**/*"
+    "src/graphql/**/*",
+    "src/lib/*apollo*/*",
+    "src/lib/**/*apollo*.*"
   ],
   "all": true
 }

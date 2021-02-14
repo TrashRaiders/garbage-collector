@@ -32,6 +32,7 @@ run(`yarn nyc merge ${REPORTS_FOLDER}`)
 
 // "nyc merge" will create a "coverage.json" file on the root, we move it to .nyc_output
 fs.moveSync('coverage.json', '.nyc_output/out.json')
+fs.copyFileSync('.nyc_output/out.json', 'coverage/coverage-final.json')
 
 // then generate the final report on the coverage folder
 run(
