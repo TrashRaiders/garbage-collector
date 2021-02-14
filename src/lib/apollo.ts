@@ -57,7 +57,10 @@ function createApolloClient({
 } = {}): ApolloClient<NormalizedCacheObject> {
   let link: ApolloLink
 
-  if (useMock || !process.env.GRAPHQL_API_ENDPOINT) {
+  const noEndpointInDevelopment =
+    process.env.NODE_ENV === 'development' && !process.env.GRAPHQL_API_ENDPOINT
+
+  if (useMock || noEndpointInDevelopment) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     link = require('./apollo-mock').createMockLink()
   } else if (setAuthToken) {
