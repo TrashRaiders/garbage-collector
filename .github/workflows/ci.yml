@@ -248,6 +248,7 @@ jobs:
 
   code-coverage:
     needs:
+      - yarn-install
       - unit-test
       - e2e-test
     runs-on: ${{ matrix.os }}
@@ -262,8 +263,27 @@ jobs:
       OS: ${{ matrix.os }}
       NODE: ${{ matrix.node_version }}
     steps:
-      - name: Create combined coverage report
-        run: yarn report:combined
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Yarn offline cache
+        uses: actions/cache@v2
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+
+      - name: Install packages
+        if: env.YARN_CACHE == 'true'
+        run: |
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
 
       - name: Restore jest coverage cache
         uses: actions/cache@v2
@@ -282,6 +302,9 @@ jobs:
           key: ${{ matrix.os }}-cypress-coverage-${{ github.sha }}
           restore-keys: |
             ${{ matrix.os }}-cypress-coverage-
+
+      - name: Create combined coverage report
+        run: yarn report:combined
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
