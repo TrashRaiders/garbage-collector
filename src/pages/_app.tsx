@@ -1,3 +1,5 @@
+import { ApolloProvider } from '@apollo/client'
+import { Provider as AuthProvider } from 'next-auth/client'
 import type { AppProps } from 'next/app'
 import Error from 'next/error'
 import React from 'react'
@@ -6,8 +8,10 @@ import { useMount } from 'react-use'
 import CommonHead from 'components/CommonHead'
 import CommonProviders from 'components/CommonProviders'
 import PageTransition from 'components/PageTransition'
+import { useApollo } from 'lib/next-with-apollo'
 
 function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
+  const apolloClient = useApollo(pageProps.initialApolloState)
   useMount(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
@@ -26,13 +30,17 @@ function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
   }
 
   return (
-    <CommonHead>
-      <CommonProviders pageProps={pageProps}>
-        <PageTransition pageID={router.route}>
-          <Component {...pageProps} />
-        </PageTransition>
-      </CommonProviders>
-    </CommonHead>
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider session={pageProps.session}>
+        <CommonHead>
+          <CommonProviders>
+            <PageTransition pageID={router.route}>
+              <Component {...pageProps} />
+            </PageTransition>
+          </CommonProviders>
+        </CommonHead>
+      </AuthProvider>
+    </ApolloProvider>
   )
 }
 
