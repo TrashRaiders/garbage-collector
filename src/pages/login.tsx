@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { signIn } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
-import Router from 'next/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -63,7 +63,8 @@ function LoginPage(): React.ReactElement {
   const onSubmit = async (data: IFormInputs): Promise<void> => {
     // eslint-disable-next-line no-console
     console.info('Here the user should be logged in', { data })
-    Router.push('/')
+    // TODO should not be here and use the read website URL
+    signIn('github', { callbackUrl: 'http://localhost:3001/' })
   }
 
   const result = {

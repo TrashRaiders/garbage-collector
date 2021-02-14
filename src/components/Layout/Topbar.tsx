@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
+import { signOut, useSession } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
-import Router from 'next/router'
 import React from 'react'
 import { useCookie } from 'react-use'
 
@@ -40,6 +40,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
 
   const classes = useStyles()
   const { t } = useTranslation('common')
+  const [session] = useSession()
 
   const [, updateThemeCookie] = useCookie(THEME_COOKIE)
   const [darkMode, setDarkMode] = useDarkMode()
@@ -51,10 +52,9 @@ function Topbar(props: TopbarProps): React.ReactElement {
     })
   }
 
-  const isSignedIn = false
   // eslint-disable-next-line unicorn/consistent-function-scoping
   const handleSignOut = (): void => {
-    Router.push('/')
+    signOut()
   }
 
   const [
@@ -110,11 +110,11 @@ function Topbar(props: TopbarProps): React.ReactElement {
           onClose={handleAccountMenuClose}
           keepMounted
         >
-          {isSignedIn ? (
+          {session ? (
             <MenuItem onClick={handleSignOut}>{t('logout')}</MenuItem>
           ) : (
             <div>
-              <Link href="/login" passHref>
+              <Link href="/auth/signin">
                 <MenuItem component="a">{t('login')}</MenuItem>
               </Link>
 
