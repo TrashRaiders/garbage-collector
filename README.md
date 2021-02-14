@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4ac241e8-17a5-40c5-ad4b-8a7c2881f996/deploy-status)](https://app.netlify.com/sites/garbage-collector-123/deploys)
 
+[![codecov](https://codecov.io/gh/TrashRaiders/garbage-collector/branch/main/graph/badge.svg?token=STVIZAH3A2)](https://codecov.io/gh/TrashRaiders/garbage-collector)
+
 ## Deployment
 
 We deploy our site on Netlify. Every commit to `main` is deployed automatically.
