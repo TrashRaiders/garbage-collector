@@ -19,4 +19,12 @@ module.exports = {
     'unicorn/no-array-for-each': 'off',
     'no-restricted-syntax': 'off',
   },
+  overrides: [
+    {
+      files: ['src/pages/**/*.*'],
+      rules: {
+        'unicorn/filename-case': 'off',
+      },
+    },
+  ],
 }
