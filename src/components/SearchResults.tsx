@@ -18,11 +18,11 @@ const useStyles = makeStyles(() =>
 )
 
 function renderRow(props: ListChildComponentProps) {
-  const { index, style } = props
+  const { index, style, data: shops } = props
 
   return (
     <ListItem style={style} key={index}>
-      <ShopCard name={`${index}`} tags={[]} />
+      <ShopCard id={shops[index].id} name={shops[index].name} tags={[]} />
     </ListItem>
   )
 }
@@ -47,6 +47,7 @@ function SearchResults(): React.ReactElement {
         itemSize={200}
         width="100%"
         itemCount={shops.length}
+        itemData={shops}
       >
         {renderRow}
       </FixedSizeList>

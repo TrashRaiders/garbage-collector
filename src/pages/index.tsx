@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
-import Layout from 'components/Layout'
 import SearchResults from 'components/SearchResults'
+import Layout from 'components/ShopDetailsLayout/Layout'
 import { ShopSearchProvider } from 'contexts/shop-search'
 
 const useStyles = makeStyles(() => ({

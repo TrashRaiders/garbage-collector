@@ -11,20 +11,15 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { signIn } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
+import Router from 'next/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import Animate from 'components/Animate'
 import Layout from 'components/ShopDetailsLayout/Layout'
-
-interface IFormInputs {
-  name: string
-  password: string
-}
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -34,20 +29,38 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   paper: {
     padding: theme.spacing(4),
+    width: '100%',
   },
   errorMessage: {
     paddingLeft: theme.spacing(2),
   },
 }))
 
-function LoginPage(): React.ReactElement {
+interface IFormInputs {
+  name: string
+  email: string
+  password: string
+}
+
+function SignUpPage(): React.ReactElement {
   const classes = useStyles()
 
   const { t } = useTranslation('common')
 
   const formSchema = yup.object().shape({
-    name: yup.string().required(),
-    password: yup.string().required(),
+    name: yup
+      .string()
+      .required()
+      .matches(/^[\w-]+$/)
+      .min(6)
+      .max(64),
+    email: yup.string().required().email(),
+    password: yup
+      .string()
+      .required()
+      .matches(/^[\u0020-\u007E]+$/)
+      .min(8)
+      .max(64),
   })
 
   const {
@@ -60,11 +73,12 @@ function LoginPage(): React.ReactElement {
     reValidateMode: 'onChange',
   })
 
+  // const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
+
   const onSubmit = async (data: IFormInputs): Promise<void> => {
     // eslint-disable-next-line no-console
-    console.info('Here the user should be logged in', { data })
-    // TODO should not be here and use the read website URL
-    signIn('github', { callbackUrl: 'http://localhost:3001/' })
+    console.info('Here the user should be signed up', { data })
+    Router.push('/')
   }
 
   const result = {
@@ -80,7 +94,7 @@ function LoginPage(): React.ReactElement {
         <Animate variant="zoomInOut">
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
-              {t('login')}
+              {t('createYourAccount')}
             </Typography>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,13 +128,39 @@ function LoginPage(): React.ReactElement {
 
               <TextField
                 inputRef={register}
+                type="text"
+                name="email"
+                autoComplete="email"
+                label={t('email')}
+                fullWidth
                 variant="outlined"
+                margin="normal"
+                error={!!errors.email}
+              />
+
+              <ErrorMessage
+                errors={errors}
+                name="email"
+                render={({ message }) => (
+                  <Typography
+                    className={classes.errorMessage}
+                    variant="body2"
+                    color="error"
+                  >
+                    {message}
+                  </Typography>
+                )}
+              />
+
+              <TextField
+                inputRef={register}
                 type="password"
                 name="password"
                 autoComplete="current-password"
                 label={t('password')}
-                margin="normal"
                 fullWidth
+                variant="outlined"
+                margin="normal"
                 error={!!errors.password}
               />
 
@@ -146,16 +186,16 @@ function LoginPage(): React.ReactElement {
                   disabled={isSubmitting}
                   fullWidth
                 >
-                  {t('logIn')}
+                  {t('createAccount')}
                 </Button>
               </Box>
 
               <Box mt={2} mb={1} fontSize="body2.fontSize">
-                {`${t('dontHaveAnAccount?')} `}
+                {`${t('alreadyHaveAnAccount?')} `}
 
-                <Link href="/signup" passHref>
+                <Link href="/login" passHref>
                   <MuiLink component="a" color="primary">
-                    {t('createAnAccount')}
+                    {t('logIn')}
                   </MuiLink>
                 </Link>
               </Box>
@@ -175,4 +215,4 @@ function LoginPage(): React.ReactElement {
   )
 }
 
-export default LoginPage
+export default SignUpPage

@@ -7,7 +7,6 @@ import { QueryHookOptions, useQuery } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 import type React from 'react'
 import { getApolloClient } from '../lib/next-with-apollo'
-import type { NormalizedCacheObject } from '@apollo/client'
 
 export async function getServerPageGetShops(
   options: Omit<Apollo.QueryOptions<Types.GetShopsQueryVariables>, 'query'>,
@@ -48,16 +47,27 @@ export const ssrGetShops = {
 
   usePage: useGetShops,
 }
+<<<<<<< HEAD
 
 export async function getServerPageGetUser(
   options: Omit<Apollo.QueryOptions<Types.GetUserQueryVariables>, 'query'>,
+=======
+export async function getServerPageGetShop(
+  options: Omit<Apollo.QueryOptions<Types.GetShopQueryVariables>, 'query'>,
+>>>>>>> 20262e4 (add shop detail view)
   ctx?: any,
 ) {
   const apolloClient = getApolloClient(ctx)
 
+<<<<<<< HEAD
   const data = await apolloClient.query<Types.GetUserQuery>({
     ...options,
     query: Operations.GetUserDocument,
+=======
+  const data = await apolloClient.query<Types.GetShopQuery>({
+    ...options,
+    query: Operations.GetShopDocument,
+>>>>>>> 20262e4 (add shop detail view)
   })
 
   const apolloState = apolloClient.cache.extract()
@@ -70,6 +80,7 @@ export async function getServerPageGetUser(
     },
   }
 }
+<<<<<<< HEAD
 export const useGetUser = (
   optionsFunc?: (
     router: NextRouter,
@@ -87,4 +98,23 @@ export const ssrGetUser = {
   getServerPage: getServerPageGetUser,
 
   usePage: useGetUser,
+=======
+export const useGetShop = (
+  optionsFunc?: (
+    router: NextRouter,
+  ) => QueryHookOptions<Types.GetShopQuery, Types.GetShopQueryVariables>,
+) => {
+  const router = useRouter()
+  const options = optionsFunc ? optionsFunc(router) : {}
+  return useQuery(Operations.GetShopDocument, options)
+}
+export type PageGetShopComp = React.FC<{
+  data?: Types.GetShopQuery
+  error?: Apollo.ApolloError
+}>
+export const ssrGetShop = {
+  getServerPage: getServerPageGetShop,
+
+  usePage: useGetShop,
+>>>>>>> 20262e4 (add shop detail view)
 }

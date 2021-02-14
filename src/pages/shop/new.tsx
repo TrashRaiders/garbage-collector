@@ -14,7 +14,7 @@ import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
 
-import Layout from 'components/Layout'
+import Layout from 'components/ShopDetailsLayout/Layout'
 import ShopForm, { FORM_SCHEMA, FormValues } from 'components/ShopForm'
 import {
   CreateShopMutationVariables,
