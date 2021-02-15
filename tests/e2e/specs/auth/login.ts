@@ -1,4 +1,5 @@
-import { cy, describe, it } from 'local-cypress'
+// type definitions for custom commands like "login"
+/// <reference types="../../support" />
 
 import { viewports } from '../../support/constants'
 

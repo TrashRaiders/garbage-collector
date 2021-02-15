@@ -1,13 +1,15 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "../../node_modules",
-    "jsx": "react",
-    "module": "ESNext",
-    "noImplicitAny": false,
-    "strict": true,
-    "target": "ES5",
-    "types": ["cypress", "@testing-library/cypress", "cypress-image-snapshot"]
+    "noEmit": true,
+    "lib": ["es5", "dom"],
+    "target": "es5",
+    "types": [
+      "cypress",
+      "@types/testing-library__cypress",
+      "@types/cypress-image-snapshot"
+    ]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "exclude": []
 }
