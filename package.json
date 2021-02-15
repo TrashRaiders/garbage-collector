@@ -102,6 +102,7 @@
     "cross-env": "7.0.3",
     "cypress": "6.4.0",
     "cypress-image-snapshot": "4.0.1",
+    "cypress-social-logins": "1.10.0",
     "destiny": "0.7.1",
     "encoding": "0.1.13",
     "eslint": "7.20.0",

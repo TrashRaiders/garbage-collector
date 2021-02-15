@@ -19,12 +19,13 @@
 // @ts-ignore - no @types/@cypress_browserify-preprocessor
 const browserify = require('@cypress/browserify-preprocessor')
 const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin')
+const {
+  GoogleSocialLogin,
+  GitHubSocialLogin,
+} = require('cypress-social-logins').plugins
 
 /**
  * @type {Cypress.PluginConfig}
- * 
- * on: Cypress.PluginEvents,
-  config: Cypress.PluginConfigOptions,
  */
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
@@ -41,6 +42,8 @@ module.exports = (on, config) => {
 
   // enables taking snapshots during tests
   addMatchImageSnapshotPlugin(on, config)
+
+  on('task', { GoogleSocialLogin, GitHubSocialLogin })
 
   // modify browser launch arguments
   // https://on.cypress.io/browser-launch-api
