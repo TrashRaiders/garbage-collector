@@ -11,6 +11,7 @@
 /coverage
 /reports
 .nyc_output
+cypress.env.json
 
 # next.js
 /.next/

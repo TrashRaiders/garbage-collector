@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://localhost:3001",
   "nodeVersion": "bundled",
+  "chromeWebSecurity": false,
   "env": {
     "codeCoverage": {
       "url": "/api/__coverage__"

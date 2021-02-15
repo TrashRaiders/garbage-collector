@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": "../../node_modules",
     "jsx": "react",
-    "module": "es6",
+    "module": "ESNext",
     "noImplicitAny": false,
     "strict": true,
-    "target": "es6",
-    "types": [
-      "node",
-      "cypress",
-      "@testing-library/cypress",
-      "cypress-image-snapshot"
-    ]
+    "target": "ES5",
+    "types": ["cypress", "@testing-library/cypress", "cypress-image-snapshot"]
   },
   "include": ["**/*.ts"]
 }

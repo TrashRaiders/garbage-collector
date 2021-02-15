@@ -1,26 +1,29 @@
+import { cy, describe, it } from 'local-cypress'
+
 import { viewports } from '../../support/constants'
 
 describe('login', (): void => {
+  beforeEach(() => {
+    cy.logout()
+  })
+
   viewports.forEach((viewport): void => {
     it(`viewport:${viewport}`, () => {
       cy.viewport(viewport)
       cy.visit('/')
 
-      // Login page
+      // login menu
       cy.findByTestId('account-icon').click()
-      cy.matchImageSnapshot(`vp-${viewport}-1-auth-options`)
-      cy.get('a[href="/login"]:visible').click()
-      cy.contains('h1', 'Einloggen')
+      cy.matchImageSnapshot(`vp-${viewport}-1-auth-menu`)
+      cy.get('a[href="/api/auth/signin"]:visible')
 
-      cy.matchImageSnapshot(`vp-${viewport}-2-login`)
+      // login
+      cy.login('github')
 
-      // Login
-      cy.get('input[name=name]').type('myusername')
-      cy.get('input[name=password]').type('mypassword')
-      cy.matchImageSnapshot(`vp-${viewport}-3-after-input`)
-      cy.get('button[type=submit]').click()
-      cy.contains('Müll Sammler')
-      cy.matchImageSnapshot(`vp-${viewport}-4-after-submit`)
+      cy.reload()
+      cy.findByTestId('account-icon').click()
+
+      cy.matchImageSnapshot(`vp-${viewport}-2-after-login`)
     })
   })
 })

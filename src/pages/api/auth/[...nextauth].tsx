@@ -26,6 +26,8 @@ const options: InitOptions = {
     Providers.Google({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      authorizationUrl:
+        'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
     }),
     Providers.GitHub({
       clientId: env.GITHUB_CLIENT_ID,
