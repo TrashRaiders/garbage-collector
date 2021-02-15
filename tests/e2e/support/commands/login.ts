@@ -33,11 +33,12 @@ Cypress.Commands.add('login', (provider: Provider) => {
     username,
     password,
     loginUrl,
-    headless: true,
+    headless: false,
     logs: false,
     isPopup: false,
+    popupDelay: 2000,
     loginSelector: `form[action="${siteName}/api/auth/signin/${provider}"] button[type=submit]`,
-    postLoginSelector: 'input[placeholder="Suche..."]',
+    postLoginSelector: 'div#__next',
   }
 
   const taskNames = {
@@ -52,7 +53,8 @@ Cypress.Commands.add('login', (provider: Provider) => {
     // cy.clearCookie('next-auth.callback-url')
     // cy.clearCookie('next-auth.csrf-token')
 
-    const cookie = cookies.filter((c) => c.name === cookieName).pop()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const cookie = cookies.filter((c: any) => c.name === cookieName).pop()
     if (cookie) {
       cy.setCookie(cookie.name, cookie.value, {
         domain: cookie.domain,

@@ -71,6 +71,7 @@ jobs:
 
   storybook-works:
     needs: yarn-install
+    if: 'false'
     strategy:
       matrix:
         os:
@@ -102,6 +103,7 @@ jobs:
 
   lint:
     needs: yarn-install
+    if: 'false'
     strategy:
       matrix:
         os:
@@ -133,6 +135,7 @@ jobs:
 
   unit-test:
     needs: yarn-install
+    if: 'false'
     strategy:
       fail-fast: false
       matrix:
@@ -227,9 +230,20 @@ jobs:
           yarn config set yarn-offline-mirror ./yarn-offline-cache
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
+
       - run: yarn build
-      - run: yarn cypress info
-      - run: yarn start-test start 3001 "cypress run"
+
+      - name: Run Cypress tests
+        env:
+          GITHUB_CLIENT_ID: ${{ secrets.MY_GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.MY_GITHUB_CLIENT_SECRET }}
+          CYPRESS_COOKIE_NAME: ${{ secrets.CYPRESS_COOKIE_NAME }}
+          CYPRESS_GITHUB_PW: ${{ secrets.CYPRESS_GITHUB_PW }}
+          CYPRESS_GITHUB_USER: ${{ secrets.CYPRESS_GITHUB_USER }}
+          CYPRESS_SITE_NAME: ${{ secrets.CYPRESS_SITE_NAME }}
+        run: |
+          yarn cypress info
+          yarn start-test start 3001 "cypress run"
 
       - name: Cache cypress coverage
         uses: actions/cache@v2
