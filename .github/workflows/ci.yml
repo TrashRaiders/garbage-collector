@@ -71,7 +71,6 @@ jobs:
 
   storybook-works:
     needs: yarn-install
-    if: 'false'
     strategy:
       matrix:
         os:
@@ -103,7 +102,6 @@ jobs:
 
   lint:
     needs: yarn-install
-    if: 'false'
     strategy:
       matrix:
         os:
@@ -135,7 +133,6 @@ jobs:
 
   unit-test:
     needs: yarn-install
-    if: 'false'
     strategy:
       fail-fast: false
       matrix:
