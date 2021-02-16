@@ -1,4 +1,4 @@
-export type Provider = 'google' | 'github'
+export type Provider = 'google' | 'github' | 'facebook'
 
 /* eslint-disable promise/always-return */
 /* eslint-disable promise/catch-or-return */
@@ -22,6 +22,10 @@ Cypress.Commands.add('login', (provider: Provider) => {
       username: Cypress.env('GITHUB_USER'),
       password: Cypress.env('GITHUB_PW'),
     },
+    facebook: {
+      username: Cypress.env('FACEBOOK_USER'),
+      password: Cypress.env('FACEBOOK_PW'),
+    },
   }
 
   const { username, password } = credentials[provider]
@@ -44,6 +48,7 @@ Cypress.Commands.add('login', (provider: Provider) => {
   const taskNames = {
     google: 'GoogleSocialLogin',
     github: 'GitHubSocialLogin',
+    facebook: 'FacebookSocialLogin',
   }
   const taskName = taskNames[provider]
 

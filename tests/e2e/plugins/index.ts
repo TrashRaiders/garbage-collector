@@ -22,6 +22,7 @@ const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin')
 const {
   GoogleSocialLogin,
   GitHubSocialLogin,
+  FacebookSocialLogin,
 } = require('cypress-social-logins').plugins
 
 /**
@@ -43,7 +44,7 @@ module.exports = (on, config) => {
   // enables taking snapshots during tests
   addMatchImageSnapshotPlugin(on, config)
 
-  on('task', { GoogleSocialLogin, GitHubSocialLogin })
+  on('task', { GoogleSocialLogin, GitHubSocialLogin, FacebookSocialLogin })
 
   // modify browser launch arguments
   // https://on.cypress.io/browser-launch-api
