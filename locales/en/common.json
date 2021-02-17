@@ -26,5 +26,9 @@
   "shopTags": "Shop Tags",
   "bicycles": "Bicycles",
   "cars": "Cars",
-  "hifi": "Hifi"
+  "hifi": "Hifi",
+  "SignEmailButton": "Sign in with Email",
+  "SignGoogleButton": "Sign in with Google",
+  "SignFacebookButton": "Sign in with Facebook",
+  "SignGithubButton": "Sign in with Github"
 }

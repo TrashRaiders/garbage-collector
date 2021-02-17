@@ -30,14 +30,13 @@ interface ISignInProps {
 // TODO currently not reachable... need to override api/auth/[...nextauth].tsx
 function SigninPage(props: ISignInProps): React.ReactNode {
   const { providers } = props
-
   if (!providers) {
     return null
   }
 
   return (
     <Layout>
-      <SignInForm />
+      <SignInForm {...props}/>
     </Layout>
   )
 
