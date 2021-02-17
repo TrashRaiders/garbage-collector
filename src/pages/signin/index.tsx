@@ -3,6 +3,9 @@ import { GetServerSideProps } from 'next'
 import { getProviders, signIn } from 'next-auth/client'
 import React from 'react'
 
+import Layout from 'components/Layout'
+import SignInForm from 'components/SignInForm'
+
 // ---------------------
 // copied from types in import('next-auth/client').getProviders()
 interface GetProvidersResponse {
@@ -33,16 +36,22 @@ function SigninPage(props: ISignInProps): React.ReactNode {
   }
 
   return (
-    <>
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <Button onClick={() => signIn(provider.id)}>
-            Signiiiiiiii in with {provider.name}
-          </Button>
-        </div>
-      ))}
-    </>
+    <Layout>
+      <SignInForm />
+    </Layout>
   )
+
+  // return (
+  //   <>
+  //     {Object.values(providers).map((provider) => (
+  //       <div key={provider.name}>
+  //         <Button onClick={() => signIn(provider.id)}>
+  //           Signiiiiiiii in with {provider.name}
+  //         </Button>
+  //       </div>
+  //     ))}
+  //   </>
+  // )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
