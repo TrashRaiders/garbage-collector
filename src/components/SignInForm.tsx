@@ -118,7 +118,7 @@ function SignInForm(props: ISignInFormProps): React.ReactElement {
           className={classes.typography}
         >
           {t('SignFormText')}{' '}
-          <span role="img" aria-label="smiling face with sunglasses">
+          <span role="img" aria-label={t('smilingFaceSunglasses')}>
             😎
           </span>
         </Typography>
