@@ -19,8 +19,8 @@ export function SignInButton(props: ISignInButtonProps): React.ReactElement {
   const { className, icon, buttonText } = props
 
   return (
-    <Box className={className}>
-      <Button variant="contained" startIcon={icon} fullWidth>
+    <Box className={className} clone>
+      <Button startIcon={icon} fullWidth>
         {buttonText}
       </Button>
     </Box>
