@@ -24,7 +24,7 @@ interface SessionProvider {
 // ---------------------
 
 interface ISignInProps {
-  providers: GetProvidersResponse | null
+  providers: GetProvidersResponse
 }
 
 // TODO currently not reachable... need to override api/auth/[...nextauth].tsx
@@ -36,21 +36,9 @@ function SigninPage(props: ISignInProps): React.ReactNode {
 
   return (
     <Layout>
-      <SignInForm {...props}/>
+      <SignInForm {...props} />
     </Layout>
   )
-
-  // return (
-  //   <>
-  //     {Object.values(providers).map((provider) => (
-  //       <div key={provider.name}>
-  //         <Button onClick={() => signIn(provider.id)}>
-  //           Signiiiiiiii in with {provider.name}
-  //         </Button>
-  //       </div>
-  //     ))}
-  //   </>
-  // )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
