@@ -1,6 +1,5 @@
-import { Button } from '@material-ui/core'
 import { GetServerSideProps } from 'next'
-import { getProviders, signIn } from 'next-auth/client'
+import { getProviders } from 'next-auth/client'
 import React from 'react'
 
 import Layout from 'components/Layout'
