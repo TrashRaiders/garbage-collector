@@ -3,12 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 import { IconBaseProps, IconType } from 'react-icons/lib'
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   button: {
-//     margin: theme.spacing(2),
-//   },
-// }))
-
 export interface ISignInButtonProps {
   className: string
   icon: IconBaseProps
