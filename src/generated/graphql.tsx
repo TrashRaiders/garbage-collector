@@ -612,66 +612,6 @@ export type GetShopsQueryResult = Apollo.QueryResult<
   GetShopsQuery,
   GetShopsQueryVariables
 >
-<<<<<<< HEAD
-export const CreateUserDocument = gql`
-  mutation CreateUser($value: userInput!) {
-    insertuser(value: $value) {
-      value {
-        user_id
-        name
-        email
-      }
-    }
-  }
-`
-export type CreateUserMutationFn = Apollo.MutationFunction<
-  CreateUserMutation,
-  CreateUserMutationVariables
->
-
-/**
- * __useCreateUserMutation__
- *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
- *   variables: {
- *      value: // value for 'value'
- *   },
- * });
- */
-export function useCreateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateUserMutation,
-    CreateUserMutationVariables
-  >,
-) {
-  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
-    CreateUserDocument,
-    baseOptions,
-  )
-}
-export type CreateUserMutationHookResult = ReturnType<
-  typeof useCreateUserMutation
->
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
-  CreateUserMutation,
-  CreateUserMutationVariables
->
-export const GetUserDocument = gql`
-  query GetUser($value: userInput!) {
-    user(value: $value) {
-      values {
-        name
-        email
-=======
 export const GetShopDocument = gql`
   query GetShop($id: String!) {
     shops(value: { shop_id: $id }) {
@@ -680,61 +620,21 @@ export const GetShopDocument = gql`
         name
         description
         pictures
->>>>>>> 20262e4 (add shop detail view)
       }
     }
   }
 `
 
 /**
-<<<<<<< HEAD
- * __useGetUserQuery__
- *
- * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
-=======
  * __useGetShopQuery__
  *
  * To run a query within a React component, call `useGetShopQuery` and pass it any options that fit your needs.
  * When your component renders, `useGetShopQuery` returns an object from Apollo Client that contains loading, error, and data properties
->>>>>>> 20262e4 (add shop detail view)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
-<<<<<<< HEAD
- * const { data, loading, error } = useGetUserQuery({
- *   variables: {
- *      value: // value for 'value'
- *   },
- * });
- */
-export function useGetUserQuery(
-  baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>,
-) {
-  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(
-    GetUserDocument,
-    baseOptions,
-  )
-}
-export function useGetUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetUserQuery,
-    GetUserQueryVariables
-  >,
-) {
-  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(
-    GetUserDocument,
-    baseOptions,
-  )
-}
-export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>
-export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>
-export type GetUserQueryResult = Apollo.QueryResult<
-  GetUserQuery,
-  GetUserQueryVariables
-=======
  * const { data, loading, error } = useGetShopQuery({
  *   variables: {
  *      id: // value for 'id'
@@ -765,5 +665,4 @@ export type GetShopLazyQueryHookResult = ReturnType<typeof useGetShopLazyQuery>
 export type GetShopQueryResult = Apollo.QueryResult<
   GetShopQuery,
   GetShopQueryVariables
->>>>>>> 20262e4 (add shop detail view)
 >

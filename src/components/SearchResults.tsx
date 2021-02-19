@@ -22,7 +22,13 @@ function renderRow(props: ListChildComponentProps) {
 
   return (
     <ListItem style={style} key={index}>
-      <ShopCard id={shops[index].id} name={shops[index].name} tags={[]} />
+      <ShopCard
+        id={shops[index].id}
+        name={shops[index].name}
+        address={shops[index].address}
+        thumbnailUrl={shops[index].pictures[0]}
+        tags={shops[index].tags}
+      />
     </ListItem>
   )
 }
@@ -44,7 +50,7 @@ function SearchResults(): React.ReactElement {
     >
       <FixedSizeList
         height={height}
-        itemSize={200}
+        itemSize={175}
         width="100%"
         itemCount={shops.length}
         itemData={shops}
