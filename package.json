@@ -9,7 +9,7 @@
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 3001",
     "ny:build": "yarn netlify build",
     "ny:deploy": "yarn netlify deploy --prod",
-    "lint": "eslint . --fix",
+    "lint": "eslint . --fix --max-warnings=0",
     "pretest": "rimraf .nyc_output || true",
     "test": "yarn test:unit && yarn test:e2e",
     "posttest": "yarn report:combined",

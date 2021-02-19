@@ -113,7 +113,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
             <MenuItem onClick={handleSignOut}>{t('logout')}</MenuItem>
           ) : (
             <div>
-              <Link href="/api/auth/signin" passHref>
+              <Link href="/signin" passHref>
                 <MenuItem component="a">{t('login')}</MenuItem>
               </Link>
             </div>

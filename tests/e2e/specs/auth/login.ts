@@ -16,7 +16,7 @@ describe('login', (): void => {
       // login menu
       cy.findByTestId('account-icon').click()
       cy.matchImageSnapshot(`vp-${viewport}-1-auth-menu`)
-      cy.get('a[href="/api/auth/signin"]:visible')
+      cy.get('a[href="/signin"]:visible')
 
       // login
 
