@@ -14,8 +14,5 @@ beforeEach(() => {
   cy.setCookie('theme', 'dark')
 
   // replace all requests to placeimg.com with our static cat
-  cy.intercept(
-    { url: /^https:\/\/placeimg\.com\/*/ },
-    { fixture: 'images/animals1.jfif' },
-  )
+  cy.intercept({ url: 'placeimg.com' }, { fixture: 'images/animal.png' })
 })
