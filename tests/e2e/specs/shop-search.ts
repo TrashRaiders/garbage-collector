@@ -5,6 +5,7 @@ describe('shop search', (): void => {
     it(`Auth viewport:${viewport}`, () => {
       cy.viewport(viewport)
       cy.visit('/')
+
       cy.contains('Müll Sammler')
       cy.matchImageSnapshot(`vp-${viewport}-first-visit`)
     })
