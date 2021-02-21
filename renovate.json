@@ -4,7 +4,7 @@
   "baseBranches": ["bump"],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": true,
-  "dependencyDashboardAutoclose": true,
+  "dependencyDashboardAutoclose": false,
   "lockFileMaintenance": {
     "enabled": false
   },
