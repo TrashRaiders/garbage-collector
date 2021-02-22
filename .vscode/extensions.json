@@ -6,6 +6,7 @@
     "christian-kohler.npm-intellisense",
     "graphql.vscode-graphql",
     "wix.vscode-import-cost",
-    "ryanluker.vscode-coverage-gutters"
+    "ryanluker.vscode-coverage-gutters",
+    "markis.code-coverage"
   ]
 }
