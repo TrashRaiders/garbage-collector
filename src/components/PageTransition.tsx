@@ -1,7 +1,11 @@
 import {
+  AnimateLayoutFeature,
   AnimatePresence,
+  AnimateSharedLayout,
   AnimationFeature,
+  DragFeature,
   ExitFeature,
+  GesturesFeature,
   MotionConfig,
   m as motion,
 } from 'framer-motion'
@@ -14,6 +18,15 @@ interface PageTransitionProps {
   children: React.ReactNode
   pageID: string
   variant?: VariantName
+}
+
+/**
+ * When transitioning to another page, the viewport should be at the top again
+ */
+function handleExitComplete() {
+  if (typeof window !== 'undefined') {
+    window.scrollTo({ top: 0 })
+  }
 }
 
 /**
@@ -35,17 +48,30 @@ function PageTransition(props: PageTransitionProps): React.ReactElement {
   }
 
   return (
-    <MotionConfig features={[AnimationFeature, ExitFeature]}>
-      <AnimatePresence exitBeforeEnter>
-        <motion.div
-          key={pageID}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={variants[variant]}
+    <MotionConfig
+      features={[
+        /* https://www.framer.com/api/motion/guide-reduce-bundle-size/ */
+        AnimationFeature,
+        ExitFeature,
+        AnimateLayoutFeature,
+        DragFeature,
+        GesturesFeature,
+      ]}
+    >
+      <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+        <AnimateSharedLayout
+        /* https://blog.sethcorker.com/shared-layout-page-transitions-nextjs-framer-motion */
         >
-          {children}
-        </motion.div>
+          <motion.div
+            key={pageID}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={variants[variant]}
+          >
+            {children}
+          </motion.div>
+        </AnimateSharedLayout>
       </AnimatePresence>
     </MotionConfig>
   )
