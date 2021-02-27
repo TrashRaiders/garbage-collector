@@ -1,8 +1,10 @@
-import { addDecorator, addParameters } from '@storybook/react'
 import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import Router from 'next/router'
 import I18nProvider from 'next-translate/I18nProvider'
+import { MockedProvider } from '@apollo/client/testing'
 
+import CommonHead from '../src/components/CommonHead'
+import CommonProviders from '../src/components/CommonProviders'
 import commonEN from '../locales/en/common.json'
 import commonDE from '../locales/de/common.json'
 
@@ -12,6 +14,13 @@ const namespaces = {
   },
   de: {
     common: commonDE,
+  },
+}
+
+export const parameters = {
+  apolloClient: {
+    MockedProvider,
+    // any props you want to pass to MockedProvider on every story
   },
 }
 
@@ -43,5 +52,12 @@ export const decorators = [
     >
       <Story />
     </I18nProvider>
+  ),
+  (Story) => (
+    <CommonHead>
+      <CommonProviders>
+        <Story />
+      </CommonProviders>
+    </CommonHead>
   ),
 ]
