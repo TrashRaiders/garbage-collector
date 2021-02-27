@@ -2,8 +2,6 @@ import { NextPage } from 'next'
 import Router from 'next/router'
 import React from 'react'
 
-import CommonHead from '../components/CommonHead'
-import CommonProviders from '../components/CommonProviders'
 import Page from '../pages'
 
 Router.router = {
@@ -16,10 +14,4 @@ Router.router = {
 export default { title: 'Pages/Index' }
 
 // eslint-disable-next-line react/function-component-definition
-export const page: NextPage = () => (
-  <CommonHead>
-    <CommonProviders>
-      <Page />
-    </CommonProviders>
-  </CommonHead>
-)
+export const page: NextPage = () => <Page />

@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
-  addons: ['@storybook/addon-essentials'],
+  addons: ['@storybook/addon-essentials', 'storybook-addon-apollo-client'],
   webpackFinal: async (config) => {
     config.resolve.modules.push(path.resolve(__dirname, '../src'))
     config.module.rules.push({
