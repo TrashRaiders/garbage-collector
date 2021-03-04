@@ -11,6 +11,11 @@ interface ShopResult {
   description?: string | null
   pictures?: (string | null)[] | null
   tags?: ShopTag[] | null
+  address?: {
+    city?: string | null
+    street?: string | null
+    zipcode?: number | null
+  }
 
   [key: string]: unknown
 }
