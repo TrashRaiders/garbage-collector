@@ -6,6 +6,7 @@ import Map from 'components/Map'
 import SearchResults from 'components/SearchResults'
 import ShopDetails from 'components/ShopDetails'
 import ShopDetailsLayout from 'components/ShopDetailsLayout'
+import Layout from 'components/ShopDetailsLayout/Layout'
 import { ShopSearchProvider } from 'contexts/shop-search'
 
 function ShopDetailsPage(): React.ReactNode {
@@ -15,11 +16,9 @@ function ShopDetailsPage(): React.ReactNode {
 
   return (
     <ShopSearchProvider>
-      <ShopDetailsLayout
-        left={<SearchResults />}
-        center={<ShopDetails id={shopID as string} />}
-        right={<Map />}
-      />
+      <Layout>
+        <ShopDetails id={shopID as string} />
+      </Layout>
     </ShopSearchProvider>
   )
 }

@@ -11,17 +11,17 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-interface ShopCardProps {
+export interface ShopCardProps {
   className?: string
   id: string
   name: string
-  tags?: string[]
+  tags?: string[] | null
   address?: {
-    city?: string
-    street?: string
-    zipcode?: number
+    city?: string | null
+    street?: string | null
+    zipcode?: number | null
   }
-  thumbnailUrl?: string
+  thumbnailUrl?: string | null
 }
 
 const useStyles = makeStyles((theme) => ({
