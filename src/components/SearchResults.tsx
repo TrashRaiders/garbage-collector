@@ -26,7 +26,7 @@ function renderRow(props: ListChildComponentProps) {
         id={shops[index].id}
         name={shops[index].name}
         address={shops[index].address}
-        thumbnailUrl={shops[index].pictures[0]}
+        pictures={shops[index].pictures[0]}
         tags={shops[index].tags}
       />
     </ListItem>
