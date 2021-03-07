@@ -3,21 +3,10 @@ import { createStateContext, useDebounce } from 'react-use'
 
 import shopsMock from './__fixtures__/shops'
 
-type ShopTag = string
+import { Shops } from 'generated/graphql'
 
-interface ShopResult {
-  id?: string | null
-  name?: string | null
-  description?: string | null
-  pictures?: (string | null)[] | null
-  tags?: ShopTag[] | null
-  address?: {
-    city?: string | null
-    street?: string | null
-    zipcode?: number | null
-  }
-
-  [key: string]: unknown
+interface ShopResult extends Omit<Shops, '__typename'> {
+  id: Shops['shop_id']
 }
 
 const [useShopSearch, ShopSearchInnerProvider] = createStateContext({

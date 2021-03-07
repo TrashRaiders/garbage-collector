@@ -11,17 +11,11 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-export interface ShopCardProps {
+import { Shops } from 'generated/graphql'
+
+export interface ShopCardProps extends Omit<Shops, '__typename'> {
   className?: string
-  id: string
-  name: string
-  tags?: string[] | null
-  address?: {
-    city?: string | null
-    street?: string | null
-    zipcode?: number | null
-  }
-  thumbnailUrl?: string | null
+  id: Shops['shop_id']
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function ShopCard(props: ShopCardProps): React.ReactElement {
-  const { className, id, name, tags, address, thumbnailUrl } = props
+  const { className, id, name, tags, address, pictures } = props
+  const titlePic = Array.isArray(pictures) ? (pictures[0] as string) : ''
 
   const classes = useStyles()
   const router = useRouter()
@@ -75,7 +70,7 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
     >
       <Grid item xs={12}>
         <div>
-          <CardMedia className={classes.thumbnail} image={thumbnailUrl} />
+          <CardMedia className={classes.thumbnail} image={titlePic} />
         </div>
 
         <CardContent className={classes.content}>
