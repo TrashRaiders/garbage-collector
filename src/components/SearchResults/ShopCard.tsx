@@ -91,7 +91,7 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
               <Typography variant="body2">123m entfernt (PH)</Typography>
             </div>
 
-            <Typography variant="body2">{`${address?.street}, ${address?.zipcode} ${address?.city}`}</Typography>
+            <Typography variant="body2">{`${address?.street}, ${address?.postalCode} ${address?.city}`}</Typography>
           </div>
         </CardContent>
       </Grid>
