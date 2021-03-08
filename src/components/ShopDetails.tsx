@@ -1,33 +1,30 @@
-import {
-  GridList,
-  GridListTile,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core'
+import { Box, Button, CardMedia, Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import LocationOnIcon from '@material-ui/icons/LocationOn'
+import MapIcon from '@material-ui/icons/Map'
+import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
-import ShopCard, { ShopCardProps } from './SearchResults/ShopCard'
-
-import mockShops from 'contexts/__fixtures__/shops'
 import { useShopSearch } from 'contexts/shop-search'
-import { useGetShopQuery } from 'generated/graphql'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    flexGrow: 1,
+  distance: {
+    marginTop: theme.spacing(1),
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
   },
-  paper: {
-    padding: theme.spacing(4),
-    flexDirection: 'column',
-    width: '100%',
+  locationIcon: {
+    marginRight: theme.spacing(1),
   },
-  gridList: {
-    width: 500,
-    height: 450,
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  mapButton: {
+    marginTop: theme.spacing(2),
+  },
+  shopName: {
+    marginTop: theme.spacing(2),
   },
 }))
 
@@ -37,21 +34,47 @@ interface ShopDetailsProps {
 
 function ShopDetails(props: ShopDetailsProps): React.ReactElement {
   const classes = useStyles()
+  const { t } = useTranslation('common')
   const { id } = props
 
   const [shopSearch] = useShopSearch()
   const { result: shops } = shopSearch
   const shop = shops.find((s) => s.id === id)
 
-  const shopCardprops: ShopCardProps = {
-    id: shop?.id ?? '',
-    name: shop?.name ?? '',
-    address: shop?.address,
-    tags: shop?.tags,
-    pictures: shop?.pictures,
-  }
+  const titlePic = Array.isArray(shop?.pictures)
+    ? (shop?.pictures[0] as string)
+    : ''
 
-  return <ShopCard {...shopCardprops} />
+  return (
+    <Box>
+      <CardMedia className={classes.media} image={titlePic} />
+      <Typography className={classes.shopName} variant="h6">
+        {shop?.name}
+      </Typography>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+      >{`${shop?.address?.street} ${shop?.address?.postalCode} ${shop?.address?.city}`}</Typography>
+      <div className={classes.distance}>
+        <LocationOnIcon
+          className={classes.locationIcon}
+          fontSize="small"
+          color="secondary"
+        />
+        <Typography variant="body2" color="textSecondary">
+          123m entfernt (PH)
+        </Typography>
+      </div>
+      <Button
+        className={classes.mapButton}
+        startIcon={<MapIcon />}
+        variant="contained"
+        color="secondary"
+      >
+        {t('showOnMapButton')}
+      </Button>
+    </Box>
+  )
 }
 
 export default ShopDetails

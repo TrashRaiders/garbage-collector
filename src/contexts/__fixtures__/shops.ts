@@ -11,7 +11,7 @@ const shops: GetShopQuery = {
         address: {
           city: 'Berlin',
           street: 'Alt Wittenau 123',
-          zipcode: 12345,
+          postalCode: '12345',
         },
       },
       {
@@ -28,7 +28,7 @@ const shops: GetShopQuery = {
         address: {
           city: 'Berlin',
           street: 'Irgendwo in Potsdam',
-          zipcode: 12345,
+          postalCode: '12345',
         },
       },
       {
@@ -48,7 +48,7 @@ const shops: GetShopQuery = {
         address: {
           city: 'Berlin',
           street: 'Wilhem Gercke Shit Street 10a',
-          zipcode: 13437,
+          postalCode: '13437',
         },
       },
     ],
