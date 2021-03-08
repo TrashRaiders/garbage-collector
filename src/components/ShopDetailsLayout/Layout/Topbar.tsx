@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { signOut, useSession } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface TopbarProps {
   withSearch?: boolean
+  withBackToSearchButton?: boolean
 }
 
 function handleSignOut(): void {
@@ -40,7 +42,7 @@ function handleSignOut(): void {
 }
 
 function Topbar(props: TopbarProps): React.ReactElement {
-  const { withSearch = false } = props
+  const { withSearch = false, withBackToSearchButton = false } = props
 
   const classes = useStyles()
   const { t } = useTranslation('common')
@@ -72,11 +74,19 @@ function Topbar(props: TopbarProps): React.ReactElement {
   return (
     <AppBar className={classes.appBar} color="default">
       <Toolbar>
-        <Link href="/" passHref>
-          <MuiLink variant="h5" color="textPrimary" underline="none" noWrap>
-            {t('appTitle')}
-          </MuiLink>
-        </Link>
+        {withBackToSearchButton ? (
+          <Link href="/" passHref>
+            <IconButton aria-label={t('goBackButton')}>
+              <ArrowBackIcon />
+            </IconButton>
+          </Link>
+        ) : (
+          <Link href="/" passHref>
+            <MuiLink variant="h5" color="textPrimary" underline="none" noWrap>
+              {t('appTitle')}
+            </MuiLink>
+          </Link>
+        )}
 
         {withSearch && <Search className={classes.grow} />}
 

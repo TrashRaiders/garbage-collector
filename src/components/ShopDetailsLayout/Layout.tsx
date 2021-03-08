@@ -31,15 +31,19 @@ interface LayoutProps {
   withSearch?: boolean
   fillContent?: boolean
   children?: React.ReactNode
+  withBackToSearchButton?: boolean
 }
 
 function Layout(props: LayoutProps): React.ReactElement {
-  const { children, withSearch, fillContent } = props
+  const { children, withSearch, fillContent, withBackToSearchButton } = props
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
-      <Topbar withSearch={withSearch} />
+      <Topbar
+        withSearch={withSearch}
+        withBackToSearchButton={withBackToSearchButton}
+      />
 
       <Container
         className={clsx(classes.container, {

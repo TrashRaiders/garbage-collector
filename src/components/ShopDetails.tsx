@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: '56.25%', // 16:9
   },
   mapButton: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
   },
   shopName: {
     marginTop: theme.spacing(2),
