@@ -33,5 +33,6 @@
   "SignGithubButton": "Sign in with Github",
   "SignFormText": "In order for you to take full advantage of our system, we must make sure that you are you",
   "smilingFaceSunglasses": "smiley with sunglasses",
-  "showOnMapButton": "Show on map"
+  "showOnMapButton": "Show on map",
+  "goBackButton": "Back to search results"
 }
