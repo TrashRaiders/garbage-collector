@@ -13,6 +13,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { signOut, useSession } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useCookie } from 'react-use'
 
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface TopbarProps {
   withSearch?: boolean
-  withBackToSearchButton?: boolean
+  withBackButton?: boolean
 }
 
 function handleSignOut(): void {
@@ -42,11 +43,12 @@ function handleSignOut(): void {
 }
 
 function Topbar(props: TopbarProps): React.ReactElement {
-  const { withSearch = false, withBackToSearchButton = false } = props
+  const { withSearch = false, withBackButton = false } = props
 
   const classes = useStyles()
   const { t } = useTranslation('common')
   const [session] = useSession()
+  const router = useRouter()
 
   const [, updateThemeCookie] = useCookie(THEME_COOKIE)
   const [darkMode, setDarkMode] = useDarkMode()
@@ -74,12 +76,13 @@ function Topbar(props: TopbarProps): React.ReactElement {
   return (
     <AppBar className={classes.appBar} color="default">
       <Toolbar>
-        {withBackToSearchButton ? (
-          <Link href="/" passHref>
-            <IconButton aria-label={t('goBackButton')}>
-              <ArrowBackIcon />
-            </IconButton>
-          </Link>
+        {withBackButton ? (
+          <IconButton
+            aria-label={t('goBackButton')}
+            onClick={() => router.back()}
+          >
+            <ArrowBackIcon />
+          </IconButton>
         ) : (
           <Link href="/" passHref>
             <MuiLink variant="h5" color="textPrimary" underline="none" noWrap>
