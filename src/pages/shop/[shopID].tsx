@@ -13,7 +13,7 @@ function ShopDetailsPage(): React.ReactNode {
 
   return (
     <ShopSearchProvider>
-      <Layout withBackToSearchButton>
+      <Layout withBackButton>
         <ShopDetails id={shopID as string} />
       </Layout>
     </ShopSearchProvider>
