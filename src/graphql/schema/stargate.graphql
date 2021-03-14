@@ -218,11 +218,11 @@ input address_typeUdtFilterInput {
 }
 
 input address_typeUdtInput {
-  city: String
-  country: String
-  street: String
-  houseNumber: String
-  postalCode: String
+  city: String!
+  country: String!
+  street: String!
+  houseNumber: String!
+  postalCode: String!
 }
 
 type contact_typeUdt {
@@ -263,8 +263,8 @@ input coordinates_typeUdtFilterInput {
 }
 
 input coordinates_typeUdtInput {
-  latitude: Float32
-  longitude: Float32
+  latitude: Float32!
+  longitude: Float32!
 }
 
 # The type used to represent results of a query for the table 'shops'.
@@ -284,7 +284,7 @@ type shops {
 # The input type used for filtering with non-equality operators for the table 'shops'.
 # Note that 'shop_id' is the field that corresponds to the table primary key.
 input shopsFilterInput {
-  shop_id: StringFilterInput
+  shop_id: StringFilterInput!
   address: address_typeUdtFilterInput
   contact: contact_typeUdtFilterInput
   coordinates: coordinates_typeUdtFilterInput
@@ -299,7 +299,7 @@ input shopsFilterInput {
 # The input type for the table 'shops'.
 # Note that 'shop_id' is the field that corresponds to the table primary key.
 input shopsInput {
-  shop_id: String
+  shop_id: String!
   address: address_typeUdtInput
   contact: contact_typeUdtInput
   coordinates: coordinates_typeUdtInput
@@ -358,7 +358,7 @@ type shops_by_location {
 input shops_by_locationFilterInput {
   longitude: Float32FilterInput
   latitude: Float32FilterInput
-  shop_id: StringFilterInput
+  shop_id: StringFilterInput!
 }
 
 # The input type for the table 'shops_by_location'.
@@ -366,7 +366,7 @@ input shops_by_locationFilterInput {
 input shops_by_locationInput {
   longitude: Float32
   latitude: Float32
-  shop_id: String
+  shop_id: String!
 }
 
 # The type used to represent results of a mutation for the table 'shops_by_location'.
@@ -400,7 +400,7 @@ type user {
 # The input type used for filtering with non-equality operators for the table 'user'.
 # Note that 'user_id' is the field that corresponds to the table primary key.
 input userFilterInput {
-  user_id: StringFilterInput
+  user_id: StringFilterInput!
   email: StringFilterInput
   name: StringFilterInput
 }
@@ -408,7 +408,7 @@ input userFilterInput {
 # The input type for the table 'user'.
 # Note that 'user_id' is the field that corresponds to the table primary key.
 input userInput {
-  user_id: String
+  user_id: String!
   email: String
   name: String
 }
