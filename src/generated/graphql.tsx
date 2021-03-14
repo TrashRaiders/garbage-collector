@@ -227,11 +227,11 @@ export type Address_TypeUdtFilterInput = {
 }
 
 export type Address_TypeUdtInput = {
-  city?: Maybe<Scalars['String']>
-  country?: Maybe<Scalars['String']>
-  street?: Maybe<Scalars['String']>
-  houseNumber?: Maybe<Scalars['String']>
-  postalCode?: Maybe<Scalars['String']>
+  city: Scalars['String']
+  country: Scalars['String']
+  street: Scalars['String']
+  houseNumber: Scalars['String']
+  postalCode: Scalars['String']
 }
 
 export type Contact_TypeUdt = {
@@ -274,8 +274,8 @@ export type Coordinates_TypeUdtFilterInput = {
 }
 
 export type Coordinates_TypeUdtInput = {
-  latitude?: Maybe<Scalars['Float32']>
-  longitude?: Maybe<Scalars['Float32']>
+  latitude: Scalars['Float32']
+  longitude: Scalars['Float32']
 }
 
 export type Shops = {
@@ -293,7 +293,7 @@ export type Shops = {
 }
 
 export type ShopsFilterInput = {
-  shop_id?: Maybe<StringFilterInput>
+  shop_id: StringFilterInput
   address?: Maybe<Address_TypeUdtFilterInput>
   contact?: Maybe<Contact_TypeUdtFilterInput>
   coordinates?: Maybe<Coordinates_TypeUdtFilterInput>
@@ -306,7 +306,7 @@ export type ShopsFilterInput = {
 }
 
 export type ShopsInput = {
-  shop_id?: Maybe<Scalars['String']>
+  shop_id: Scalars['String']
   address?: Maybe<Address_TypeUdtInput>
   contact?: Maybe<Contact_TypeUdtInput>
   coordinates?: Maybe<Coordinates_TypeUdtInput>
@@ -363,13 +363,13 @@ export type Shops_By_Location = {
 export type Shops_By_LocationFilterInput = {
   longitude?: Maybe<Float32FilterInput>
   latitude?: Maybe<Float32FilterInput>
-  shop_id?: Maybe<StringFilterInput>
+  shop_id: StringFilterInput
 }
 
 export type Shops_By_LocationInput = {
   longitude?: Maybe<Scalars['Float32']>
   latitude?: Maybe<Scalars['Float32']>
-  shop_id?: Maybe<Scalars['String']>
+  shop_id: Scalars['String']
 }
 
 export type Shops_By_LocationMutationResult = {
@@ -401,13 +401,13 @@ export type User = {
 }
 
 export type UserFilterInput = {
-  user_id?: Maybe<StringFilterInput>
+  user_id: StringFilterInput
   email?: Maybe<StringFilterInput>
   name?: Maybe<StringFilterInput>
 }
 
 export type UserInput = {
-  user_id?: Maybe<Scalars['String']>
+  user_id: Scalars['String']
   email?: Maybe<Scalars['String']>
   name?: Maybe<Scalars['String']>
 }
@@ -560,7 +560,7 @@ export type CreateShopMutationOptions = Apollo.BaseMutationOptions<
 >
 export const GetShopsDocument = gql`
   query GetShops {
-    shops(value: {}) {
+    shops {
       values {
         id: shop_id
         name
