@@ -8,6 +8,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]: Maybe<T[SubKey]> }
+const defaultOptions = {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -438,9 +439,10 @@ export type CreateShopMutationVariables = Exact<{
 
 export type CreateShopMutation = { __typename?: 'Mutation' } & {
   insertshops?: Maybe<
-    { __typename?: 'shopsMutationResult' } & {
-      value?: Maybe<{ __typename?: 'shops' } & Pick<Shops, 'shop_id'>>
-    }
+    { __typename?: 'shopsMutationResult' } & Pick<
+      ShopsMutationResult,
+      'applied'
+    >
   >
 }
 
@@ -509,10 +511,8 @@ export type GetUserQuery = { __typename?: 'Query' } & {
 
 export const CreateShopDocument = gql`
   mutation CreateShop($value: shopsInput!) {
-    insertshops(value: $value) {
-      value {
-        shop_id
-      }
+    insertshops(value: $value, ifNotExists: true) {
+      applied
     }
   }
 `
@@ -544,9 +544,10 @@ export function useCreateShopMutation(
     CreateShopMutationVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useMutation<CreateShopMutation, CreateShopMutationVariables>(
     CreateShopDocument,
-    baseOptions,
+    options,
   )
 }
 export type CreateShopMutationHookResult = ReturnType<
@@ -588,9 +589,10 @@ export const GetShopsDocument = gql`
 export function useGetShopsQuery(
   baseOptions?: Apollo.QueryHookOptions<GetShopsQuery, GetShopsQueryVariables>,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetShopsQuery, GetShopsQueryVariables>(
     GetShopsDocument,
-    baseOptions,
+    options,
   )
 }
 export function useGetShopsLazyQuery(
@@ -599,9 +601,10 @@ export function useGetShopsLazyQuery(
     GetShopsQueryVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetShopsQuery, GetShopsQueryVariables>(
     GetShopsDocument,
-    baseOptions,
+    options,
   )
 }
 export type GetShopsQueryHookResult = ReturnType<typeof useGetShopsQuery>
@@ -644,9 +647,10 @@ export const GetShopDocument = gql`
 export function useGetShopQuery(
   baseOptions: Apollo.QueryHookOptions<GetShopQuery, GetShopQueryVariables>,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetShopQuery, GetShopQueryVariables>(
     GetShopDocument,
-    baseOptions,
+    options,
   )
 }
 export function useGetShopLazyQuery(
@@ -655,9 +659,10 @@ export function useGetShopLazyQuery(
     GetShopQueryVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetShopQuery, GetShopQueryVariables>(
     GetShopDocument,
-    baseOptions,
+    options,
   )
 }
 export type GetShopQueryHookResult = ReturnType<typeof useGetShopQuery>
@@ -705,9 +710,10 @@ export function useCreateUserMutation(
     CreateUserMutationVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
     CreateUserDocument,
-    baseOptions,
+    options,
   )
 }
 export type CreateUserMutationHookResult = ReturnType<
@@ -748,9 +754,10 @@ export const GetUserDocument = gql`
 export function useGetUserQuery(
   baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(
     GetUserDocument,
-    baseOptions,
+    options,
   )
 }
 export function useGetUserLazyQuery(
@@ -759,9 +766,10 @@ export function useGetUserLazyQuery(
     GetUserQueryVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(
     GetUserDocument,
-    baseOptions,
+    options,
   )
 }
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>
