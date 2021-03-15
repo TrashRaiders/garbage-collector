@@ -61,11 +61,11 @@ function Search(props: SearchProps): React.ReactElement {
   const [, setShopSearch] = useShopSearch()
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
-    setShopSearch((prevOptions) => ({
-      ...prevOptions,
-      searchTerm: e.target.value,
+    setShopSearch((previousOptions) => ({
+      ...previousOptions,
+      searchTerm: event.target.value,
     }))
   }
 

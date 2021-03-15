@@ -1,9 +1,9 @@
 // https://on.cypress.io/configuration
 
-import { configure } from '@testing-library/cypress'
 import '@cypress/code-coverage/support'
-
 import './commands'
+
+import { configure } from '@testing-library/cypress'
 
 configure({ testIdAttribute: 'data-test-id' })
 

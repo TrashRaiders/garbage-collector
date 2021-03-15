@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
 import React from 'react'
-import { Control, ValidationValueMessage, useController } from 'react-hook-form'
+import { Control, useController, ValidationValueMessage } from 'react-hook-form'
 
 export interface IChipItem {
   id: string
@@ -24,6 +24,11 @@ function setValueAs(value: IChipItem[]): ReturnValue {
   return value.map((item) => item.id) || []
 }
 
+FormChipSelect.defaultProps = {
+  required: false,
+  error: false,
+}
+
 export default function FormChipSelect(
   props: IFormChipSelectProps,
 ): React.ReactElement {
@@ -44,13 +49,13 @@ export default function FormChipSelect(
       fullWidth
       multiple
       options={options}
-      onChange={(e, data) => onChange(data)}
+      onChange={(event, data) => onChange(data)}
       getOptionLabel={(option) => option.label}
       getOptionSelected={(option, value) => option.id === value.id}
       filterSelectedOptions
-      renderInput={(params) => (
+      renderInput={(parameters) => (
         <TextField
-          {...params}
+          {...parameters}
           error={error}
           variant="outlined"
           label={label}

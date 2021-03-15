@@ -10,8 +10,12 @@ interface AnimateProps {
   duration?: number
 }
 
+Animate.defaultProps = {
+  variant: 'none',
+  duration: 0.3,
+}
 function Animate(props: AnimateProps): React.ReactElement {
-  const { children, duration = 0.3 } = props
+  const { children, duration } = props
   let { variant = 'none' } = props
 
   const reduceMotion = useReducedMotion()

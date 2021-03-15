@@ -13,20 +13,20 @@ export function createErrorLink(): ApolloLink {
     // eslint-disable-next-line consistent-return
     ({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
-        for (const graphQLError of graphQLErrors) {
+        graphQLErrors.forEach((graphQLError) => {
           const { message, locations, path } = graphQLError
 
           // based on this approach to refresh a token:
           // https://able.bio/AnasT/apollo-graphql-async-access-token-refresh--470t1c8#concurrent-requests
           if (/.*authorization failed/g.test(message)) {
             // eslint-disable-next-line no-console
-            console.info(`Authorization failed!`)
+            console.info('Authorization failed!')
           }
           // eslint-disable-next-line no-console
           console.info(
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
           )
-        }
+        })
       }
 
       if (networkError) {

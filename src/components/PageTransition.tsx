@@ -6,8 +6,8 @@ import {
   DragFeature,
   ExitFeature,
   GesturesFeature,
-  MotionConfig,
   m as motion,
+  MotionConfig,
 } from 'framer-motion'
 import React from 'react'
 import { useLocalStorage, usePreviousDistinct } from 'react-use'
@@ -18,6 +18,10 @@ interface PageTransitionProps {
   children: React.ReactNode
   pageID: string
   variant?: VariantName
+}
+
+PageTransition.defaultProps = {
+  variant: 'none',
 }
 
 /**
@@ -38,7 +42,7 @@ function PageTransition(props: PageTransitionProps): React.ReactElement {
 
   // enables to change the transition animation basen on the current/target page
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const prevPageID = usePreviousDistinct(pageID)
+  const previousPageID = usePreviousDistinct(pageID)
 
   /* AnimatePresence is causing Cypress to hang indefintly during tests. */
   // TODO We should provide an example repo for this bug and open an issue for the framer-motion devs.

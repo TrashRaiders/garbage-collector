@@ -1,4 +1,4 @@
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 
 import { useDarkMode } from 'contexts/dark-mode'

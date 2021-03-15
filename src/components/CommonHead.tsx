@@ -1,7 +1,11 @@
 import { useTheme } from '@material-ui/core/styles'
-import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
+import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
+
+CommonHead.defaultProps = {
+  children: null,
+}
 
 function CommonHead({
   children,

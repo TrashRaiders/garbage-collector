@@ -30,6 +30,10 @@ function DarkModeConsumer(consumerProps: {
   return <React.Fragment {...consumerProps} />
 }
 
+DarkModeProvider.defaultProps = {
+  children: null,
+}
+
 function DarkModeProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {
@@ -47,4 +51,4 @@ function DarkModeProvider(props: {
   )
 }
 
-export { useDarkMode, DarkModeProvider }
+export { DarkModeProvider, useDarkMode }

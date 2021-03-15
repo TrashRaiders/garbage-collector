@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { InitOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
 
-const env: { [key: string]: string } = (function local() {
+const environment: { [key: string]: string } = (function local() {
   const variables = {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID || '',
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET || '',
@@ -12,33 +12,33 @@ const env: { [key: string]: string } = (function local() {
     FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET || '',
   }
 
-  for (const [key, value] of Object.entries(variables)) {
+  Object.entries(variables).forEach(([key, value]) => {
     if (!value) {
       // eslint-disable-next-line no-console
       console.warn(`${key} is not defined`)
     }
-  }
+  })
 
   return variables
 })()
 
 const options: InitOptions = {
-  secret: env.AUTH_SECRET || undefined,
+  secret: environment.AUTH_SECRET || undefined,
   // Configure one or more authentication providers
   providers: [
     Providers.Google({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: environment.GOOGLE_CLIENT_ID,
+      clientSecret: environment.GOOGLE_CLIENT_SECRET,
       authorizationUrl:
         'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
     }),
     Providers.GitHub({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
+      clientId: environment.GITHUB_CLIENT_ID,
+      clientSecret: environment.GITHUB_CLIENT_SECRET,
     }),
     Providers.Facebook({
-      clientId: env.FACEBOOK_APP_ID,
-      clientSecret: env.FACEBOOK_APP_SECRET,
+      clientId: environment.FACEBOOK_APP_ID,
+      clientSecret: environment.FACEBOOK_APP_SECRET,
     }),
   ],
   pages: {
@@ -51,6 +51,6 @@ const options: InitOptions = {
 }
 
 export default (
-  req: NextApiRequest,
-  res: NextApiResponse<unknown>,
-): Promise<void> => NextAuth(req, res, options)
+  request: NextApiRequest,
+  response: NextApiResponse<unknown>,
+): Promise<void> => NextAuth(request, response, options)

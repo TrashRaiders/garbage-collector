@@ -34,6 +34,12 @@ interface LayoutProps {
   withBackButton?: boolean
 }
 
+Layout.defaultProps = {
+  withSearch: false,
+  fillContent: false,
+  children: null,
+  withBackButton: false,
+}
 function Layout(props: LayoutProps): React.ReactElement {
   const { children, withSearch, fillContent, withBackButton } = props
   const classes = useStyles()

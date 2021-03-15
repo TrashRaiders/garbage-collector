@@ -69,7 +69,6 @@ function NewShopPage(): React.ReactNode {
       .then((createShopResult) => {
         // eslint-disable-next-line no-console
         console.log({ createShopResult })
-        return null
       })
       .catch((createShopError) => {
         // eslint-disable-next-line no-console
@@ -120,8 +119,7 @@ function NewShopPage(): React.ReactNode {
   /* eslint-enable react/jsx-props-no-spreading */
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  return ssrGetShops.getServerPage({})
-}
+export const getServerSideProps: GetServerSideProps = async () =>
+  ssrGetShops.getServerPage({})
 
 export default NewShopPage

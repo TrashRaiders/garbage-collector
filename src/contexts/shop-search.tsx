@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createStateContext, useDebounce } from 'react-use'
 
-import shopsMock from './__fixtures__/shops'
-
 import { Shops } from 'generated/graphql'
+
+import shopsMock from './__fixtures__/shops'
 
 interface ShopResult extends Omit<Shops, '__typename'> {
   id: Shops['shop_id']
@@ -14,6 +14,10 @@ const [useShopSearch, ShopSearchInnerProvider] = createStateContext({
   filter: {},
   result: shopsMock.shops?.values as ShopResult[],
 })
+
+ShopSearchConsumer.defaultProps = {
+  children: null,
+}
 
 function ShopSearchConsumer(props: {
   children?: React.ReactNode
@@ -48,14 +52,18 @@ function ShopSearchConsumer(props: {
   useEffect(() => {
     const searchResult = mockFetchResults(debouncedSearchOptions.searchTerm)
 
-    setShopSearch((prevOptions) => ({
-      ...prevOptions,
+    setShopSearch((previousOptions) => ({
+      ...previousOptions,
       result: searchResult,
     }))
   }, [debouncedSearchOptions, setShopSearch])
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <React.Fragment {...props} />
+}
+
+ShopSearchProvider.defaultProps = {
+  children: null,
 }
 
 function ShopSearchProvider(props: {
@@ -78,4 +86,4 @@ function mockFetchResults(searchTerm: string): ShopResult[] {
     : shops
 }
 
-export { useShopSearch, ShopSearchProvider }
+export { ShopSearchProvider, useShopSearch }
