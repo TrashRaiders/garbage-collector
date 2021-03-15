@@ -34,6 +34,8 @@
     "cypress-coverage",
     "coverage",
     "jest-coverage",
-    "reports"
+    "reports",
+    "netlify",
+    ".netlify"
   ]
 }

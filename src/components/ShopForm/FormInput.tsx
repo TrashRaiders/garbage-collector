@@ -1,6 +1,6 @@
 import { TextField } from '@material-ui/core'
 import React from 'react'
-import { Control, ValidationValueMessage, useController } from 'react-hook-form'
+import { Control, useController, ValidationValueMessage } from 'react-hook-form'
 
 interface FormInputProps {
   name: string
@@ -9,6 +9,10 @@ interface FormInputProps {
 
   error: boolean
   control: Control
+}
+
+FormInput.defaultProps = {
+  required: false,
 }
 
 function FormInput(props: FormInputProps): React.ReactElement {

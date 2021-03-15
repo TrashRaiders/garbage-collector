@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (
-  ctx: DocumentContext,
+  context: DocumentContext,
 ): Promise<DocumentInitialProps> => {
   // Resolution order
   //
@@ -58,9 +58,9 @@ MyDocument.getInitialProps = async (
 
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets()
-  const originalRenderPage = ctx.renderPage
+  const originalRenderPage = context.renderPage
 
-  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
+  context.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
       enhanceApp: (
         App: NextComponentType<
@@ -75,7 +75,7 @@ MyDocument.getInitialProps = async (
       ): React.ReactElement => sheets.collect(<App {...props} />),
     })
 
-  const initialProps = await Document.getInitialProps(ctx)
+  const initialProps = await Document.getInitialProps(context)
 
   return {
     ...initialProps,

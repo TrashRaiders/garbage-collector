@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import Link from 'next/link'
 import { signIn } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
-import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'

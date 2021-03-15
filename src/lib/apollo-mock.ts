@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+// import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { ApolloLink } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
 import { addMocksToSchema } from '@graphql-tools/mock'
@@ -6,9 +7,8 @@ import {
   addResolversToSchema,
   makeExecutableSchema,
 } from '@graphql-tools/schema'
-import { buildClientSchema } from 'graphql'
 
-// import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
+import { buildClientSchema } from 'graphql'
 
 import introspectionResult from '../generated/schema.json'
 import typeDefs from '../generated/typedefs'

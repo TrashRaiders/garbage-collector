@@ -93,7 +93,7 @@ function createIsomorphLink(): ApolloLink {
 }
 
 function createAuthLink(): ApolloLink {
-  const authLink = setContext(async (req, previousContext) => {
+  const authLink = setContext(async (request, previousContext) => {
     const { headers } = previousContext
     token = token || (await getNewToken())
 
@@ -139,8 +139,8 @@ export async function getNewToken(): Promise<string> {
       ? `${process.env.BASE_URL}${tokenPath}`
       : tokenPath
 
-  const res = await fetch(url)
-  const data = await res.json()
+  const response = await fetch(url)
+  const data = await response.json()
 
   return data.authToken
 }

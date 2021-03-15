@@ -51,10 +51,9 @@ function ShopDetails(props: ShopDetailsProps): React.ReactElement {
       <Typography className={classes.shopName} variant="h6">
         {shop?.name}
       </Typography>
-      <Typography
-        variant="body2"
-        color="textSecondary"
-      >{`${shop?.address?.street} ${shop?.address?.postalCode} ${shop?.address?.city}`}</Typography>
+      <Typography variant="body2" color="textSecondary">
+        {`${shop?.address?.street} ${shop?.address?.postalCode} ${shop?.address?.city}`}
+      </Typography>
       <div className={classes.distance}>
         <LocationOnIcon
           className={classes.locationIcon}

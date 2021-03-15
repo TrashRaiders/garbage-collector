@@ -1,9 +1,8 @@
 /* istanbul ignore file */
 
-import { ParsedUrlQuery } from 'querystring'
-
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { GetServerSidePropsContext } from 'next'
+import { ParsedUrlQuery } from 'querystring'
 import { useMemo } from 'react'
 
 import { initApolloClient } from './apollo'
@@ -31,10 +30,9 @@ export function useApollo(
 export const getApolloClient = (
   context?: GetServerSidePropsContext<ParsedUrlQuery>,
   initialState?: NormalizedCacheObject,
-): ApolloClient<NormalizedCacheObject> => {
-  return initApolloClient({
+): ApolloClient<NormalizedCacheObject> =>
+  initApolloClient({
     initialState,
     setAuthToken: process.env.NODE_ENV !== 'test',
     useMock: process.env.MOCK_GRAPHQL_API === 'true',
   })
-}

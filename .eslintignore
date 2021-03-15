@@ -1,12 +1,15 @@
-src/generated/
 node_modules/
 dist/
+src/generated/
 netlify-automatic-functions/
 .next/
-.netlify/
+*netlify/
 .github/
 .vscode/
+.github/
+.nyc_output/
+public/
+reports/
 
 # coverage reports
 *coverage/
-

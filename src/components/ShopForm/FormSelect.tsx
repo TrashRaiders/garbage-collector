@@ -8,7 +8,7 @@ import {
 import { createStyles, makeStyles } from '@material-ui/core/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { Control, ValidationValueMessage, useController } from 'react-hook-form'
+import { Control, useController, ValidationValueMessage } from 'react-hook-form'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +34,10 @@ interface FormSelectProps {
   required?: boolean | string | ValidationValueMessage<boolean>
   error: boolean
   control: Control
+}
+
+FormSelect.defaultProps = {
+  required: false,
 }
 
 function FormSelect(props: FormSelectProps): React.ReactElement {

@@ -8,8 +8,8 @@ type Error = {
 }
 
 export default async (
-  req: NextApiRequest,
-  res: NextApiResponse<Data | Error>,
+  request: NextApiRequest,
+  response: NextApiResponse<Data | Error>,
 ): Promise<void> => {
   const {
     GRAPHQL_API_LOGIN_URL: url,
@@ -23,12 +23,12 @@ export default async (
   )
 
   if (error) {
-    res.status(500).json({ error })
+    response.status(500).json({ error })
     return
   }
 
   // fetch the access token from the backend
-  const response = await fetch(url, {
+  const tokenResponse = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,9 +38,9 @@ export default async (
       password,
     }),
   })
-  const data: Data = await response.json()
+  const data: Data = await tokenResponse.json()
 
-  res.status(200).json(data)
+  response.status(200).json(data)
 }
 
 /**
@@ -54,7 +54,7 @@ export default async (
 function getConfig(...variables: string[]) {
   const result: { [key: string]: string } = {}
 
-  for (const variable of variables) {
+  variables.forEach((variable) => {
     if (process.env[variable]) {
       result[variable] = process.env[variable] ?? ''
     } else {
@@ -66,7 +66,7 @@ function getConfig(...variables: string[]) {
         ? [result.error, errorMessage].join(', ')
         : errorMessage
     }
-  }
+  })
 
   return result
 }

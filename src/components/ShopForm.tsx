@@ -37,6 +37,9 @@ interface ShopFormProps {
   className?: string
 }
 
+ShopForm.defaultProps = {
+  className: undefined,
+}
 function ShopForm(props: ShopFormProps): React.ReactElement {
   const { className } = props
 

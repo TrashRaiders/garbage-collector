@@ -4,9 +4,9 @@ import React from 'react'
 import { useMeasure } from 'react-use'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 
-import ShopCard from './SearchResults/ShopCard'
-
 import { useShopSearch } from 'contexts/shop-search'
+
+import ShopCard from './SearchResults/ShopCard'
 
 const useStyles = makeStyles(() =>
   createStyles({

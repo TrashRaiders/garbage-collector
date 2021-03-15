@@ -1,25 +1,25 @@
 import {
   AppBar,
   IconButton,
+  Link as MuiLink,
   Menu,
   MenuItem,
-  Link as MuiLink,
   Theme,
   Toolbar,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import { signOut, useSession } from 'next-auth/client'
-import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { signOut, useSession } from 'next-auth/client'
+import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { useCookie } from 'react-use'
 
-import Search from './Topbar/Search'
-
 import { THEME_COOKIE, useDarkMode } from 'contexts/dark-mode'
+
+import Search from './Topbar/Search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   grow: {
@@ -38,6 +38,10 @@ interface TopbarProps {
   withBackButton?: boolean
 }
 
+Topbar.defaultProps = {
+  withSearch: false,
+  withBackButton: false,
+}
 function handleSignOut(): void {
   signOut()
 }
@@ -61,16 +65,16 @@ function Topbar(props: TopbarProps): React.ReactElement {
   }
 
   const [
-    accountIconAnchorEl,
-    setAccountIconAnchorEl,
+    accountIconAnchorElement,
+    setAccountIconAnchorElement,
   ] = React.useState<HTMLElement | null>(null)
   const handleAccountMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
-    setAccountIconAnchorEl(event.currentTarget)
+    setAccountIconAnchorElement(event.currentTarget)
   }
   const handleAccountMenuClose = (): void => {
-    setAccountIconAnchorEl(null)
+    setAccountIconAnchorElement(null)
   }
 
   return (
@@ -114,11 +118,11 @@ function Topbar(props: TopbarProps): React.ReactElement {
         </IconButton>
 
         <Menu
-          anchorEl={accountIconAnchorEl}
+          anchorEl={accountIconAnchorElement}
           getContentAnchorEl={null}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={!!accountIconAnchorEl}
+          open={!!accountIconAnchorElement}
           onClose={handleAccountMenuClose}
           keepMounted
         >

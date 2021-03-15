@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
-import { Provider as AuthProvider } from 'next-auth/client'
 import type { AppProps } from 'next/app'
 import Error from 'next/error'
+import { Provider as AuthProvider } from 'next-auth/client'
 import React from 'react'
 import { useMount } from 'react-use'
 
