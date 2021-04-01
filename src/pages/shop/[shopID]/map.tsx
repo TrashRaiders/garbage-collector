@@ -6,7 +6,8 @@ import Layout from 'components/ShopDetailsLayout/Layout'
 function ShopMapPage(): React.ReactElement {
   return (
     <Layout withBackButton>
-      <Map latitude={32.064171} longitude={34.7748068} />
+      {/* TODO lat/lng should come from the shop data */}
+      <Map latitude={52.520008} longitude={13.404954} />
     </Layout>
   )
 }
