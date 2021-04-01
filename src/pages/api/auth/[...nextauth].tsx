@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import NextAuth, { InitOptions } from 'next-auth'
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
 
 const environment: { [key: string]: string } = (function local() {
@@ -22,7 +22,7 @@ const environment: { [key: string]: string } = (function local() {
   return variables
 })()
 
-const options: InitOptions = {
+const options: NextAuthOptions = {
   secret: environment.AUTH_SECRET || undefined,
   // Configure one or more authentication providers
   providers: [
@@ -53,4 +53,4 @@ const options: InitOptions = {
 export default (
   request: NextApiRequest,
   response: NextApiResponse<unknown>,
-): Promise<void> => NextAuth(request, response, options)
+): ReturnType<NextApiHandler> => NextAuth(request, response, options)

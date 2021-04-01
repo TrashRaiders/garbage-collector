@@ -1,11 +1,8 @@
 import {
-  AnimateLayoutFeature,
   AnimatePresence,
   AnimateSharedLayout,
-  AnimationFeature,
-  DragFeature,
-  ExitFeature,
-  GesturesFeature,
+  domMax,
+  LazyMotion,
   m as motion,
   MotionConfig,
 } from 'framer-motion'
@@ -52,32 +49,29 @@ function PageTransition(props: PageTransitionProps): React.ReactElement {
   }
 
   return (
-    <MotionConfig
-      features={[
-        /* https://www.framer.com/api/motion/guide-reduce-bundle-size/ */
-        AnimationFeature,
-        ExitFeature,
-        AnimateLayoutFeature,
-        DragFeature,
-        GesturesFeature,
-      ]}
+    <LazyMotion
+      /* https://www.framer.com/api/motion/guide-reduce-bundle-size/ */
+      features={domMax}
+      strict
     >
-      <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
-        <AnimateSharedLayout
-        /* https://blog.sethcorker.com/shared-layout-page-transitions-nextjs-framer-motion */
-        >
-          <motion.div
-            key={pageID}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={variants[variant]}
+      <MotionConfig transition={{ duration: 1 }}>
+        <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+          <AnimateSharedLayout
+          /* https://blog.sethcorker.com/shared-layout-page-transitions-nextjs-framer-motion */
           >
-            {children}
-          </motion.div>
-        </AnimateSharedLayout>
-      </AnimatePresence>
-    </MotionConfig>
+            <motion.div
+              key={pageID}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={variants[variant]}
+            >
+              {children}
+            </motion.div>
+          </AnimateSharedLayout>
+        </AnimatePresence>
+      </MotionConfig>
+    </LazyMotion>
   )
 }
 
