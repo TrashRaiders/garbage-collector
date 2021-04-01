@@ -1,7 +1,15 @@
-import { Box, Button, CardMedia, Theme, Typography } from '@material-ui/core'
+import {
+  Box,
+  Button,
+  CardMedia,
+  Link,
+  Theme,
+  Typography,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import MapIcon from '@material-ui/icons/Map'
+import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
@@ -37,6 +45,10 @@ function ShopDetails(props: ShopDetailsProps): React.ReactElement {
   const { t } = useTranslation('common')
   const { id } = props
 
+  const {
+    query: { shopID },
+  } = useRouter()
+
   const [shopSearch] = useShopSearch()
   const { result: shops } = shopSearch
   const shop = shops.find((s) => s.id === id)
@@ -64,14 +76,16 @@ function ShopDetails(props: ShopDetailsProps): React.ReactElement {
           123m entfernt (PH)
         </Typography>
       </div>
-      <Button
-        className={classes.mapButton}
-        startIcon={<MapIcon />}
-        variant="contained"
-        color="secondary"
-      >
-        {t('showOnMapButton')}
-      </Button>
+      <Link href={`/shop/${shopID}/map`}>
+        <Button
+          className={classes.mapButton}
+          startIcon={<MapIcon />}
+          variant="contained"
+          color="secondary"
+        >
+          {t('showOnMapButton')}
+        </Button>
+      </Link>
     </Box>
   )
 }
