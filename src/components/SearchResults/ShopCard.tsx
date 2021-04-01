@@ -69,9 +69,11 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
       onClick={onListItemClick}
     >
       <Grid item xs={12}>
-        <div>
-          <CardMedia className={classes.thumbnail} image={titlePic} />
-        </div>
+        {titlePic && (
+          <div>
+            <CardMedia className={classes.thumbnail} image={titlePic} />
+          </div>
+        )}
 
         <CardContent className={classes.content}>
           <Typography variant="h6">{name}</Typography>
