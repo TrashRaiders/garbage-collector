@@ -21,7 +21,7 @@ import * as yup from 'yup'
 import Animate from 'components/Animate'
 import Layout from 'components/ShopDetailsLayout/Layout'
 
-interface IFormInputs {
+interface FormValues {
   name: string
   password: string
 }
@@ -53,14 +53,13 @@ function LoginPage(): React.ReactElement {
   const {
     register,
     handleSubmit,
-    errors,
-    formState: { isSubmitting },
-  } = useForm<IFormInputs>({
+    formState: { isSubmitting, errors },
+  } = useForm<FormValues>({
     resolver: yupResolver(formSchema),
     reValidateMode: 'onChange',
   })
 
-  const onSubmit = async (data: IFormInputs): Promise<void> => {
+  const onSubmit = async (data: FormValues): Promise<void> => {
     // eslint-disable-next-line no-console
     console.info('Here the user should be logged in', { data })
     // TODO should not be here and use the read website URL
@@ -85,9 +84,8 @@ function LoginPage(): React.ReactElement {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
-                inputRef={register}
+                {...register('name')}
                 type="text"
-                name="name"
                 autoComplete="name"
                 label={t('name')}
                 // eslint-disable-next-line jsx-a11y/no-autofocus
@@ -101,7 +99,7 @@ function LoginPage(): React.ReactElement {
               <ErrorMessage
                 errors={errors}
                 name="name"
-                render={({ message }) => (
+                render={({ message }: { message: string }) => (
                   <Typography
                     className={classes.errorMessage}
                     variant="body2"
@@ -113,10 +111,9 @@ function LoginPage(): React.ReactElement {
               />
 
               <TextField
-                inputRef={register}
+                {...register('password')}
                 variant="outlined"
                 type="password"
-                name="password"
                 autoComplete="current-password"
                 label={t('password')}
                 margin="normal"
@@ -127,7 +124,7 @@ function LoginPage(): React.ReactElement {
               <ErrorMessage
                 errors={errors}
                 name="password"
-                render={({ message }) => (
+                render={({ message }: { message: string }) => (
                   <Typography
                     className={classes.errorMessage}
                     variant="body2"

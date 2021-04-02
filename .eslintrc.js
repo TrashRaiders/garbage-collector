@@ -74,6 +74,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    'react/no-unused-prop-types': 'off',
 
     // import
     'import/no-cycle': ['off', { ignoreExternal: true }],

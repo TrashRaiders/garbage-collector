@@ -1,6 +1,7 @@
 import { TextField } from '@material-ui/core'
 import React from 'react'
-import { Control, useController, ValidationValueMessage } from 'react-hook-form'
+import type { Control, ValidationValueMessage } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 
 interface FormInputProps {
   name: string
@@ -8,7 +9,9 @@ interface FormInputProps {
   required?: boolean | string | ValidationValueMessage<boolean>
 
   error: boolean
-  control: Control
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>
 }
 
 FormInput.defaultProps = {

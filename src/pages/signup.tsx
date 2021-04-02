@@ -66,8 +66,7 @@ function SignUpPage(): React.ReactElement {
   const {
     register,
     handleSubmit,
-    errors,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<IFormInputs>({
     resolver: yupResolver(formSchema),
     reValidateMode: 'onChange',
@@ -115,7 +114,7 @@ function SignUpPage(): React.ReactElement {
               <ErrorMessage
                 errors={errors}
                 name="name"
-                render={({ message }) => (
+                render={({ message }: { message: string }) => (
                   <Typography
                     className={classes.errorMessage}
                     variant="body2"
@@ -141,7 +140,7 @@ function SignUpPage(): React.ReactElement {
               <ErrorMessage
                 errors={errors}
                 name="email"
-                render={({ message }) => (
+                render={({ message }: { message: string }) => (
                   <Typography
                     className={classes.errorMessage}
                     variant="body2"
@@ -167,7 +166,7 @@ function SignUpPage(): React.ReactElement {
               <ErrorMessage
                 errors={errors}
                 name="password"
-                render={({ message }) => (
+                render={({ message }: { message: string }) => (
                   <Typography
                     className={classes.errorMessage}
                     variant="body2"
