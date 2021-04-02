@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 // data structure of the resulting form values
-export type FormValues = {
+export interface FormValues {
   name: string
   type: string
   tags: string[]
@@ -44,7 +44,10 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
   const { className } = props
 
   const classes = useStyles()
-  const { control, errors } = useFormContext<FormValues>()
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<FormValues>()
 
   const { t } = useTranslation('common')
 
@@ -68,7 +71,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
       <ErrorMessage
         errors={errors}
         name="name"
-        render={({ message }) => (
+        render={({ message }: { message: string }) => (
           <Typography variant="body2" color="error">
             {message}
           </Typography>
@@ -96,7 +99,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
       <ErrorMessage
         errors={errors}
         name="type"
-        render={({ message }) => (
+        render={({ message }: { message: string }) => (
           <Typography variant="body2" color="error">
             {message}
           </Typography>
@@ -114,7 +117,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
       <ErrorMessage
         errors={errors}
         name="tags"
-        render={({ message }) => (
+        render={({ message }: { message: string }) => (
           <Typography variant="body2" color="error">
             {message}
           </Typography>

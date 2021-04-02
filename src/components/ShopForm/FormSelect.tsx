@@ -33,7 +33,9 @@ interface FormSelectProps {
 
   required?: boolean | string | ValidationValueMessage<boolean>
   error: boolean
-  control: Control
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>
 }
 
 FormSelect.defaultProps = {

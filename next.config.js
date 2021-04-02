@@ -8,6 +8,9 @@ const nextTranslate = require('next-translate')
 
 const nextConfig = {
   basePath: '',
+  future: {
+    webpack5: false,
+  },
   i18n: {
     locales: ['en', 'de'],
     defaultLocale: 'de',

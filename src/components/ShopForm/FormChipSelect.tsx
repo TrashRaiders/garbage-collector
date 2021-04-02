@@ -15,7 +15,9 @@ interface IFormChipSelectProps {
 
   required?: boolean | string | ValidationValueMessage<boolean>
   error?: boolean
-  control: Control
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>
 }
 
 type ReturnValue = string[]
