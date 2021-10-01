@@ -1,0 +1,45 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/jest-coverage
+/cypress-coverage
+/coverage
+/reports
+.nyc_output
+cypress.env.json
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# cypress
+screenshots
+videos
+**/snapshots/**/__diff_output__/**
+**/snapshots/**/*(failed)*.*
+**/snapshots/**/*-snap.*
+
+# misc
+.DS_Store
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# deepcode analysis
+.dccache
+
+# Local Netlify folder
+.netlify
+dist
+netlify*
+!netlify.toml
