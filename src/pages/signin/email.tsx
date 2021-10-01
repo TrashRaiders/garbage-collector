@@ -40,22 +40,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
+const FORM_SCHEMA = yup
+  .object({
+    name: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required()
+
 function LoginPage(): React.ReactElement {
   const classes = useStyles()
 
   const { t } = useTranslation('common')
-
-  const formSchema = yup.object().shape({
-    name: yup.string().required(),
-    password: yup.string().required(),
-  })
 
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(FORM_SCHEMA),
     reValidateMode: 'onChange',
   })
 

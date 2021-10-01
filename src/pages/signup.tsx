@@ -36,18 +36,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-interface IFormInputs {
-  name: string
-  email: string
-  password: string
-}
-
-function SignUpPage(): React.ReactElement {
-  const classes = useStyles()
-
-  const { t } = useTranslation('common')
-
-  const formSchema = yup.object().shape({
+const FORM_SCHEMA = yup
+  .object({
     name: yup
       .string()
       .required()
@@ -62,14 +52,31 @@ function SignUpPage(): React.ReactElement {
       .min(8)
       .max(64),
   })
+  .required()
+
+interface IFormInputs {
+  name: string
+  email: string
+  password: string
+}
+
+function SignUpPage(): React.ReactElement {
+  const classes = useStyles()
+
+  const { t } = useTranslation('common')
 
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm<IFormInputs>({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(FORM_SCHEMA),
     reValidateMode: 'onChange',
+    defaultValues: {
+      email: '',
+      name: '',
+      password: '',
+    },
   })
 
   // const [signUp, result] = useSignUpMutation({ errorPolicy: 'all' })
