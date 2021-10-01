@@ -62,17 +62,20 @@ MyDocument.getInitialProps = async (
 
   context.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
-      enhanceApp: (
-        App: NextComponentType<
-          AppContextType<NextRouter>,
-          AppInitialProps,
-          AppPropsType<NextRouter, Record<string, unknown>>
-        >,
-      ) => (
-        props: React.PropsWithChildren<
-          AppPropsType<NextRouter, Record<string, unknown>>
-        >,
-      ): React.ReactElement => sheets.collect(<App {...props} />),
+      enhanceApp:
+        (
+          App: NextComponentType<
+            AppContextType<NextRouter>,
+            AppInitialProps,
+            AppPropsType<NextRouter, Record<string, unknown>>
+          >,
+        ) =>
+        (
+          props: React.PropsWithChildren<
+            AppPropsType<NextRouter, Record<string, unknown>>
+          >,
+        ): React.ReactElement =>
+          sheets.collect(<App {...props} />),
     })
 
   const initialProps = await Document.getInitialProps(context)

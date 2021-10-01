@@ -59,7 +59,7 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
   const classes = useStyles()
   const router = useRouter()
 
-  function onListItemClick() {
+  const onListItemClick = () => {
     router.push(`/shop/${id}`)
   }
 
