@@ -6,7 +6,7 @@ import { Shops } from 'generated/graphql'
 import shopsMock from './__fixtures__/shops'
 
 interface ShopResult extends Omit<Shops, '__typename'> {
-  id: Shops['shop_id']
+  id?: Shops['shop_id']
 }
 
 const [useShopSearch, ShopSearchInnerProvider] = createStateContext({

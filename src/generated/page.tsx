@@ -22,7 +22,7 @@ export async function getServerPageGetShops(
 
   return {
     props: {
-      apolloState,
+      apolloState: apolloState,
       data: data?.data,
       error: data?.error ?? data?.errors ?? null,
     },
@@ -61,7 +61,7 @@ export async function getServerPageGetShop(
 
   return {
     props: {
-      apolloState,
+      apolloState: apolloState,
       data: data?.data,
       error: data?.error ?? data?.errors ?? null,
     },
@@ -101,7 +101,7 @@ export async function getServerPageGetUser(
 
   return {
     props: {
-      apolloState,
+      apolloState: apolloState,
       data: data?.data,
       error: data?.error ?? data?.errors ?? null,
     },

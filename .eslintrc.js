@@ -154,6 +154,9 @@ module.exports = {
       },
     ],
     'unicorn/no-array-for-each': 'off',
+
+    // next lint
+    '@next/next/no-document-import-in-page': 'off',
   },
   overrides: [
     {

@@ -2,7 +2,6 @@ import { ServerStyleSheets } from '@material-ui/core/styles'
 import { NextComponentType } from 'next'
 import { AppInitialProps } from 'next/app'
 import { AppContextType, AppPropsType } from 'next/dist/shared/lib/utils'
-// eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, {
   DocumentContext,
   DocumentInitialProps,
