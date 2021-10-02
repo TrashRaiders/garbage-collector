@@ -45,6 +45,7 @@ module.exports = {
     'plugin:import/typescript',
     'prettier',
     'plugin:prettier/recommended',
+    'plugin:@next/next/recommended',
   ],
   settings: {
     react: {
