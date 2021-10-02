@@ -1,4 +1,4 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 
 import { useDarkMode } from 'contexts/dark-mode'
@@ -15,7 +15,7 @@ function MyThemeProvider(props: {
   const [darkMode] = useDarkMode()
   const theme = React.useMemo(() => {
     const { isDarkMode } = darkMode
-    return createMuiTheme(isDarkMode ? darkTheme : lightTheme)
+    return createTheme(isDarkMode ? darkTheme : lightTheme)
   }, [darkMode])
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>
