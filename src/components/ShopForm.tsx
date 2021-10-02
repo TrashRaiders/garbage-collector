@@ -27,11 +27,14 @@ export interface FormValues {
 }
 
 // validation rules
-export const FORM_SCHEMA = yup.object().shape({
-  name: yup.string().required(),
-  type: yup.string().required(),
-  tags: yup.array().of(yup.string()),
-})
+export const FORM_SCHEMA = yup
+  .object()
+  .shape({
+    name: yup.string().required(),
+    type: yup.string().required(),
+    tags: yup.array().of(yup.string()),
+  })
+  .required()
 
 interface ShopFormProps {
   className?: string
