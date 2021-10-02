@@ -134,7 +134,7 @@ module.exports = {
             properties: false,
           },
         },
-        whitelist: {
+        allowList: {
           ref: true,
           i18n: true,
           'next-env.d': true,
@@ -181,6 +181,21 @@ module.exports = {
             ignore: ['^__coverage__.ts$'],
           },
         ],
+      },
+    },
+    {
+      files: [
+        '*.config.js',
+        'i18n.js',
+        'scripts/**',
+        '**/.eslintrc.js',
+        'src/lib/apollo.ts',
+        'src/lib/next-with-apollo.ts',
+        'src/pages/api/__coverage__.ts',
+        'tests/e2e/plugins/index.ts',
+      ],
+      rules: {
+        'unicorn/prefer-module': 'off',
       },
     },
   ],

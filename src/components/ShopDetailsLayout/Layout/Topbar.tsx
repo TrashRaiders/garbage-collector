@@ -64,10 +64,8 @@ function Topbar(props: TopbarProps): React.ReactElement {
     })
   }
 
-  const [
-    accountIconAnchorElement,
-    setAccountIconAnchorElement,
-  ] = React.useState<HTMLElement | null>(null)
+  const [accountIconAnchorElement, setAccountIconAnchorElement] =
+    React.useState<HTMLElement | null>(null)
   const handleAccountMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
