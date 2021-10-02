@@ -73,6 +73,7 @@
     "@istanbuljs/nyc-config-typescript": "1.0.1",
     "@netlify/plugin-nextjs": "3.9.0",
     "@next/bundle-analyzer": "11.1.2",
+    "@next/eslint-plugin-next": "11.1.2",
     "@octokit/core": "3.5.1",
     "@storybook/addon-essentials": "6.3.9",
     "@storybook/addons": "6.3.9",
