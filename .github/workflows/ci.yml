@@ -360,7 +360,7 @@ jobs:
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
       - run: yarn build
-      - uses: treosh/lighthouse-ci-action@v7
+      - uses: treosh/lighthouse-ci-action@v8
         with:
           uploadArtifacts: true
           temporaryPublicStorage: false
