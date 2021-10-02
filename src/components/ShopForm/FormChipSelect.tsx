@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
 import React from 'react'
-import { Control, useController, ValidationValueMessage } from 'react-hook-form'
+import { Control, useController, ValidationRule } from 'react-hook-form'
 
 export interface IChipItem {
   id: string
@@ -13,17 +13,11 @@ interface IFormChipSelectProps {
   label: string
   options: IChipItem[]
 
-  required?: boolean | string | ValidationValueMessage<boolean>
+  required?: boolean | string | ValidationRule<boolean>
   error?: boolean
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>
-}
-
-type ReturnValue = string[]
-
-function setValueAs(value: IChipItem[]): ReturnValue {
-  return value.map((item) => item.id) || []
 }
 
 FormChipSelect.defaultProps = {
@@ -41,9 +35,14 @@ export default function FormChipSelect(
   } = useController({
     name,
     control,
-    rules: { required, setValueAs },
+    rules: { required },
     defaultValue: [],
   })
+
+  const handleChange = (data: IChipItem[]) => {
+    const valueToSend = data.map((item) => item.id) || []
+    onChange(valueToSend)
+  }
 
   return (
     <Autocomplete
@@ -51,7 +50,7 @@ export default function FormChipSelect(
       fullWidth
       multiple
       options={options}
-      onChange={(event, data) => onChange(data)}
+      onChange={(event, data) => handleChange(data)}
       getOptionLabel={(option) => option.label}
       getOptionSelected={(option, value) => option.id === value.id}
       filterSelectedOptions
