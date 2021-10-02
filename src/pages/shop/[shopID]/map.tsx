@@ -7,7 +7,7 @@ function ShopMapPage(): React.ReactElement {
   return (
     <Layout withBackButton>
       {/* TODO lat/lng should come from the shop data */}
-      <Map latitude={52.520008} longitude={13.404954} />
+      <Map latitude={52.520_008} longitude={13.404_954} />
     </Layout>
   )
 }

@@ -60,9 +60,9 @@ function Search(props: SearchProps): React.ReactElement {
 
   const [, setShopSearch] = useShopSearch()
 
-  function handleChange(
+  const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
+  ) => {
     setShopSearch((previousOptions) => ({
       ...previousOptions,
       searchTerm: event.target.value,

@@ -14,6 +14,7 @@ Animate.defaultProps = {
   variant: 'none',
   duration: 0.3,
 }
+
 function Animate(props: AnimateProps): React.ReactElement {
   const { children, duration } = props
   let { variant = 'none' } = props

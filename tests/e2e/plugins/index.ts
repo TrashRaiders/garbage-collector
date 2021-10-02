@@ -19,11 +19,8 @@
 // @ts-ignore - no @types/@cypress_browserify-preprocessor
 const browserify = require('@cypress/browserify-preprocessor')
 const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin')
-const {
-  GoogleSocialLogin,
-  GitHubSocialLogin,
-  FacebookSocialLogin,
-} = require('cypress-social-logins').plugins
+const { GoogleSocialLogin, GitHubSocialLogin, FacebookSocialLogin } =
+  require('cypress-social-logins').plugins
 
 /**
  * @type {Cypress.PluginConfig}
