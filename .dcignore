@@ -1,5 +1,0 @@
-node_modules/**
-.next/**
-src/generated
-dist/**
-netlify-automatic-functions/**

@@ -1,10 +1,9 @@
-import { GetShopQuery } from 'generated/graphql'
+import { Shops } from 'generated/graphql'
 
-const shops: GetShopQuery = {
+const shops: { shops: { values: Shops[] } } = {
   shops: {
     values: [
       {
-        id: '1234',
         name: 'Geräte Reperatur Deluxe',
         description: 'That is shop 1 description',
         pictures: ['https://placeimg.com/640/480/animals?0'],
@@ -15,7 +14,6 @@ const shops: GetShopQuery = {
         },
       },
       {
-        id: '1235',
         name: 'Mach heile Shop',
         tags: ['Zuverlässlich', 'klein', 'hm...'],
         description: 'That is shop 2 description',
@@ -32,7 +30,6 @@ const shops: GetShopQuery = {
         },
       },
       {
-        id: '1236',
         name: 'Bastis kleine Bumsbude',
         description: 'That is shop 3 description',
         tags: ['Günstig', 'Besondere Dienstleistungen'],
