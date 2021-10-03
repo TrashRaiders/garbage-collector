@@ -126,7 +126,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-unicorn": "36.0.0",
-    "fs-extra": "9.1.0",
+    "fs-extra": "10.0.0",
     "graphql-iso-date": "3.6.1",
     "husky": "7.0.2",
     "identity-obj-proxy": "3.0.0",
