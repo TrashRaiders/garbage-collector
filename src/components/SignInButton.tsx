@@ -1,10 +1,9 @@
 import { Box, Button } from '@material-ui/core'
 import React from 'react'
-import { IconBaseProps } from 'react-icons/lib'
 
 export interface ISignInButtonProps {
   className: string
-  icon: IconBaseProps
+  icon: React.ReactNode
   buttonText: string
 }
 
