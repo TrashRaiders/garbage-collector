@@ -319,7 +319,7 @@ jobs:
         run: yarn report:combined
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage/
@@ -360,7 +360,7 @@ jobs:
           yarn config set yarn-offline-mirror-pruning true
           yarn install --frozen-lockfile --prefer-offline
       - run: yarn build
-      - uses: treosh/lighthouse-ci-action@v7
+      - uses: treosh/lighthouse-ci-action@v8
         with:
           uploadArtifacts: true
           temporaryPublicStorage: false
