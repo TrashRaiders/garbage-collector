@@ -28,6 +28,16 @@ const nextConfig = {
 
     return resultingRewrites
   },
+  generateBuildId: async () => {
+    if (process.env.BUILD_ID) {
+      return process.env.BUILD_ID
+    }
+
+    const buildId = Date.now().toString()
+    process.env.BUILD_ID = buildId
+
+    return buildId
+  },
 }
 
 module.exports = withPlugins(
