@@ -2,28 +2,10 @@ import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
 
-const environment: { [key: string]: string } = (function local() {
-  const variables = {
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID || '',
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET || '',
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || '',
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || '',
-    FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID || '',
-    FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET || '',
-  }
-
-  Object.entries(variables).forEach(([key, value]) => {
-    if (!value) {
-      // eslint-disable-next-line no-console
-      console.warn(`${key} is not defined`)
-    }
-  })
-
-  return variables
-})()
+import environment from 'lib/environment'
 
 const options: NextAuthOptions = {
-  secret: environment.AUTH_SECRET || undefined,
+  secret: environment.AUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     Providers.Google({

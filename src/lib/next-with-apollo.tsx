@@ -12,6 +12,7 @@ import { IncomingMessage } from 'node:http'
 import { useMemo } from 'react'
 
 import { initApolloClient } from './apollo'
+import environment from './environment'
 
 export type ApolloClientContext = {
   req?: IncomingMessage & {
@@ -29,8 +30,8 @@ export function useApollo(
     () =>
       initApolloClient({
         initialState,
-        setAuthToken: process.env.NODE_ENV !== 'test',
-        useMock: process.env.MOCK_GRAPHQL_API === 'true',
+        setAuthToken: environment.NODE_ENV !== 'test',
+        useMock: environment.MOCK_GRAPHQL_API === true,
       }),
     [initialState],
   )
@@ -45,6 +46,6 @@ export const getApolloClient = (
 ): ApolloClient<NormalizedCacheObject> =>
   initApolloClient({
     initialState,
-    setAuthToken: process.env.NODE_ENV !== 'test',
-    useMock: process.env.MOCK_GRAPHQL_API === 'true',
+    setAuthToken: environment.NODE_ENV !== 'test',
+    useMock: environment.MOCK_GRAPHQL_API === true,
   })

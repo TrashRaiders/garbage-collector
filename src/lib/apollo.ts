@@ -15,6 +15,7 @@ import { RetryLink } from '@apollo/client/link/retry'
 import merge from 'deepmerge'
 
 import { createErrorLink } from './apollo/error-link'
+import environment from './environment'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
@@ -58,7 +59,7 @@ function createApolloClient({
   let link: ApolloLink
 
   const noEndpointInDevelopment =
-    process.env.NODE_ENV === 'development' && !process.env.GRAPHQL_API_ENDPOINT
+    environment.NODE_ENV === 'development' && !environment.GRAPHQL_API_ENDPOINT
 
   if (useMock || noEndpointInDevelopment) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
@@ -78,13 +79,13 @@ function createApolloClient({
     cache: new InMemoryCache(),
     link,
     ssrMode: typeof window === 'undefined',
-    connectToDevTools: process.env.NODE_ENV === 'development',
+    connectToDevTools: environment.NODE_ENV === 'development',
   })
 }
 
 function createIsomorphLink(): ApolloLink {
   const uri =
-    typeof window === 'undefined' ? process.env.GRAPHQL_API_ENDPOINT : '/api'
+    typeof window === 'undefined' ? environment.GRAPHQL_API_ENDPOINT : '/api'
 
   return new HttpLink({
     uri,
@@ -136,7 +137,7 @@ export async function getNewToken(): Promise<string> {
   const tokenPath = '/api/get-token'
   const url =
     typeof window === 'undefined'
-      ? `${process.env.BASE_URL}${tokenPath}`
+      ? `${environment.BASE_URL}${tokenPath}`
       : tokenPath
 
   const response = await fetch(url)

@@ -3,7 +3,9 @@ import React, { CSSProperties } from 'react'
 import GoogleStaticMap from 'react-google-static'
 import { useDebounce, useMeasure } from 'react-use'
 
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_STATIC_API_KEY
+import environment from 'lib/environment'
+
+const API_KEY = environment.NEXT_PUBLIC_GOOGLE_MAPS_STATIC_API_KEY
 
 const useStyles = makeStyles(() =>
   createStyles({

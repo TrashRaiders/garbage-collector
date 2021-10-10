@@ -1,5 +1,20 @@
+const { str, envsafe, bool } = require('envsafe')
+
+const environment = envsafe({
+  NODE_ENV: str({
+    devDefault: 'development',
+    choices: ['development', 'production', 'test'],
+  }),
+  GRAPHQL_API_ENDPOINT: str({
+    allowEmpty: true,
+  }),
+  ANALYZE: bool({
+    default: false,
+  }),
+})
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: environment.ANALYZE === true,
 })
 const withPlugins = require('next-compose-plugins')
 const nextTranslate = require('next-translate')
@@ -23,10 +38,10 @@ const nextConfig = {
 async function rewrites() {
   const resultingRewrites = []
 
-  if (process.env.GRAPHQL_API_ENDPOINT) {
+  if (environment.GRAPHQL_API_ENDPOINT) {
     resultingRewrites.push({
       source: '/api',
-      destination: process.env.GRAPHQL_API_ENDPOINT,
+      destination: environment.GRAPHQL_API_ENDPOINT,
     })
   }
 
@@ -39,7 +54,7 @@ module.exports = withPlugins(
       withBundleAnalyzer,
       {
         env: {
-          MOCK_GRAPHQL_API: process.env.NODE_ENV === 'test' ? 'true' : '',
+          MOCK_GRAPHQL_API: environment.NODE_ENV === 'test' ? 'true' : '',
         },
       },
     ],

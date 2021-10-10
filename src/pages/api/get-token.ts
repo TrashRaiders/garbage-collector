@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import environment from 'lib/environment'
+
 type Data = {
   authToken: string
 }
@@ -11,21 +13,13 @@ export default async (
   request: NextApiRequest,
   response: NextApiResponse<Data | Error>,
 ): Promise<void> => {
-  const {
-    GRAPHQL_API_LOGIN_URL: url,
-    GRAPHQL_API_USERNAME: username,
-    GRAPHQL_API_PASSWORD: password,
-    error,
-  } = getConfig(
-    'GRAPHQL_API_LOGIN_URL',
-    'GRAPHQL_API_USERNAME',
-    'GRAPHQL_API_PASSWORD',
-  )
+  const config = getConfig(response)
 
-  if (error) {
-    response.status(500).json({ error })
+  if (!config) {
     return
   }
+
+  const { url, username, password } = config
 
   // fetch the access token from the backend
   const tokenResponse = await fetch(url, {
@@ -46,27 +40,23 @@ export default async (
 /**
  *
  * Show a warning if the env variables are not specified
- *
- * @param {string[]} variables - environment variables to read from process.env
- *
- * @returns { [key: string]: string } - the input strings as keys of the resulting object with the read values
  */
-function getConfig(...variables: string[]) {
-  const result: { [key: string]: string } = {}
-
-  variables.forEach((variable) => {
-    if (process.env[variable]) {
-      result[variable] = process.env[variable] ?? ''
-    } else {
-      result[variable] = ''
-      const errorMessage = `process.env.${variable} is not defined`
-      // eslint-disable-next-line no-console
-      console.warn(errorMessage)
-      result.error = result.error
-        ? [result.error, errorMessage].join(', ')
-        : errorMessage
+function getConfig(response: NextApiResponse<Data | Error>): {
+  readonly url: string
+  readonly username: string
+  readonly password: string
+} | null {
+  try {
+    const {
+      GRAPHQL_API_LOGIN_URL: url,
+      GRAPHQL_API_USERNAME: username,
+      GRAPHQL_API_PASSWORD: password,
+    } = environment
+    return { url, username, password } as const
+  } catch (error) {
+    if (typeof error === 'string') {
+      response.status(500).json({ error })
     }
-  })
-
-  return result
+  }
+  return null
 }
