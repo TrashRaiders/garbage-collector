@@ -5,6 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const withPlugins = require('next-compose-plugins')
 const nextTranslate = require('next-translate')
+const nextBuildId = require('next-build-id')
 
 const nextConfig = {
   basePath: '',
@@ -28,16 +29,7 @@ const nextConfig = {
 
     return resultingRewrites
   },
-  generateBuildId: async () => {
-    if (process.env.BUILD_ID) {
-      return process.env.BUILD_ID
-    }
-
-    const buildId = Date.now().toString()
-    process.env.BUILD_ID = buildId
-
-    return buildId
-  },
+  generateBuildId: () => nextBuildId({ dir: __dirname }),
 }
 
 module.exports = withPlugins(
