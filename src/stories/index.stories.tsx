@@ -13,5 +13,4 @@ Router.router = {
 
 export default { title: 'Pages/Index' }
 
-// eslint-disable-next-line react/function-component-definition
 export const page: NextPage = () => <Page />
