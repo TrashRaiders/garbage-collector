@@ -5,4 +5,4 @@
 # skip husky on CI
 [ -n "$CI" ] && exit 0
 
-yarn lint-staged
+yarn lint-staged -c lint-staged.config.js
