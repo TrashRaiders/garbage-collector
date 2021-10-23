@@ -29,7 +29,10 @@
     "storybook": "start-storybook --ci -p 9001",
     "check:storybook": "yarn storybook --smoke-test",
     "rearange:components": "yarn destiny",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "gen:protos": "yarn gen:protos:grpc && yarn gen:protos:ts",
+    "gen:protos:grpc": "yarn run grpc_tools_node_protoc --js_out=\"import_style=commonjs,binary:./src/generated/protos\" --grpc_out=\"./src/generated/protos\" --plugin=protoc-gen-grpc=\".\\node_modules\\.bin\\grpc_tools_node_protoc_plugin.cmd\" -I ./../junk-dealer/protos ./../junk-dealer/protos/*.proto",
+    "gen:protos:ts": "yarn run grpc_tools_node_protoc --ts_out=\"./src/generated/protos\" --plugin=protoc-gen-grpc=\".\\node_modules\\.bin\\protoc-gen-ts.cmd\" -I ./../junk-dealer/protos ./../junk-dealer/protos/*.proto"
   },
   "dependencies": {
     "@apollo/client": "3.4.16",
@@ -75,6 +78,7 @@
     "@graphql-codegen/typescript-react-apollo": "3.1.6",
     "@graphql-tools/mock": "8.4.0",
     "@graphql-tools/schema": "8.2.0",
+    "@grpc/grpc-js": "^1.4.1",
     "@istanbuljs/nyc-config-typescript": "1.0.1",
     "@netlify/plugin-nextjs": "3.9.2",
     "@next/eslint-plugin-next": "11.1.2",
@@ -132,6 +136,8 @@
     "eslint-plugin-unicorn": "36.0.0",
     "fs-extra": "10.0.0",
     "graphql-iso-date": "3.6.1",
+    "grpc-tools": "^1.11.2",
+    "grpc_tools_node_protoc_ts": "^5.3.2",
     "husky": "7.0.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "27.2.5",
