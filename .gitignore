@@ -44,3 +44,6 @@ yarn-error.log*
 dist
 netlify*
 !netlify.toml
+
+# IDE
+.idea/
