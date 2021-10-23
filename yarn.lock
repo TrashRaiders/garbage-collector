@@ -2113,7 +2113,7 @@
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
 
-"@grpc/grpc-js@^1.4.1":
+"@grpc/grpc-js@1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.4.1.tgz#799063a4ff7395987d4fceb2aab133629b003840"
   integrity sha512-/chkA48TdAvATHA7RXJPeHQLdfFhpu51974s8htjO/XTDHA41j5+SkR5Io+lr9XsLmkZD6HxLyRAFGmA9wjO2w==
@@ -11880,14 +11880,14 @@ graphql@^15.1.0:
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.6.0.tgz#e69323c6a9780a1a4b9ddf7e35ca8904bb04df02"
   integrity sha512-WJR872Zlc9hckiEPhXgyUftXH48jp2EjO5tgBBOyNMRJZ9fviL2mJBD6CAysk6N5S0r9BTs09Qk39nnJBkvOXQ==
 
-grpc-tools@^1.11.2:
+grpc-tools@1.11.2:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/grpc-tools/-/grpc-tools-1.11.2.tgz#22d802d40012510ccc6591d11f9c94109ac07aab"
   integrity sha512-4+EgpnnkJraamY++oyBCw5Hp9huRYfgakjNVKbiE3PgO9Tv5ydVlRo7ZyGJ0C0SEiA7HhbVc1sNNtIyK7FiEtg==
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.5"
 
-grpc_tools_node_protoc_ts@^5.3.2:
+grpc_tools_node_protoc_ts@5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/grpc_tools_node_protoc_ts/-/grpc_tools_node_protoc_ts-5.3.2.tgz#e84ddc6a9ce168ebcc033a78e6989b70f2199926"
   integrity sha512-7xPSeu8bwjcird3i9R5+9O4BF2Lhv9fMBdeobfUc2Bys9tSVtm/VB3WjTpKV78WlLYJyD94+wL/8hJqaMZ53Hw==
