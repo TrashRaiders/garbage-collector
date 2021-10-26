@@ -14,7 +14,6 @@ const nextConfig = {
     locales: ['en', 'de'],
     defaultLocale: 'de',
   },
-  target: 'serverless', // use 'experimental-serverless-trace' as an alternative
   rewrites,
   generateBuildId: () => nextBuildId({ dir: __dirname }),
   reactStrictMode: true,
