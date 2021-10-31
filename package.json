@@ -28,7 +28,8 @@
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "storybook": "start-storybook --ci -p 9001",
     "check:storybook": "yarn storybook --smoke-test",
-    "rearange:components": "yarn destiny"
+    "rearange:components": "yarn destiny",
+    "prepare": "yarn lefthook install -a"
   },
   "dependencies": {
     "@apollo/client": "3.4.16",
