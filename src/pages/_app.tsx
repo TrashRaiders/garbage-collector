@@ -32,6 +32,7 @@ function MyApp(props: MyAppProps): React.ReactElement {
 
   const apolloClient = useApollo(pageProps.initialApolloState)
 
+  /* 
   if (pageProps.error) {
     return (
       <CacheProvider value={emotionCache}>
@@ -42,20 +43,20 @@ function MyApp(props: MyAppProps): React.ReactElement {
       </CacheProvider>
     )
   }
+  */
 
   return (
     <CacheProvider value={emotionCache}>
-      <ApolloProvider client={apolloClient}>
-        <AuthProvider session={pageProps.session}>
-          <CommonHead>
-            <CommonProviders>
-              <PageTransition pageID={router.route}>
-                <Component {...pageProps} />
-              </PageTransition>
-            </CommonProviders>
-          </CommonHead>
-        </AuthProvider>
-      </ApolloProvider>
+      {/* <ApolloProvider client={apolloClient}> 
+      <AuthProvider session={pageProps.session}> */}
+      <CommonHead />
+      <CommonProviders>
+        {/* <PageTransition pageID={router.route}> */}
+        <Component {...pageProps} />
+        {/* </PageTransition> */}
+      </CommonProviders>
+      {/* </AuthProvider>
+      </ApolloProvider> */}
     </CacheProvider>
   )
 }

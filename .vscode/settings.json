@@ -7,10 +7,10 @@
     "typescript",
     "typescriptreact"
   ],
-  "editor.formatOnSave": true,
   "files.insertFinalNewline": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.formatOnSave": true
 }
