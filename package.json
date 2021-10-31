@@ -39,7 +39,6 @@
     "@emotion/react": "11.4.1",
     "@emotion/server": "11.4.0",
     "@emotion/styled": "11.3.0",
-    "@graphql-codegen/import-types-preset": "2.1.4",
     "@hookform/error-message": "2.0.0",
     "@hookform/resolvers": "2.8.2",
     "@next/bundle-analyzer": "12.0.1",
