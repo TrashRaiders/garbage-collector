@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    eslint:
+      glob: "*.{ts,tsx}"
+      run: yarn eslint {staged_files} --max-warnings 0
