@@ -7,7 +7,7 @@ import {
   Theme,
   Typography,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
@@ -22,31 +22,43 @@ import {
 } from 'generated/graphql'
 import { ssrGetShops } from 'generated/page'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+const PREFIX = 'NewShopPage'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  paper: `${PREFIX}-paper`,
+  formContainer: `${PREFIX}-formContainer`,
+  form: `${PREFIX}-form`,
+}
+
+const StyledLayout = styled(Layout)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.container}`]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     padding: theme.spacing(4),
     flexDirection: 'column',
     width: '100%',
   },
-  formContainer: {
+
+  [`& .${classes.formContainer}`]: {
     display: 'flex',
     flexDirection: 'column',
     gap: 10,
     marginBlockStart: 20,
   },
-  form: {
+
+  [`& .${classes.form}`]: {
     marginBlockEnd: 20,
   },
 }))
 
 function NewShopPage(): React.ReactNode {
-  const classes = useStyles()
   const { t } = useTranslation('common')
+  const theme = useTheme()
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(FORM_SCHEMA),
@@ -83,7 +95,7 @@ function NewShopPage(): React.ReactNode {
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <Layout>
+    <StyledLayout theme={theme}>
       <Container className={classes.container} maxWidth="xs">
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -114,7 +126,7 @@ function NewShopPage(): React.ReactNode {
           </FormProvider>
         </Paper>
       </Container>
-    </Layout>
+    </StyledLayout>
   )
   /* eslint-enable react/jsx-props-no-spreading */
 }

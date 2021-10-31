@@ -10,7 +10,7 @@ import {
   Theme,
   Toolbar,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
@@ -22,11 +22,19 @@ import { THEME_COOKIE, useDarkMode } from 'contexts/dark-mode'
 
 import Search from './Topbar/Search'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  grow: {
+const PREFIX = 'Topbar'
+
+const classes = {
+  grow: `${PREFIX}-grow`,
+  appBar: `${PREFIX}-appBar`,
+}
+
+const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.grow}`]: {
     flexGrow: 1,
   },
-  appBar: {
+
+  [`&.${classes.appBar}`]: {
     [theme.breakpoints.up('sm')]: {
       zIndex: theme.zIndex.drawer + 1,
     },
@@ -50,10 +58,10 @@ function handleSignOut(): void {
 function Topbar(props: TopbarProps): React.ReactElement {
   const { withSearch = false, withBackButton = false } = props
 
-  const classes = useStyles()
   const { t } = useTranslation('common')
   const [session] = useSession()
   const router = useRouter()
+  const theme = useTheme()
 
   const [, updateThemeCookie] = useCookie(THEME_COOKIE)
   const [darkMode, setDarkMode] = useDarkMode()
@@ -77,7 +85,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
   }
 
   return (
-    <AppBar className={classes.appBar} color="default">
+    <StyledAppBar theme={theme} className={classes.appBar} color="default">
       <Toolbar>
         {withBackButton ? (
           <IconButton
@@ -141,7 +149,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
           )}
         </Menu>
       </Toolbar>
-    </AppBar>
+    </StyledAppBar>
   )
 }
 

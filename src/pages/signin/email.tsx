@@ -10,7 +10,7 @@ import {
   Theme,
   Typography,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import Link from 'next/link'
 import { signIn } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'
@@ -21,24 +21,34 @@ import * as yup from 'yup'
 import Animate from 'components/Animate'
 import Layout from 'components/ShopDetailsLayout/Layout'
 
-interface FormValues {
-  name: string
-  password: string
+const PREFIX = 'LoginPage'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  paper: `${PREFIX}-paper`,
+  errorMessage: `${PREFIX}-errorMessage`,
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+const StyledLayout = styled(Layout)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.container}`]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     padding: theme.spacing(4),
   },
-  errorMessage: {
+
+  [`& .${classes.errorMessage}`]: {
     paddingLeft: theme.spacing(2),
   },
 }))
+
+interface FormValues {
+  name: string
+  password: string
+}
 
 const FORM_SCHEMA = yup
   .object({
@@ -48,9 +58,8 @@ const FORM_SCHEMA = yup
   .required()
 
 function LoginPage(): React.ReactElement {
-  const classes = useStyles()
-
   const { t } = useTranslation('common')
+  const theme = useTheme()
 
   const {
     register,
@@ -76,7 +85,7 @@ function LoginPage(): React.ReactElement {
   const { loading, error } = result
 
   return (
-    <Layout>
+    <StyledLayout theme={theme}>
       <Container className={classes.container} maxWidth="xs">
         <Animate variant="zoomInOut">
           <Paper className={classes.paper}>
@@ -170,7 +179,7 @@ function LoginPage(): React.ReactElement {
           </Paper>
         </Animate>
       </Container>
-    </Layout>
+    </StyledLayout>
   )
 }
 

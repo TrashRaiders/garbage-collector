@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import clsx from 'clsx'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
@@ -11,8 +11,14 @@ import FormChipSelect from './ShopForm/FormChipSelect'
 import FormInput from './ShopForm/FormInput'
 import FormSelect from './ShopForm/FormSelect'
 
-const useStyles = makeStyles(() => ({
-  root: {
+const PREFIX = 'ShopForm'
+
+const classes = {
+  root: `${PREFIX}-root`,
+}
+
+const Root = styled('div')(() => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     flexDirection: 'column',
     gap: 10,
@@ -46,7 +52,6 @@ ShopForm.defaultProps = {
 function ShopForm(props: ShopFormProps): React.ReactElement {
   const { className } = props
 
-  const classes = useStyles()
   const {
     control,
     formState: { errors },
@@ -62,7 +67,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
   ]
 
   return (
-    <div className={clsx(className, classes.root)}>
+    <Root className={clsx(className, classes.root)}>
       <FormInput
         name="name"
         label={t('shopName')}
@@ -126,7 +131,7 @@ function ShopForm(props: ShopFormProps): React.ReactElement {
           </Typography>
         )}
       />
-    </div>
+    </Root>
   )
 }
 

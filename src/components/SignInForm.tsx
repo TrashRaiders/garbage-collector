@@ -1,5 +1,5 @@
 import { Container, Divider, Paper, Theme, Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { FaFacebookF, FaGithub } from 'react-icons/fa'
@@ -8,31 +8,39 @@ import { MdEmail } from 'react-icons/md'
 
 import { ISignInButtonProps, SignInButton } from './SignInButton'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+const PREFIX = 'SignInForm'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  paper: `${PREFIX}-paper`,
+  divider: `${PREFIX}-divider`,
+  typography: `${PREFIX}-typography`,
+  emailButton: `${PREFIX}-emailButton`,
+  googleButton: `${PREFIX}-googleButton`,
+  facebookButton: `${PREFIX}-facebookButton`,
+  githubButton: `${PREFIX}-githubButton`,
+}
+
+const StyledContainer = styled(Container)(({ theme }: { theme: Theme }) => ({
+  [`&.${classes.container}`]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     padding: theme.spacing(4),
   },
-  divider: {
+
+  [`& .${classes.divider}`]: {
     margin: theme.spacing(1),
   },
-  typography: {
+
+  [`& .${classes.typography}`]: {
     margin: theme.spacing(1),
   },
-  emailButton: {
-    margin: theme.spacing(1),
-    backgroundColor: 'white',
-    color: 'black',
-    border: '1px solid',
-    '&:hover': {
-      backgroundColor: '#e5e5e5',
-    },
-  },
-  googleButton: {
+
+  [`& .${classes.emailButton}`]: {
     margin: theme.spacing(1),
     backgroundColor: 'white',
     color: 'black',
@@ -41,7 +49,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: '#e5e5e5',
     },
   },
-  facebookButton: {
+
+  [`& .${classes.googleButton}`]: {
+    margin: theme.spacing(1),
+    backgroundColor: 'white',
+    color: 'black',
+    border: '1px solid',
+    '&:hover': {
+      backgroundColor: '#e5e5e5',
+    },
+  },
+
+  [`& .${classes.facebookButton}`]: {
     margin: theme.spacing(1),
     backgroundColor: '#3b5998', // facebook blue
     color: 'white',
@@ -49,7 +68,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: ' #6d84b4', // facebook medium blue
     },
   },
-  githubButton: {
+
+  [`& .${classes.githubButton}`]: {
     margin: theme.spacing(1),
     backgroundColor: 'black',
     color: 'white',
@@ -82,8 +102,9 @@ interface ISignInFormProps {
 
 function SignInForm(props: ISignInFormProps): React.ReactElement {
   const { providers } = props
-  const classes = useStyles()
+
   const { t } = useTranslation('common')
+  const theme = useTheme()
 
   const emailButtonProps: ISignInButtonProps = {
     className: classes.emailButton,
@@ -110,7 +131,7 @@ function SignInForm(props: ISignInFormProps): React.ReactElement {
   }
 
   return (
-    <Container className={classes.container} maxWidth="xs">
+    <StyledContainer theme={theme} className={classes.container} maxWidth="xs">
       <Paper className={classes.paper}>
         <Typography
           component="p"
@@ -133,7 +154,7 @@ function SignInForm(props: ISignInFormProps): React.ReactElement {
 
         {'github' in providers && <SignInButton {...githubButtonProps} />}
       </Paper>
-    </Container>
+    </StyledContainer>
   )
 }
 

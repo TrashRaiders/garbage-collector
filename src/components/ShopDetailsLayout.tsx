@@ -1,16 +1,24 @@
 import { Container, Grid } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import React from 'react'
 
 import Layout from './ShopDetailsLayout/Layout'
 
-const useStyles = makeStyles(() => ({
-  container: {
+const PREFIX = 'ShopDetailsLayout'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  grid: `${PREFIX}-grid`,
+}
+
+const StyledLayout = styled(Layout)(() => ({
+  [`& .${classes.container}`]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
   },
-  grid: {
+
+  [`& .${classes.grid}`]: {
     height: '100%',
   },
 }))
@@ -25,10 +33,9 @@ function ShopDetailsLayout(
   props: SearchDetailsLayoutProps,
 ): React.ReactElement {
   const { left, center, right } = props
-  const classes = useStyles()
 
   return (
-    <Layout withSearch>
+    <StyledLayout withSearch>
       <Container
         className={classes.container}
         data-testid="shop-details-layout"
@@ -47,7 +54,7 @@ function ShopDetailsLayout(
           </Grid>
         </Grid>
       </Container>
-    </Layout>
+    </StyledLayout>
   )
 }
 

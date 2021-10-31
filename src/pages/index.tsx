@@ -1,27 +1,23 @@
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import React from 'react'
 
 import SearchResults from 'components/SearchResults'
 import Layout from 'components/ShopDetailsLayout/Layout'
 import { ShopSearchProvider } from 'contexts/shop-search'
 
-const useStyles = makeStyles(() => ({
-  page: {
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
+const StyledSearchResultsContainer = styled('div')(() => ({
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
 }))
 
 function IndexPage(): React.ReactElement {
-  const classes = useStyles()
-
   return (
     <ShopSearchProvider>
       <Layout withSearch fillContent>
-        <div className={classes.page}>
+        <StyledSearchResultsContainer>
           <SearchResults />
-        </div>
+        </StyledSearchResultsContainer>
       </Layout>
     </ShopSearchProvider>
   )

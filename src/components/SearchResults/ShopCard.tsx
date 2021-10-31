@@ -7,43 +7,53 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
-import { Theme } from '@mui/material/styles'
-import { makeStyles } from '@mui/styles'
+import { styled, Theme, useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 import { Shops } from 'generated/graphql'
 
-export interface ShopCardProps extends Omit<Shops, '__typename'> {
-  className?: string
-  id: Shops['shop_id']
+const PREFIX = 'ShopCard'
+
+const classes = {
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  details: `${PREFIX}-details`,
+  distance: `${PREFIX}-distance`,
+  locationIcon: `${PREFIX}-locationIcon`,
+  thumbnail: `${PREFIX}-thumbnail`,
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+const StyledCard = styled(Card)(({ theme }: { theme: Theme }) => ({
+  [`&.${classes.root}`]: {
     position: 'relative',
     display: 'flex',
     height: '100%',
     width: '100%',
     cursor: 'pointer',
   },
-  content: {
+
+  [`& .${classes.content}`]: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     flex: '1 0 auto',
   },
-  details: {
+
+  [`& .${classes.details}`]: {
     marginTop: theme.spacing(1),
   },
-  distance: {
+
+  [`& .${classes.distance}`]: {
     display: 'flex',
     flexDirection: 'row',
   },
-  locationIcon: {
+
+  [`& .${classes.locationIcon}`]: {
     marginRight: theme.spacing(1),
   },
-  thumbnail: {
+
+  [`& .${classes.thumbnail}`]: {
     position: 'absolute',
     top: 0,
     right: 0,
@@ -53,19 +63,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
+export interface ShopCardProps extends Omit<Shops, '__typename'> {
+  className?: string
+  id: Shops['shop_id']
+}
+
 function ShopCard(props: ShopCardProps): React.ReactElement {
   const { className, id, name, tags, address, pictures } = props
   const titlePic = Array.isArray(pictures) ? (pictures[0] as string) : ''
 
-  const classes = useStyles()
   const router = useRouter()
+  const theme = useTheme()
 
   const onListItemClick = () => {
     router.push(`/shop/${id}`)
   }
 
   return (
-    <Card
+    <StyledCard
+      theme={theme}
       className={[classes.root, className].join(' ')}
       onClick={onListItemClick}
     >
@@ -98,7 +114,7 @@ function ShopCard(props: ShopCardProps): React.ReactElement {
           </div>
         </CardContent>
       </Grid>
-    </Card>
+    </StyledCard>
   )
 }
 

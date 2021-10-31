@@ -1,30 +1,44 @@
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import MapIcon from '@mui/icons-material/Map'
 import { Box, Button, CardMedia, Link, Theme, Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
 import { useShopSearch } from 'contexts/shop-search'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  distance: {
+const PREFIX = 'ShopDetails'
+
+const classes = {
+  distance: `${PREFIX}-distance`,
+  locationIcon: `${PREFIX}-locationIcon`,
+  media: `${PREFIX}-media`,
+  mapButton: `${PREFIX}-mapButton`,
+  shopName: `${PREFIX}-shopName`,
+}
+
+const StyledBox = styled(Box)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.distance}`]: {
     marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'row',
   },
-  locationIcon: {
+
+  [`& .${classes.locationIcon}`]: {
     marginRight: theme.spacing(1),
   },
-  media: {
+
+  [`& .${classes.media}`]: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  mapButton: {
+
+  [`& .${classes.mapButton}`]: {
     marginTop: theme.spacing(3),
   },
-  shopName: {
+
+  [`& .${classes.shopName}`]: {
     marginTop: theme.spacing(2),
   },
 }))
@@ -34,10 +48,10 @@ interface ShopDetailsProps {
 }
 
 function ShopDetails(props: ShopDetailsProps): React.ReactElement {
-  const classes = useStyles()
   const { t } = useTranslation('common')
   const { id } = props
 
+  const theme = useTheme()
   const {
     query: { shopID },
   } = useRouter()
@@ -51,7 +65,7 @@ function ShopDetails(props: ShopDetailsProps): React.ReactElement {
     : ''
 
   return (
-    <Box>
+    <StyledBox theme={theme}>
       <CardMedia className={classes.media} image={titlePic} />
       <Typography className={classes.shopName} variant="h6">
         {shop?.name}
@@ -79,7 +93,7 @@ function ShopDetails(props: ShopDetailsProps): React.ReactElement {
           {t('showOnMapButton')}
         </Button>
       </Link>
-    </Box>
+    </StyledBox>
   )
 }
 

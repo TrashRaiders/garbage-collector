@@ -1,20 +1,24 @@
-import { createStyles, makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import React, { CSSProperties } from 'react'
 import GoogleStaticMap from 'react-google-static'
 import { useDebounce, useMeasure } from 'react-use'
 
+const PREFIX = 'Map'
+
+const classes = {
+  mapWrapper: `${PREFIX}-mapWrapper`,
+}
+
+const Root = styled('div')(() => ({
+  [`&.${classes.mapWrapper}`]: {
+    textAlign: 'center',
+
+    height: '100%',
+    width: '100%',
+  },
+}))
+
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_STATIC_API_KEY
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    mapWrapper: {
-      textAlign: 'center',
-
-      height: '100%',
-      width: '100%',
-    },
-  }),
-)
 
 const mapStyle: CSSProperties = {
   height: 'auto',
@@ -44,14 +48,12 @@ function Map(props: IMapProps): React.ReactElement {
     [height, width],
   )
 
-  const classes = useStyles()
-
   if (!API_KEY) {
     throw new Error('No API key for Google Static Maps provided')
   }
 
   return (
-    <div ref={ref} className={classes.mapWrapper}>
+    <Root ref={ref} className={classes.mapWrapper}>
       <GoogleStaticMap
         apiKey={API_KEY}
         latitude={latitude}
@@ -61,7 +63,7 @@ function Map(props: IMapProps): React.ReactElement {
         zoom={16}
         iconUrl=""
       />
-    </div>
+    </Root>
   )
 }
 

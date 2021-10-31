@@ -10,7 +10,7 @@ import {
   Theme,
   Typography,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import Link from 'next/link'
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
@@ -21,17 +21,27 @@ import * as yup from 'yup'
 import Animate from 'components/Animate'
 import Layout from 'components/ShopDetailsLayout/Layout'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+const PREFIX = 'SignUpPage'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  paper: `${PREFIX}-paper`,
+  errorMessage: `${PREFIX}-errorMessage`,
+}
+
+const StyledLayout = styled(Layout)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.container}`]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     padding: theme.spacing(4),
     width: '100%',
   },
-  errorMessage: {
+
+  [`& .${classes.errorMessage}`]: {
     paddingLeft: theme.spacing(2),
   },
 }))
@@ -61,9 +71,8 @@ interface IFormInputs {
 }
 
 function SignUpPage(): React.ReactElement {
-  const classes = useStyles()
-
   const { t } = useTranslation('common')
+  const theme = useTheme()
 
   const {
     register,
@@ -95,7 +104,7 @@ function SignUpPage(): React.ReactElement {
   const { loading, error } = result
 
   return (
-    <Layout>
+    <StyledLayout theme={theme}>
       <Container className={classes.container} maxWidth="xs">
         <Animate variant="zoomInOut">
           <Paper className={classes.paper}>
@@ -217,7 +226,7 @@ function SignUpPage(): React.ReactElement {
           </Paper>
         </Animate>
       </Container>
-    </Layout>
+    </StyledLayout>
   )
 }
 

@@ -1,29 +1,39 @@
 import { Box, Container, Theme } from '@mui/material'
-import { createStyles, makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import clsx from 'clsx'
 import React from 'react'
 
 import Topbar from './Layout/Topbar'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      flexGrow: 1,
-      width: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    filledContainer: {
-      padding: 0,
-    },
-    main: {
-      flexGrow: 1,
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    toolbar: theme.mixins.toolbar,
-  }),
-)
+const PREFIX = 'Layout'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  filledContainer: `${PREFIX}-filledContainer`,
+  main: `${PREFIX}-main`,
+  toolbar: `${PREFIX}-toolbar`,
+}
+
+const StyledBox = styled(Box)(({ theme }: { theme: Theme }) => ({
+  [`& .${classes.container}`]: {
+    flexGrow: 1,
+    width: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  [`& .${classes.filledContainer}`]: {
+    padding: 0,
+  },
+
+  [`& .${classes.main}`]: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  [`& .${classes.toolbar}`]: theme.mixins.toolbar,
+}))
 
 interface LayoutProps {
   withSearch?: boolean
@@ -41,10 +51,11 @@ Layout.defaultProps = {
 
 function Layout(props: LayoutProps): React.ReactElement {
   const { children, withSearch, fillContent, withBackButton } = props
-  const classes = useStyles()
+
+  const theme = useTheme()
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <StyledBox theme={theme} sx={{ display: 'flex', minHeight: '100vh' }}>
       <Topbar withSearch={withSearch} withBackButton={withBackButton} />
 
       <Container
@@ -59,7 +70,7 @@ function Layout(props: LayoutProps): React.ReactElement {
           {children}
         </main>
       </Container>
-    </Box>
+    </StyledBox>
   )
 }
 

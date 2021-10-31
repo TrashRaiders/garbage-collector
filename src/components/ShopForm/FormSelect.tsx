@@ -1,15 +1,23 @@
 import { FormControl, InputLabel, MenuItem, Select, Theme } from '@mui/material'
-import { createStyles, makeStyles } from '@mui/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { Control, useController, ValidationValueMessage } from 'react-hook-form'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
+const PREFIX = 'FormSelect'
+
+const classes = {
+  formControl: `${PREFIX}-formControl`,
+  selectEmpty: `${PREFIX}-selectEmpty`,
+}
+
+const StyledFormControl = styled(FormControl)(
+  ({ theme }: { theme: Theme }) => ({
+    [`&.${classes.formControl}`]: {
       minWidth: 120,
     },
-    selectEmpty: {
+
+    [`& .${classes.selectEmpty}`]: {
       marginTop: theme.spacing(2),
     },
   }),
@@ -39,9 +47,8 @@ FormSelect.defaultProps = {
 function FormSelect(props: FormSelectProps): React.ReactElement {
   const { label, name, options, control, required, error } = props
 
-  const classes = useStyles()
-
   const { t } = useTranslation('common')
+  const theme = useTheme()
 
   const {
     field: { ref, ...selectProps },
@@ -53,7 +60,7 @@ function FormSelect(props: FormSelectProps): React.ReactElement {
   })
 
   return (
-    <FormControl fullWidth className={classes.formControl}>
+    <StyledFormControl theme={theme} fullWidth className={classes.formControl}>
       <InputLabel
         id={`${name}-label`}
         variant="outlined"
@@ -85,7 +92,7 @@ function FormSelect(props: FormSelectProps): React.ReactElement {
           </MenuItem>
         ))}
       </Select>
-    </FormControl>
+    </StyledFormControl>
   )
 }
 

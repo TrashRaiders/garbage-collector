@@ -1,5 +1,5 @@
 import { ListItem } from '@mui/material'
-import { createStyles, makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import React from 'react'
 import { useMeasure } from 'react-use'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
@@ -8,14 +8,18 @@ import { useShopSearch } from 'contexts/shop-search'
 
 import ShopCard from './SearchResults/ShopCard'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      width: '100%',
-      height: '100%',
-    },
-  }),
-)
+const PREFIX = 'SearchResults'
+
+const classes = {
+  root: `${PREFIX}-root`,
+}
+
+const Root = styled('div')(() => ({
+  [`&.${classes.root}`]: {
+    width: '100%',
+    height: '100%',
+  },
+}))
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style, data: shops } = props
@@ -37,12 +41,10 @@ function SearchResults(): React.ReactElement {
   const [shopSearch] = useShopSearch()
   const { result: shops } = shopSearch
 
-  const classes = useStyles()
-
   const [ref, { height }] = useMeasure()
 
   return (
-    <div
+    <Root
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       ref={ref}
@@ -57,7 +59,7 @@ function SearchResults(): React.ReactElement {
       >
         {renderRow}
       </FixedSizeList>
-    </div>
+    </Root>
   )
 }
 
