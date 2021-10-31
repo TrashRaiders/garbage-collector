@@ -5,8 +5,9 @@ import { useDarkMode } from 'contexts/dark-mode'
 import { theme as darkTheme } from 'lib/themes/dark'
 import { theme as lightTheme } from 'lib/themes/light'
 
-declare module '@mui/styles' {
-  type DefaultTheme = Theme
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
 }
 
 // Light Theme example: https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=455A64&primary.color=7CB342

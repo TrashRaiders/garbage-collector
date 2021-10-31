@@ -83,6 +83,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
           <IconButton
             aria-label={t('goBackButton')}
             onClick={() => router.back()}
+            size="large"
           >
             <ArrowBackIcon />
           </IconButton>
@@ -99,12 +100,16 @@ function Topbar(props: TopbarProps): React.ReactElement {
         <Box sx={{ flexGrow: 1 }} />
 
         <Link href="/shop/new" passHref>
-          <IconButton aria-label={t('addNewShop')}>
+          <IconButton aria-label={t('addNewShop')} size="large">
             <AddLocation />
           </IconButton>
         </Link>
 
-        <IconButton onClick={handleDarkMode} aria-label="Dark mode">
+        <IconButton
+          onClick={handleDarkMode}
+          aria-label="Dark mode"
+          size="large"
+        >
           <Brightness4 />
         </IconButton>
 
@@ -112,6 +117,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
           onClick={handleAccountMenuOpen}
           aria-label="Account menu"
           data-test-id="account-icon"
+          size="large"
         >
           <AccountCircle />
         </IconButton>
