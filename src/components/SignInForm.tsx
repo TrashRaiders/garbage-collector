@@ -1,5 +1,5 @@
-import { Container, Divider, Paper, Theme, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Container, Divider, Paper, Theme, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { FaFacebookF, FaGithub } from 'react-icons/fa'

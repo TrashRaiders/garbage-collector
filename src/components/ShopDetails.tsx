@@ -1,14 +1,7 @@
-import {
-  Box,
-  Button,
-  CardMedia,
-  Link,
-  Theme,
-  Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
-import MapIcon from '@material-ui/icons/Map'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import MapIcon from '@mui/icons-material/Map'
+import { Box, Button, CardMedia, Link, Theme, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'

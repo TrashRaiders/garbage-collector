@@ -1,4 +1,4 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@mui/styles'
 import React, { CSSProperties } from 'react'
 import GoogleStaticMap from 'react-google-static'
 import { useDebounce, useMeasure } from 'react-use'

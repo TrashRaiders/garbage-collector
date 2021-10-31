@@ -6,8 +6,8 @@ import {
   Paper,
   Theme,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'

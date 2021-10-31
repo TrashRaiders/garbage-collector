@@ -9,8 +9,8 @@ import {
   TextField,
   Theme,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import Link from 'next/link'
 import { signIn } from 'next-auth/client'
 import useTranslation from 'next-translate/useTranslation'

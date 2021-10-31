@@ -1,9 +1,9 @@
-import { blueGrey, grey, lightGreen } from '@material-ui/core/colors'
-import { ThemeOptions } from '@material-ui/core/styles'
+import { blueGrey, grey, lightGreen } from '@mui/material/colors'
+import { ThemeOptions } from '@mui/material/styles'
 
 export const theme: ThemeOptions = {
   palette: {
-    type: 'light',
+    mode: 'light',
     primary: {
       main: lightGreen[900],
       contrastText: '#FEFEFE',

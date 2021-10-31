@@ -1,5 +1,4 @@
-import { TextField } from '@material-ui/core'
-import { Autocomplete } from '@material-ui/lab'
+import { Autocomplete, TextField } from '@mui/material'
 import React from 'react'
 import { Control, useController, ValidationRule } from 'react-hook-form'
 
@@ -52,7 +51,7 @@ export default function FormChipSelect(
       options={options}
       onChange={(event, data) => handleChange(data)}
       getOptionLabel={(option) => option.label}
-      getOptionSelected={(option, value) => option.id === value.id}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       filterSelectedOptions
       renderInput={(parameters) => (
         <TextField

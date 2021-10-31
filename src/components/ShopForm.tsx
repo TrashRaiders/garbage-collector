@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import clsx from 'clsx'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'

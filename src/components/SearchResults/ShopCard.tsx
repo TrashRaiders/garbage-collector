@@ -1,3 +1,4 @@
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
   Card,
   CardContent,
@@ -5,9 +6,9 @@ import {
   Chip,
   Grid,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
+} from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -18,7 +19,7 @@ export interface ShopCardProps extends Omit<Shops, '__typename'> {
   id: Shops['shop_id']
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
     display: 'flex',

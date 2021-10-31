@@ -1,6 +1,7 @@
-import { InputBase, Theme } from '@material-ui/core'
-import { alpha, makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@mui/icons-material/Search'
+import { InputBase, Theme } from '@mui/material'
+import { alpha } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -78,7 +79,7 @@ function Search(props: SearchProps): React.ReactElement {
       <InputBase
         placeholder={`${t('search')}...`}
         classes={{
-          root: classes.inputRoot,
+          // root: classes.inputRoot,
           input: classes.inputInput,
         }}
         inputProps={{ 'aria-label': t('search') }}

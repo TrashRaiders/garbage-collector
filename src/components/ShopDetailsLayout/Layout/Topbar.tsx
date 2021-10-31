@@ -1,15 +1,16 @@
+import { AccountCircle, AddLocation, Brightness4 } from '@mui/icons-material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import {
   AppBar,
+  Box,
   IconButton,
   Link as MuiLink,
   Menu,
   MenuItem,
   Theme,
   Toolbar,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { AccountCircle, AddLocation, Brightness4 } from '@material-ui/icons'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
@@ -95,7 +96,7 @@ function Topbar(props: TopbarProps): React.ReactElement {
 
         {withSearch && <Search className={classes.grow} />}
 
-        <div className={classes.grow} />
+        <Box sx={{ flexGrow: 1 }} />
 
         <Link href="/shop/new" passHref>
           <IconButton aria-label={t('addNewShop')}>
@@ -117,7 +118,6 @@ function Topbar(props: TopbarProps): React.ReactElement {
 
         <Menu
           anchorEl={accountIconAnchorElement}
-          getContentAnchorEl={null}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           open={!!accountIconAnchorElement}

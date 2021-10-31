@@ -1,11 +1,5 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Theme,
-} from '@material-ui/core'
-import { createStyles, makeStyles } from '@material-ui/core/styles'
+import { FormControl, InputLabel, MenuItem, Select, Theme } from '@mui/material'
+import { createStyles, makeStyles } from '@mui/styles'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { Control, useController, ValidationValueMessage } from 'react-hook-form'

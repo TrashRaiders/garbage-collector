@@ -1,5 +1,5 @@
-import { ListItem } from '@material-ui/core'
-import { createStyles, makeStyles } from '@material-ui/core/styles'
+import { ListItem } from '@mui/material'
+import { createStyles, makeStyles } from '@mui/styles'
 import React from 'react'
 import { useMeasure } from 'react-use'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
