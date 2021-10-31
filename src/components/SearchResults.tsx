@@ -41,15 +41,10 @@ function SearchResults(): React.ReactElement {
   const [shopSearch] = useShopSearch()
   const { result: shops } = shopSearch
 
-  const [ref, { height }] = useMeasure()
+  const [ref, { height }] = useMeasure<HTMLDivElement>()
 
   return (
-    <Root
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      ref={ref}
-      className={classes.root}
-    >
+    <Root ref={ref} className={classes.root}>
       <FixedSizeList
         height={height}
         itemSize={175}
