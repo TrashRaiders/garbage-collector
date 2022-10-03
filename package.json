@@ -29,7 +29,8 @@
     "storybook": "start-storybook --ci -p 9001",
     "check:storybook": "yarn storybook --smoke-test",
     "rearange:components": "yarn destiny",
-    "prepare": "yarn lefthook install -a"
+    "prepare": "yarn lefthook install -a",
+    "update": "yarn upgrade-interactive --latest"
   },
   "dependencies": {
     "@apollo/client": "3.4.16",
