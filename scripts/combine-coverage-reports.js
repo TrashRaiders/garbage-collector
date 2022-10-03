@@ -2,7 +2,7 @@
  * This script merges the coverage reports from Cypress and Jest into a single one,
  * inside the "coverage" folder
  */
-const { execSync } = require('child_process')
+const { execSync } = require('node:child_process')
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const fs = require('fs-extra')

@@ -10,7 +10,20 @@ import CommonProviders from 'components/CommonProviders'
 import PageTransition from 'components/PageTransition'
 import { useApollo } from 'lib/next-with-apollo'
 
-function MyApp({ Component, pageProps, router }: AppProps): React.ReactElement {
+interface PageProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialApolloState: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  session: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error: any
+}
+
+function MyApp({
+  Component,
+  pageProps,
+  router,
+}: AppProps<PageProps>): React.ReactElement {
   const apolloClient = useApollo(pageProps.initialApolloState)
   useMount(() => {
     // Remove the server-side injected CSS.
