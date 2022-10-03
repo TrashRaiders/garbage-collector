@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('node:fs')
 
 const sourceFolders = fs
   .readdirSync('src', { withFileTypes: true })

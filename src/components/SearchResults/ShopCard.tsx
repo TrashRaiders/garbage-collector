@@ -14,6 +14,7 @@ import React from 'react'
 import { Shops } from 'generated/graphql'
 
 export interface ShopCardProps extends Omit<Shops, '__typename'> {
+  // eslint-disable-next-line react/require-default-props
   className?: string
   id: Shops['shop_id']
 }

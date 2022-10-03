@@ -1,6 +1,5 @@
 import { ServerStyleSheets } from '@material-ui/core/styles'
 import { NextComponentType } from 'next'
-import { AppInitialProps } from 'next/app'
 import { AppContextType, AppPropsType } from 'next/dist/shared/lib/utils'
 import Document, {
   DocumentContext,
@@ -50,7 +49,7 @@ MyDocument.getInitialProps = async (
         (
           App: NextComponentType<
             AppContextType<NextRouter>,
-            AppInitialProps,
+            Record<string, unknown>,
             AppPropsType<NextRouter, Record<string, unknown>>
           >,
         ) =>

@@ -53,4 +53,5 @@ const options: NextAuthOptions = {
 export default (
   request: NextApiRequest,
   response: NextApiResponse<unknown>,
+  // @ts-expect-error next-auth types are wrong
 ): ReturnType<NextApiHandler> => NextAuth(request, response, options)
