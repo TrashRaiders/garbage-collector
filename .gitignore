@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# cache
+tsconfig.tsbuildinfo
+
 # testing
 /jest-coverage
 /cypress-coverage
