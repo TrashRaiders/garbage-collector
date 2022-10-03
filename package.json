@@ -110,7 +110,7 @@
     "babel-plugin-istanbul": "6.1.1",
     "critters": "0.0.16",
     "cross-env": "7.0.3",
-    "cypress": "8.6.0",
+    "cypress": "10.9.0",
     "cypress-image-snapshot": "4.0.1",
     "cypress-social-logins": "1.14.0",
     "destiny": "0.7.1",

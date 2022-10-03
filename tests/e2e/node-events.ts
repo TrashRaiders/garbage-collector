@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable unicorn/prefer-module */
 // ***********************************************************
 /// <reference types="cypress" />
 /// <reference types="@types/node" />
@@ -16,7 +17,6 @@
 // the project's config changing)
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - no @types/@cypress_browserify-preprocessor
 const browserify = require('@cypress/browserify-preprocessor')
 const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin')
 const { GoogleSocialLogin, GitHubSocialLogin, FacebookSocialLogin } =
@@ -25,7 +25,7 @@ const { GoogleSocialLogin, GitHubSocialLogin, FacebookSocialLogin } =
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (
+const setupNodeEvents = (
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,
 ) => {
@@ -79,9 +79,9 @@ module.exports = (
   return {
     ...config,
     fixturesFolder: 'tests/e2e/fixtures',
-    integrationFolder: 'tests/e2e/specs',
     screenshotsFolder: 'tests/e2e/screenshots',
     videosFolder: 'tests/e2e/videos',
   }
 }
-/* eslint-enable @typescript-eslint/no-var-requires */
+
+export { setupNodeEvents }
